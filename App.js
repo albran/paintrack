@@ -2,11 +2,13 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 
 import MovingBall from "./components/MovingBall";
+import Canvas from "./components/Canvas";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <MovingBall />
+      {/* <MovingBall /> */}
+      <Canvas />
     </View>
   );
 }
