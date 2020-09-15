@@ -20,15 +20,17 @@ const GesturePath = ({ path }) => {
         points={points}
         fill="transparent"
         stroke="black"
-        strokeWidth={10}
+        strokeWidth={50}
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <Polyline
         points={points}
         fill="transparent"
         stroke="white"
-        strokeWidth={5}
+        strokeWidth={45}
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </Svg>
   );
