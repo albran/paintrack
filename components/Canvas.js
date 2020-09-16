@@ -46,6 +46,8 @@ const GestureRecorder = ({ onPathChanged }) => {
         pathRef.current = [];
       },
       onPanResponderMove: (event) => {
+        console.log(event);
+        console.log("hello");
         pathRef.current.push({
           x: event.nativeEvent.locationX,
           y: event.nativeEvent.locationY,
@@ -59,14 +61,19 @@ const GestureRecorder = ({ onPathChanged }) => {
     })
   ).current;
 
-  return <View style={StyleSheet.absoluteFill} {...panResponder.panHandlers} />;
+  return (
+    <View
+      style={{ ...StyleSheet.absoluteFill, flex: 1 }}
+      {...panResponder.panHandlers}
+    />
+  );
 };
 
 const Canvas = () => {
-  const [path, setPath] = useState(examplePath);
+  const [path, setPath] = useState();
   return (
-    <View style={StyleSheet.absoluteFill}>
-      <GesturePath path={path} />
+    <View style={{ ...StyleSheet.absoluteFill, flex: 1 }}>
+      {path && <GesturePath path={path} />}
       <GestureRecorder onPathChanged={setPath} />
     </View>
   );
