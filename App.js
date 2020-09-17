@@ -4,13 +4,15 @@ import { StyleSheet, View } from "react-native";
 import MovingBall from "./components/MovingBall";
 import Canvas from "./components/Canvas";
 import PGCanvas from "./components/PGCanvas";
+import PinchCircle from "./components/PinchCircle";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style={styles.circle} />
+      {/* <View style={styles.circle} /> */}
       {/* <Canvas /> */}
-      <PGCanvas />
+      {/* <PGCanvas /> */}
+      <PinchCircle />
     </View>
   );
 }

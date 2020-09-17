@@ -1,4 +1,4 @@
-import { Animated, Dimensions, View, StyleSheet } from "react-native";
+import { Animated, Dimensions, StyleSheet } from "react-native";
 import Svg, { Polyline } from "react-native-svg";
 import React, { useRef, useState } from "react";
 import {
