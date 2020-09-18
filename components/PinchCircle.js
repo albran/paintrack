@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   circle: {
     width: 100,
     height: 100,
-    borderRadius: 100 / 2,
+    borderRadius: 50,
     backgroundColor: "transparent",
     borderWidth: 1,
   },

@@ -2,17 +2,19 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 
 import MovingBall from "./components/MovingBall";
-import Canvas from "./components/Canvas";
 import PGCanvas from "./components/PGCanvas";
 import PinchCircle from "./components/PinchCircle";
+import Canvas from "./feature/Canvas";
+import Drawer from "./feature/Drawer";
 
 export default function App() {
   return (
     <View style={styles.container}>
       {/* <View style={styles.circle} /> */}
-      {/* <Canvas /> */}
+      <Canvas />
       {/* <PGCanvas /> */}
-      <PinchCircle />
+      {/* <PinchCircle /> */}
+      {/* <Drawer /> */}
     </View>
   );
 }
