@@ -51,53 +51,40 @@ const Drawer = () => {
     <PanGestureHandler
       onGestureEvent={onPanGestureEvent}
       onHandlerStateChange={onPanHandlerStateChange}
-      minDist={0}
     >
-      <Animated.View style={styles.wrapper}>
-        <PinchGestureHandler
-          onGestureEvent={onPinchGestureEvent}
-          onHandlerStateChange={onPinchHandlerStateChange}
-        >
-          <View style={styles.container}>
-            {/* {path && <Stroke path={path} width={375} height={700} />} */}
-            <Animated.View
-              style={[
-                styles.circle,
-                {
-                  transform: [{ scale: scaleRef.current }],
-                },
-              ]}
-            />
-          </View>
-        </PinchGestureHandler>
-      </Animated.View>
+      <PinchGestureHandler
+        onGestureEvent={onPinchGestureEvent}
+        onHandlerStateChange={onPinchHandlerStateChange}
+      >
+        <View style={styles.container}>
+          {path && <Stroke path={path} width={375} height={700} />}
+          <Animated.View
+            style={[
+              styles.circle,
+              {
+                transform: [{ scale: scaleRef.current }],
+              },
+            ]}
+          />
+        </View>
+      </PinchGestureHandler>
     </PanGestureHandler>
   );
 };
 
 const styles = StyleSheet.create({
-  test: {
-    position: "absolute",
-    flex: 1,
-    borderWidth: 1,
-    backgroundColor: "pink",
-  },
-  wrapper: {
-    flex: 1,
-    backgroundColor: "transparent",
-  },
   container: {
-    position: "absolute",
-    justifyContent: "center",
-    alignItems: "center",
     width: 375,
     height: 700,
     backgroundColor: "transparent",
+    borderWidth: 1,
   },
   circle: {
     position: "absolute",
+    alignSelf: "center",
+    top: 50,
     width: 100,
-    height: 100,
+    aspectRatio: 1,
     borderRadius: 50,
     backgroundColor: "transparent",
     borderWidth: 1,

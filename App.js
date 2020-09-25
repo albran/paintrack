@@ -7,16 +7,12 @@ import PinchCircle from "./components/PinchCircle";
 import Canvas from "./feature/Canvas";
 import Drawer from "./feature/Drawer";
 import StackSVG from "./components/StackSVG";
+import CircleTranform from "./components/CircleTranform";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      {/* <View style={styles.circle} /> */}
-      {/* <Canvas /> */}
-      {/* <PGCanvas /> */}
-      {/* <PinchCircle /> */}
-      {/* <Drawer /> */}
-      <StackSVG />
+      <Drawer />
     </View>
   );
 }
@@ -27,12 +23,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-  },
-  circle: {
-    width: 300,
-    height: 300,
-    borderRadius: 300 / 2,
-    backgroundColor: "red",
-    borderWidth: 1,
   },
 });
