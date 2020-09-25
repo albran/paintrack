@@ -9,8 +9,16 @@ import {
 import Stroke from "./Stroke";
 
 const Drawer = () => {
+  const defaultStrokeWidth = 50;
   const [path, setPath] = useState();
+  const [strokeWidth, setStrokeWidth] = useState(defaultStrokeWidth);
   const pathRef = useRef([]);
+  const baseScaleRef = useRef(new Animated.Value(1));
+  const pinchScaleRef = useRef(new Animated.Value(1));
+  const scaleRef = useRef(
+    Animated.multiply(baseScaleRef.current, pinchScaleRef.current)
+  );
+  let lastScale = 1;
 
   const onPanGestureEvent = (event) => {
     pathRef.current.push({
@@ -27,23 +35,19 @@ const Drawer = () => {
     }
   };
 
-  const baseScaleRef = useRef(new Animated.Value(1));
-  const pinchScaleRef = useRef(new Animated.Value(1));
-  const scaleRef = useRef(
-    Animated.multiply(baseScaleRef.current, pinchScaleRef.current)
-  );
-  let lastScale = 1;
-
   const onPinchGestureEvent = Animated.event(
     [{ nativeEvent: { scale: pinchScaleRef.current } }],
     { useNativeDriver: false }
   );
 
   const onPinchHandlerStateChange = (event) => {
-    if (event.nativeEvent.oldState === State.ACTIVE) {
-      lastScale *= event.nativeEvent.scale;
-      baseScaleRef.current.setValue(lastScale);
-      pinchScaleRef.current.setValue(1);
+    // if (event.nativeEvent.oldState === State.ACTIVE) {
+    //   lastScale *= event.nativeEvent.scale;
+    //   baseScaleRef.current.setValue(lastScale);
+    //   pinchScaleRef.current.setValue(1);
+    // }
+    if (event.nativeEvent.state === State.END) {
+      setStrokeWidth(defaultStrokeWidth * scaleRef.current.__getValue());
     }
   };
 
@@ -57,7 +61,14 @@ const Drawer = () => {
         onHandlerStateChange={onPinchHandlerStateChange}
       >
         <View style={styles.container}>
-          {path && <Stroke path={path} width={375} height={700} />}
+          {path && (
+            <Stroke
+              path={path}
+              width={375}
+              height={700}
+              strokeWidth={strokeWidth}
+            />
+          )}
           <Animated.View
             style={[
               styles.circle,
@@ -83,9 +94,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     top: 50,
-    width: 100,
+    width: 50,
     aspectRatio: 1,
-    borderRadius: 50,
+    borderRadius: 25,
     backgroundColor: "transparent",
     borderWidth: 1,
   },

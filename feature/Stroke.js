@@ -1,8 +1,7 @@
-import { Dimensions, useWindowDimensions } from "react-native";
 import Svg, { Polyline } from "react-native-svg";
-import React, { useRef, useState } from "react";
+import React from "react";
 
-const Stroke = ({ path, width, height }) => {
+const Stroke = ({ path, strokeWidth, width, height }) => {
   // const { width, height } = useWindowDimensions();
   const points = path.map((p) => `${p.x},${p.y}`).join(" ");
   return (
@@ -11,7 +10,7 @@ const Stroke = ({ path, width, height }) => {
         points={points}
         fill="transparent"
         stroke="black"
-        strokeWidth={50}
+        strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -19,7 +18,7 @@ const Stroke = ({ path, width, height }) => {
         points={points}
         fill="transparent"
         stroke="white"
-        strokeWidth={45}
+        strokeWidth={strokeWidth - 3}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
