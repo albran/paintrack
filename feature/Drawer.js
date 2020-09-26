@@ -21,9 +21,7 @@ const Drawer = () => {
   );
   // let lastScale = 1;
   const strokePathsRef = useRef([]);
-  const addPath = (stroke) => {
-    setPaths([...strokePathsRef, stroke]);
-  };
+  const strokeWidthsRef = useRef([]);
 
   const onPanGestureEvent = (event) => {
     pathRef.current.push({
@@ -41,6 +39,8 @@ const Drawer = () => {
 
     if (event.nativeEvent.state === State.END) {
       strokePathsRef.current.push(livePath);
+      strokeWidthsRef.current.push(strokeWidth);
+      setLivePath([]);
     }
   };
 
@@ -56,7 +56,6 @@ const Drawer = () => {
     //   pinchScaleRef.current.setValue(1);
     // }
     if (event.nativeEvent.state === State.END) {
-      console.log(scaleRef.current.__getValue());
       setStrokeWidth(defaultStrokeWidth * scaleRef.current.__getValue());
     }
   };
@@ -73,7 +72,11 @@ const Drawer = () => {
         <View style={styles.container}>
           <Svg height="100%" width="100%" viewBox={`0 0 ${375} ${700}`}>
             {strokePathsRef.current.map((path, i) => (
-              <Stroke key={i} path={path} strokeWidth={strokeWidth} />
+              <Stroke
+                key={i}
+                path={path}
+                strokeWidth={strokeWidthsRef.current[i]}
+              />
             ))}
             {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />}
           </Svg>
