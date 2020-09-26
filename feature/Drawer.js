@@ -5,9 +5,10 @@ import {
   PinchGestureHandler,
   State,
 } from "react-native-gesture-handler";
-import Svg, { Polyline } from "react-native-svg";
+import Svg from "react-native-svg";
 
 import Stroke from "./Stroke";
+import TouchableOpacityG from "../components/TouchableOpacityG";
 
 const Drawer = () => {
   const defaultStrokeWidth = 50;
@@ -72,11 +73,13 @@ const Drawer = () => {
         <View style={styles.container}>
           <Svg height="100%" width="100%" viewBox={`0 0 ${375} ${700}`}>
             {strokePathsRef.current.map((path, i) => (
-              <Stroke
-                key={i}
-                path={path}
-                strokeWidth={strokeWidthsRef.current[i]}
-              />
+              <TouchableOpacityG key={i}>
+                <Stroke
+                  key={i}
+                  path={path}
+                  strokeWidth={strokeWidthsRef.current[i]}
+                />
+              </TouchableOpacityG>
             ))}
             {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />}
           </Svg>
