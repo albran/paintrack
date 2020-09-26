@@ -18,7 +18,7 @@ const Stroke = ({ path, strokeWidth, width, height }) => {
         points={points}
         fill="transparent"
         stroke="white"
-        strokeWidth={strokeWidth - 3}
+        strokeWidth={strokeWidth - 1}
         strokeLinecap="round"
         strokeLinejoin="round"
       />

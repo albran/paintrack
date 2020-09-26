@@ -18,7 +18,13 @@ const Drawer = () => {
   const scaleRef = useRef(
     Animated.multiply(baseScaleRef.current, pinchScaleRef.current)
   );
-  let lastScale = 1;
+  const interpolatedScaleRef = useRef(
+    scaleRef.current.interpolate({
+      inputRange: [0, 2],
+      outputRange: [0.2, 1.5],
+    })
+  );
+  // let lastScale = 1;
 
   const onPanGestureEvent = (event) => {
     pathRef.current.push({
@@ -47,6 +53,7 @@ const Drawer = () => {
     //   pinchScaleRef.current.setValue(1);
     // }
     if (event.nativeEvent.state === State.END) {
+      console.log(scaleRef.current.__getValue());
       setStrokeWidth(defaultStrokeWidth * scaleRef.current.__getValue());
     }
   };
@@ -73,7 +80,11 @@ const Drawer = () => {
             style={[
               styles.circle,
               {
-                transform: [{ scale: scaleRef.current }],
+                transform: [
+                  {
+                    scale: scaleRef.current,
+                  },
+                ],
               },
             ]}
           />
