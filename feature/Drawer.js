@@ -11,7 +11,7 @@ import Stroke from "./Stroke";
 
 const Drawer = () => {
   const defaultStrokeWidth = 50;
-  const [path, setPath] = useState();
+  const [livePath, setLivePath] = useState();
   const [strokeWidth, setStrokeWidth] = useState(defaultStrokeWidth);
   const pathRef = useRef([]);
   const baseScaleRef = useRef(new Animated.Value(1));
@@ -20,19 +20,27 @@ const Drawer = () => {
     Animated.multiply(baseScaleRef.current, pinchScaleRef.current)
   );
   // let lastScale = 1;
+  const [paths, setPaths] = useState([]);
+  const addPath = (stroke) => {
+    setPaths([...paths, stroke]);
+  };
 
   const onPanGestureEvent = (event) => {
     pathRef.current.push({
       x: event.nativeEvent.x,
       y: event.nativeEvent.y,
     });
-    setPath([...pathRef.current]);
+    setLivePath([...pathRef.current]);
   };
 
   const onPanHandlerStateChange = (event) => {
     if (event.nativeEvent.state === State.BEGAN) {
       pathRef.current = [];
-      setPath(pathRef.current);
+      setLivePath(pathRef.current);
+    }
+
+    if (event.nativeEvent.state === State.END) {
+      addPath(livePath);
     }
   };
 
@@ -64,7 +72,10 @@ const Drawer = () => {
       >
         <View style={styles.container}>
           <Svg height="100%" width="100%" viewBox={`0 0 ${375} ${700}`}>
-            {path && <Stroke path={path} strokeWidth={strokeWidth} />}
+            {paths.map((path, i) => (
+              <Stroke key={i} path={path} strokeWidth={strokeWidth} />
+            ))}
+            {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />}
           </Svg>
           <Animated.View
             style={[
