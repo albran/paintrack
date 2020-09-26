@@ -20,9 +20,9 @@ const Drawer = () => {
     Animated.multiply(baseScaleRef.current, pinchScaleRef.current)
   );
   // let lastScale = 1;
-  const [paths, setPaths] = useState([]);
+  const strokePathsRef = useRef([]);
   const addPath = (stroke) => {
-    setPaths([...paths, stroke]);
+    setPaths([...strokePathsRef, stroke]);
   };
 
   const onPanGestureEvent = (event) => {
@@ -40,7 +40,7 @@ const Drawer = () => {
     }
 
     if (event.nativeEvent.state === State.END) {
-      addPath(livePath);
+      strokePathsRef.current.push(livePath);
     }
   };
 
@@ -72,7 +72,7 @@ const Drawer = () => {
       >
         <View style={styles.container}>
           <Svg height="100%" width="100%" viewBox={`0 0 ${375} ${700}`}>
-            {paths.map((path, i) => (
+            {strokePathsRef.current.map((path, i) => (
               <Stroke key={i} path={path} strokeWidth={strokeWidth} />
             ))}
             {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />}
