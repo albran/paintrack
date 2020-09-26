@@ -5,6 +5,7 @@ import {
   PinchGestureHandler,
   State,
 } from "react-native-gesture-handler";
+import Svg, { Polyline } from "react-native-svg";
 
 import Stroke from "./Stroke";
 
@@ -17,12 +18,6 @@ const Drawer = () => {
   const pinchScaleRef = useRef(new Animated.Value(1));
   const scaleRef = useRef(
     Animated.multiply(baseScaleRef.current, pinchScaleRef.current)
-  );
-  const interpolatedScaleRef = useRef(
-    scaleRef.current.interpolate({
-      inputRange: [0, 2],
-      outputRange: [0.2, 1.5],
-    })
   );
   // let lastScale = 1;
 
@@ -68,14 +63,9 @@ const Drawer = () => {
         onHandlerStateChange={onPinchHandlerStateChange}
       >
         <View style={styles.container}>
-          {path && (
-            <Stroke
-              path={path}
-              width={375}
-              height={700}
-              strokeWidth={strokeWidth}
-            />
-          )}
+          <Svg height="100%" width="100%" viewBox={`0 0 ${375} ${700}`}>
+            {path && <Stroke path={path} strokeWidth={strokeWidth} />}
+          </Svg>
           <Animated.View
             style={[
               styles.circle,

@@ -1,11 +1,10 @@
-import Svg, { Polyline } from "react-native-svg";
+import { Polyline } from "react-native-svg";
 import React from "react";
 
-const Stroke = ({ path, strokeWidth, width, height }) => {
-  // const { width, height } = useWindowDimensions();
+const Stroke = ({ path, strokeWidth }) => {
   const points = path.map((p) => `${p.x},${p.y}`).join(" ");
   return (
-    <Svg height="100%" width="100%" viewBox={`0 0 ${width} ${height}`}>
+    <>
       <Polyline
         points={points}
         fill="transparent"
@@ -22,7 +21,7 @@ const Stroke = ({ path, strokeWidth, width, height }) => {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </Svg>
+    </>
   );
 };
 
