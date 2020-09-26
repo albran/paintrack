@@ -65,10 +65,14 @@ const Drawer = () => {
     <PanGestureHandler
       onGestureEvent={onPanGestureEvent}
       onHandlerStateChange={onPanHandlerStateChange}
+      minPointers={1}
+      maxPointers={1}
     >
       <PinchGestureHandler
         onGestureEvent={onPinchGestureEvent}
         onHandlerStateChange={onPinchHandlerStateChange}
+        minPointers={2}
+        maxPointers={2}
       >
         <View style={styles.container}>
           <Svg height="100%" width="100%" viewBox={`0 0 ${375} ${700}`}>
