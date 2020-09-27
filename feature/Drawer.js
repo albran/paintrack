@@ -17,12 +17,15 @@ const Drawer = () => {
   const pathRef = useRef([]);
   const baseScaleRef = useRef(new Animated.Value(1));
   const pinchScaleRef = useRef(new Animated.Value(1));
+  const circleXRef = useRef(new Animated.Value(1));
+  const circleYRef = useRef(new Animated.Value(1));
   const scaleRef = useRef(
     Animated.multiply(baseScaleRef.current, pinchScaleRef.current)
   );
   // let lastScale = 1;
   const strokePathsRef = useRef([]);
   const strokeWidthsRef = useRef([]);
+  const [circleIsVisible, setCircleIsVisible] = useState(false);
 
   const onPanGestureEvent = (event) => {
     pathRef.current.push({
@@ -46,7 +49,15 @@ const Drawer = () => {
   };
 
   const onPinchGestureEvent = Animated.event(
-    [{ nativeEvent: { scale: pinchScaleRef.current } }],
+    [
+      {
+        nativeEvent: {
+          scale: pinchScaleRef.current,
+          focalX: circleXRef.current,
+          focalY: circleYRef.current,
+        },
+      },
+    ],
     { useNativeDriver: false }
   );
 
@@ -56,8 +67,14 @@ const Drawer = () => {
     //   baseScaleRef.current.setValue(lastScale);
     //   pinchScaleRef.current.setValue(1);
     // }
+
+    if (event.nativeEvent.state === State.BEGAN) {
+      setCircleIsVisible(true);
+    }
+
     if (event.nativeEvent.state === State.END) {
       setStrokeWidth(defaultStrokeWidth * scaleRef.current.__getValue());
+      setCircleIsVisible(false);
     }
   };
 
@@ -87,18 +104,24 @@ const Drawer = () => {
             ))}
             {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />}
           </Svg>
-          <Animated.View
-            style={[
-              styles.circle,
-              {
-                transform: [
-                  {
-                    scale: scaleRef.current,
-                  },
-                ],
-              },
-            ]}
-          />
+          {circleIsVisible && (
+            <Animated.View
+              style={[
+                {
+                  ...styles.circle,
+                  left: circleXRef.current,
+                  top: circleYRef.current,
+                },
+                {
+                  transform: [
+                    {
+                      scale: scaleRef.current,
+                    },
+                  ],
+                },
+              ]}
+            />
+          )}
         </View>
       </PinchGestureHandler>
     </PanGestureHandler>
@@ -114,8 +137,6 @@ const styles = StyleSheet.create({
   },
   circle: {
     position: "absolute",
-    alignSelf: "center",
-    top: 50,
     width: 50,
     aspectRatio: 1,
     borderRadius: 25,
