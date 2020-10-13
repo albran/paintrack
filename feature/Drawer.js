@@ -5,7 +5,7 @@ import {
   PinchGestureHandler,
   State,
 } from "react-native-gesture-handler";
-import Svg from "react-native-svg";
+import Svg, { Circle } from "react-native-svg";
 
 import Stroke from "./Stroke";
 import TouchableOpacityG from "../components/TouchableOpacityG";
@@ -93,6 +93,14 @@ const Drawer = () => {
       >
         <View style={styles.container}>
           <Svg height="100%" width="100%" viewBox={`0 0 ${375} ${700}`}>
+            <Circle
+              cx="190"
+              cy="300"
+              r="175"
+              fill="transparent"
+              stroke="black"
+              strokeWidth={2}
+            />
             {strokePathsRef.current.map((path, i) => (
               <TouchableOpacityG key={i}>
                 <Stroke

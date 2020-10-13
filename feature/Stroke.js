@@ -7,20 +7,20 @@ const Stroke = ({ path, strokeWidth }) => {
     <>
       <Polyline
         points={points}
-        fill="transparent"
         stroke="black"
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeOpacity={0.25}
       />
-      <Polyline
+      {/* <Polyline
         points={points}
-        fill="transparent"
         stroke="white"
         strokeWidth={strokeWidth - 1}
         strokeLinecap="round"
         strokeLinejoin="round"
-      />
+        strokeOpacity={0.5}
+      /> */}
     </>
   );
 };
