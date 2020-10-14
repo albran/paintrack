@@ -4,6 +4,7 @@ import {
   PanGestureHandler,
   PinchGestureHandler,
   State,
+  TapGestureHandler,
 } from "react-native-gesture-handler";
 import Svg, { Circle } from "react-native-svg";
 

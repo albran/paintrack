@@ -10,8 +10,10 @@ const StackSVG = () => (
       <TouchableOpacityG>
         <Circle cx="50" cy="50" r="50" fill="pink" />
       </TouchableOpacityG>
+    </Svg>
+    <Svg height={300} width={300} style={{ position: "absolute" }}>
       <TouchableOpacityG>
-        <Circle x={110} cx="50" cy="50" r="50" fill="cyan" />
+        <Circle cx="150" cy="150" r="50" fill="pink" />
       </TouchableOpacityG>
     </Svg>
   </View>
