@@ -6,12 +6,19 @@ import {
   State,
   TapGestureHandler,
 } from "react-native-gesture-handler";
-import Svg, { Circle } from "react-native-svg";
+import Svg, { Circle, G, Path } from "react-native-svg";
+import * as Device from "expo-device";
 
 import Stroke from "./Stroke";
 import TouchableOpacityG from "../components/TouchableOpacityG";
+import ModelFront from "../components/assets/ModelFront";
 
-const Drawer = () => {
+const Drawer = ({ winWidth, winHeight }) => {
+  const modelScale = winWidth / 102;
+  const canvasHeight = 118 * modelScale;
+  const phoneModel = Device.modelName;
+  console.log(`${phoneModel} scale: ${modelScale}`);
+  console.log(`canvas w:${winWidth}, h:${canvasHeight}`);
   const defaultStrokeWidth = 50;
   const [livePath, setLivePath] = useState();
   const [strokeWidth, setStrokeWidth] = useState(defaultStrokeWidth);
@@ -78,7 +85,6 @@ const Drawer = () => {
       setCircleIsVisible(false);
     }
   };
-
   return (
     <PanGestureHandler
       onGestureEvent={onPanGestureEvent}
@@ -92,16 +98,20 @@ const Drawer = () => {
         minPointers={2}
         maxPointers={2}
       >
-        <View style={styles.container}>
-          <Svg height="100%" width="100%" viewBox={`0 0 ${375} ${700}`}>
-            <Circle
-              cx="190"
-              cy="300"
-              r="175"
-              fill="transparent"
-              stroke="black"
-              strokeWidth={2}
-            />
+        <View
+          style={{
+            ...styles.container,
+            // width: canvasWidth,
+            // height: canvasHeight,
+          }}
+        >
+          <Svg
+            width={winWidth}
+            height={canvasHeight}
+            viewBox={`0 0 ${winWidth} ${canvasHeight}`}
+          >
+            <ModelFront modelScale={modelScale} />
+
             {strokePathsRef.current.map((path, i) => (
               <TouchableOpacityG key={i}>
                 <Stroke
@@ -139,10 +149,8 @@ const Drawer = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 375,
-    height: 700,
-    backgroundColor: "transparent",
-    borderWidth: 1,
+    // borderTopWidth: 1,
+    borderBottomWidth: 1,
   },
   circle: {
     position: "absolute",
