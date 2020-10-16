@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Animated, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import {
   PanGestureHandler,
   PinchGestureHandler,
@@ -7,12 +7,13 @@ import {
   TapGestureHandler,
 } from "react-native-gesture-handler";
 import Svg, { Circle } from "react-native-svg";
-// import Animated from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 
 import Stroke from "./Stroke";
 import TouchableOpacityG from "../components/TouchableOpacityG";
 import ModelFront from "../components/assets/ModelFront";
 import ModelBack from "../components/assets/ModelBack";
+import { set } from "react-native-reanimated";
 
 const Drawer = ({ winWidth, winHeight }) => {
   const modelScale = winWidth / 344;
@@ -68,18 +69,28 @@ const Drawer = ({ winWidth, winHeight }) => {
   //   console.log(event.nativeEvent);
   // };
 
-  const onPinchGestureEvent = Animated.event(
-    [
-      {
-        nativeEvent: {
-          scale: pinchScaleRef.current,
-          focalX: circleXRef.current,
-          focalY: circleYRef.current,
-        },
+  // const onPinchGestureEvent = Animated.event(
+  //   [
+  //     {
+  //       nativeEvent: {
+  //         scale: pinchScaleRef.current,
+  //         focalX: circleXRef.current,
+  //         focalY: circleYRef.current,
+  //       },
+  //     },
+  //   ],
+  //   { useNativeDriver: false }
+  // );
+
+  const onPinchGestureEvent = Animated.event([
+    {
+      nativeEvent: {
+        scale: (scale) => set(pinchScaleRef.current, scale),
+        focalX: (x) => set(circleXRef.current, x),
+        focalY: (y) => set(circleYRef.current, y),
       },
-    ],
-    { useNativeDriver: false }
-  );
+    },
+  ]);
 
   const onPinchHandlerStateChange = (event) => {
     // if (event.nativeEvent.oldState === State.ACTIVE) {
@@ -111,7 +122,7 @@ const Drawer = ({ winWidth, winHeight }) => {
           // minPointers={2}
           // maxPointers={2}
         >
-          <View
+          <Animated.View
             style={{
               ...styles.container,
             }}
@@ -165,7 +176,7 @@ const Drawer = ({ winWidth, winHeight }) => {
               ]}
             />
           )} */}
-          </View>
+          </Animated.View>
         </PinchGestureHandler>
       </Animated.View>
     </PanGestureHandler>
