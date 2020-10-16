@@ -6,23 +6,28 @@ import {
   State,
   TapGestureHandler,
 } from "react-native-gesture-handler";
-import Svg, { Circle, G, Path } from "react-native-svg";
-import * as Device from "expo-device";
+import Svg, { Circle } from "react-native-svg";
+import Reanimated from "react-native-reanimated";
 
 import Stroke from "./Stroke";
 import TouchableOpacityG from "../components/TouchableOpacityG";
 import ModelFront from "../components/assets/ModelFront";
+import ModelBack from "../components/assets/ModelBack";
 
 const Drawer = ({ winWidth, winHeight }) => {
-  const modelScale = winWidth / 102;
-  const canvasHeight = 118 * modelScale;
-  const phoneModel = Device.modelName;
-  console.log(`${phoneModel} scale: ${modelScale}`);
-  console.log(`canvas w:${winWidth}, h:${canvasHeight}`);
-  const defaultStrokeWidth = 50;
-  const [livePath, setLivePath] = useState();
-  const [strokeWidth, setStrokeWidth] = useState(defaultStrokeWidth);
+  const modelScale = winWidth / 344;
+  const translateX = 0.003 * winWidth;
+  const canvasHeight = 400 * modelScale;
+
   const pathRef = useRef([]);
+  const [livePath, setLivePath] = useState();
+
+  const defaultStrokeWidth = 50;
+  const [strokeWidth, setStrokeWidth] = useState(defaultStrokeWidth);
+
+  let AnimatedCircle = Animated.createAnimatedComponent(Circle);
+  // let AnimatedCircle = Reanimated.createAnimatedComponent(Circle);
+
   const baseScaleRef = useRef(new Animated.Value(1));
   const pinchScaleRef = useRef(new Animated.Value(1));
   const circleXRef = useRef(new Animated.Value(1));
@@ -30,6 +35,12 @@ const Drawer = ({ winWidth, winHeight }) => {
   const scaleRef = useRef(
     Animated.multiply(baseScaleRef.current, pinchScaleRef.current)
   );
+  const baseCircleRref = useRef(new Animated.Value(20));
+  const circleRref = Animated.multiply(
+    baseCircleRref.current,
+    pinchScaleRef.current
+  );
+
   // let lastScale = 1;
   const strokePathsRef = useRef([]);
   const strokeWidthsRef = useRef([]);
@@ -55,6 +66,10 @@ const Drawer = ({ winWidth, winHeight }) => {
       setLivePath([]);
     }
   };
+
+  // const onPinchGestureEvent = (event) => {
+  //   console.log(event.nativeEvent);
+  // };
 
   const onPinchGestureEvent = Animated.event(
     [
@@ -101,8 +116,6 @@ const Drawer = ({ winWidth, winHeight }) => {
         <View
           style={{
             ...styles.container,
-            // width: canvasWidth,
-            // height: canvasHeight,
           }}
         >
           <Svg
@@ -110,9 +123,22 @@ const Drawer = ({ winWidth, winHeight }) => {
             height={canvasHeight}
             viewBox={`0 0 ${winWidth} ${canvasHeight}`}
           >
-            <ModelFront modelScale={modelScale} />
-
-            {strokePathsRef.current.map((path, i) => (
+            {/* <ModelFront translateX={translateX} modelScale={modelScale} /> */}
+            <ModelBack translateX={translateX} modelScale={modelScale} />
+            {livePath && (
+              <Stroke path={livePath} strokeWidth={80 * modelScale} />
+            )}
+            {circleIsVisible && (
+              <AnimatedCircle
+                stroke="black"
+                strokeWidth={1}
+                fill="transparent"
+                cx={circleXRef.current}
+                cy={circleYRef.current}
+                r={circleRref}
+              />
+            )}
+            {/* {strokePathsRef.current.map((path, i) => (
               <TouchableOpacityG key={i}>
                 <Stroke
                   key={i}
@@ -121,9 +147,9 @@ const Drawer = ({ winWidth, winHeight }) => {
                 />
               </TouchableOpacityG>
             ))}
-            {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />}
+            {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />} */}
           </Svg>
-          {circleIsVisible && (
+          {/* {circleIsVisible && (
             <Animated.View
               style={[
                 {
@@ -140,7 +166,7 @@ const Drawer = ({ winWidth, winHeight }) => {
                 },
               ]}
             />
-          )}
+          )} */}
         </View>
       </PinchGestureHandler>
     </PanGestureHandler>
