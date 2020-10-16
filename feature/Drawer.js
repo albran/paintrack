@@ -7,7 +7,7 @@ import {
   TapGestureHandler,
 } from "react-native-gesture-handler";
 import Svg, { Circle } from "react-native-svg";
-import Reanimated from "react-native-reanimated";
+// import Animated from "react-native-reanimated";
 
 import Stroke from "./Stroke";
 import TouchableOpacityG from "../components/TouchableOpacityG";
@@ -33,6 +33,7 @@ const Drawer = ({ winWidth, winHeight }) => {
   // let AnimatedCircle = Reanimated.createAnimatedComponent(Circle);
 
   const pinchScaleRef = useRef(new Animated.Value(1));
+  // const example = Reanimated.Value.useValue(1);
 
   const circleXRef = useRef(new Animated.Value(1));
   const circleYRef = useRef(new Animated.Value(1));
@@ -100,41 +101,42 @@ const Drawer = ({ winWidth, winHeight }) => {
     <PanGestureHandler
       onGestureEvent={onPanGestureEvent}
       onHandlerStateChange={onPanHandlerStateChange}
-      minPointers={1}
-      maxPointers={1}
+      // minPointers={1}
+      // maxPointers={1}
     >
-      <PinchGestureHandler
-        onGestureEvent={onPinchGestureEvent}
-        onHandlerStateChange={onPinchHandlerStateChange}
-        minPointers={2}
-        maxPointers={2}
-      >
-        <View
-          style={{
-            ...styles.container,
-          }}
+      <Animated.View>
+        <PinchGestureHandler
+          onGestureEvent={onPinchGestureEvent}
+          onHandlerStateChange={onPinchHandlerStateChange}
+          // minPointers={2}
+          // maxPointers={2}
         >
-          <Svg
-            width={winWidth}
-            height={canvasHeight}
-            viewBox={`0 0 ${winWidth} ${canvasHeight}`}
+          <View
+            style={{
+              ...styles.container,
+            }}
           >
-            {/* <ModelFront translateX={translateX} modelScale={modelScale} /> */}
-            <ModelBack translateX={translateX} modelScale={modelScale} />
-            {livePath && (
-              <Stroke path={livePath} strokeWidth={80 * modelScale} />
-            )}
-            {circleIsVisible && (
-              <AnimatedCircle
-                stroke="black"
-                strokeWidth={1}
-                fill="transparent"
-                cx={circleXRef.current}
-                cy={circleYRef.current}
-                r={circleRref}
-              />
-            )}
-            {/* {strokePathsRef.current.map((path, i) => (
+            <Svg
+              width={winWidth}
+              height={canvasHeight}
+              viewBox={`0 0 ${winWidth} ${canvasHeight}`}
+            >
+              {/* <ModelFront translateX={translateX} modelScale={modelScale} /> */}
+              <ModelBack translateX={translateX} modelScale={modelScale} />
+              {livePath && (
+                <Stroke path={livePath} strokeWidth={80 * modelScale} />
+              )}
+              {circleIsVisible && (
+                <AnimatedCircle
+                  stroke="black"
+                  strokeWidth={1}
+                  fill="transparent"
+                  cx={circleXRef.current}
+                  cy={circleYRef.current}
+                  r={circleRref}
+                />
+              )}
+              {/* {strokePathsRef.current.map((path, i) => (
               <TouchableOpacityG key={i}>
                 <Stroke
                   key={i}
@@ -144,8 +146,8 @@ const Drawer = ({ winWidth, winHeight }) => {
               </TouchableOpacityG>
             ))}
             {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />} */}
-          </Svg>
-          {/* {circleIsVisible && (
+            </Svg>
+            {/* {circleIsVisible && (
             <Animated.View
               style={[
                 {
@@ -163,8 +165,9 @@ const Drawer = ({ winWidth, winHeight }) => {
               ]}
             />
           )} */}
-        </View>
-      </PinchGestureHandler>
+          </View>
+        </PinchGestureHandler>
+      </Animated.View>
     </PanGestureHandler>
   );
 };
