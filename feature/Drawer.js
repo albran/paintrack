@@ -22,29 +22,25 @@ const Drawer = ({ winWidth, winHeight }) => {
   const pathRef = useRef([]);
   const [livePath, setLivePath] = useState();
 
+  const strokePathsRef = useRef([]);
+  const strokeWidthsRef = useRef([]);
+  const [circleIsVisible, setCircleIsVisible] = useState(false);
+
   const defaultStrokeWidth = 50;
   const [strokeWidth, setStrokeWidth] = useState(defaultStrokeWidth);
 
   let AnimatedCircle = Animated.createAnimatedComponent(Circle);
   // let AnimatedCircle = Reanimated.createAnimatedComponent(Circle);
 
-  const baseScaleRef = useRef(new Animated.Value(1));
   const pinchScaleRef = useRef(new Animated.Value(1));
+
   const circleXRef = useRef(new Animated.Value(1));
   const circleYRef = useRef(new Animated.Value(1));
-  const scaleRef = useRef(
-    Animated.multiply(baseScaleRef.current, pinchScaleRef.current)
-  );
   const baseCircleRref = useRef(new Animated.Value(20));
   const circleRref = Animated.multiply(
     baseCircleRref.current,
     pinchScaleRef.current
   );
-
-  // let lastScale = 1;
-  const strokePathsRef = useRef([]);
-  const strokeWidthsRef = useRef([]);
-  const [circleIsVisible, setCircleIsVisible] = useState(false);
 
   const onPanGestureEvent = (event) => {
     pathRef.current.push({
@@ -96,7 +92,7 @@ const Drawer = ({ winWidth, winHeight }) => {
     }
 
     if (event.nativeEvent.state === State.END) {
-      setStrokeWidth(defaultStrokeWidth * scaleRef.current.__getValue());
+      // setStrokeWidth(defaultStrokeWidth * scaleRef.current.__getValue());
       setCircleIsVisible(false);
     }
   };
