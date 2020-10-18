@@ -26,7 +26,8 @@ const Drawer = ({ winWidth, winHeight }) => {
   const strokeWidthsRef = useRef([]);
   const [circleIsVisible, setCircleIsVisible] = useState(false);
 
-  const defaultStrokeWidth = 50;
+  const defaultStrokeWidth = 30;
+  const strokeScaleRef = useRef(1);
   const [strokeWidth, setStrokeWidth] = useState(defaultStrokeWidth);
 
   let AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -35,7 +36,7 @@ const Drawer = ({ winWidth, winHeight }) => {
 
   const circleXRef = useRef(new Animated.Value(1));
   const circleYRef = useRef(new Animated.Value(1));
-  const baseCircleRref = useRef(new Animated.Value(20));
+  const baseCircleRref = useRef(new Animated.Value(defaultStrokeWidth * 0.5));
   const circleRref = Animated.multiply(
     baseCircleRref.current,
     pinchScaleRef.current
@@ -65,9 +66,16 @@ const Drawer = ({ winWidth, winHeight }) => {
   const onPinchGestureEvent = Animated.event([
     {
       nativeEvent: {
-        scale: (scale) => set(pinchScaleRef.current, scale),
-        focalX: (x) => set(circleXRef.current, x),
-        focalY: (y) => set(circleYRef.current, y),
+        scale: (scale) =>
+          Animated.block([
+            Animated.set(pinchScaleRef.current, scale),
+            Animated.call(
+              [scale],
+              ([scaleListener]) => (strokeScaleRef.current = scaleListener)
+            ),
+          ]),
+        focalX: (x) => Animated.set(circleXRef.current, x),
+        focalY: (y) => Animated.set(circleYRef.current, y),
       },
     },
   ]);
@@ -84,7 +92,7 @@ const Drawer = ({ winWidth, winHeight }) => {
     }
 
     if (event.nativeEvent.state === State.END) {
-      // setStrokeWidth(defaultStrokeWidth * scaleRef.current.__getValue());
+      setStrokeWidth(defaultStrokeWidth * strokeScaleRef.current);
       setCircleIsVisible(false);
     }
   };
@@ -106,9 +114,7 @@ const Drawer = ({ winWidth, winHeight }) => {
             >
               {/* <ModelFront translateX={translateX} modelScale={modelScale} /> */}
               <ModelBack translateX={translateX} modelScale={modelScale} />
-              {livePath && (
-                <Stroke path={livePath} strokeWidth={80 * modelScale} />
-              )}
+              {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />}
               {circleIsVisible && (
                 <AnimatedCircle
                   stroke="black"
