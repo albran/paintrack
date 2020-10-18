@@ -13,8 +13,8 @@ export default function App() {
         marginTop: winHeight * 0.04,
       }}
     >
-      {/* <Drawer winWidth={winWidth} winHeight={winHeight} /> */}
-      <NestAndroid />
+      <Drawer winWidth={winWidth} winHeight={winHeight} />
+      {/* <NestAndroid /> */}
     </View>
   );
 }

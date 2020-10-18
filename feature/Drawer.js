@@ -58,6 +58,7 @@ const Drawer = ({ winWidth, winHeight }) => {
       strokePathsRef.current.push(livePath);
       strokeWidthsRef.current.push(strokeWidth);
       setLivePath([]);
+      setCircleIsVisible(false);
     }
   };
 
@@ -79,7 +80,11 @@ const Drawer = ({ winWidth, winHeight }) => {
   ]);
 
   const onPinchHandlerStateChange = (event) => {
-    if (event.nativeEvent.state === State.BEGAN) {
+    // if (event.nativeEvent.state === State.BEGAN) {
+    //   setCircleIsVisible(true);
+    // }
+
+    if (event.nativeEvent.state === State.ACTIVE) {
       setCircleIsVisible(true);
     }
 
