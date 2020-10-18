@@ -1,18 +1,16 @@
 import React, { useRef, useState } from "react";
-import { StyleSheet, View } from "react-native";
 import {
   PanGestureHandler,
   PinchGestureHandler,
   State,
-  TapGestureHandler,
 } from "react-native-gesture-handler";
 import Svg, { Circle } from "react-native-svg";
 import Animated from "react-native-reanimated";
 
+import TouchableOpacityG from "../components/TouchableOpacityG";
 import Stroke from "./Stroke";
 import ModelFront from "../components/assets/ModelFront";
 import ModelBack from "../components/assets/ModelBack";
-import { set } from "react-native-reanimated";
 
 const Drawer = ({ winWidth, winHeight }) => {
   const modelScale = winWidth / 344;
@@ -81,12 +79,6 @@ const Drawer = ({ winWidth, winHeight }) => {
   ]);
 
   const onPinchHandlerStateChange = (event) => {
-    // if (event.nativeEvent.oldState === State.ACTIVE) {
-    //   lastScale *= event.nativeEvent.scale;
-    //   baseScaleRef.current.setValue(lastScale);
-    //   pinchScaleRef.current.setValue(1);
-    // }
-
     if (event.nativeEvent.state === State.BEGAN) {
       setCircleIsVisible(true);
     }
@@ -100,13 +92,17 @@ const Drawer = ({ winWidth, winHeight }) => {
     <PanGestureHandler
       onGestureEvent={onPanGestureEvent}
       onHandlerStateChange={onPanHandlerStateChange}
+      minPointers={1}
+      maxPointers={1}
     >
       <Animated.View>
         <PinchGestureHandler
           onGestureEvent={onPinchGestureEvent}
           onHandlerStateChange={onPinchHandlerStateChange}
+          minPointers={2}
+          maxPointers={2}
         >
-          <Animated.View style={styles.container}>
+          <Animated.View>
             <Svg
               width={winWidth}
               height={canvasHeight}
@@ -125,16 +121,16 @@ const Drawer = ({ winWidth, winHeight }) => {
                   r={circleRref}
                 />
               )}
-              {/* {strokePathsRef.current.map((path, i) => (
-              <TouchableOpacityG key={i}>
-                <Stroke
-                  key={i}
-                  path={path}
-                  strokeWidth={strokeWidthsRef.current[i]}
-                />
-              </TouchableOpacityG>
-            ))}
-            {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />} */}
+              {strokePathsRef.current.map((path, i) => (
+                <TouchableOpacityG key={i}>
+                  <Stroke
+                    key={i}
+                    path={path}
+                    strokeWidth={strokeWidthsRef.current[i]}
+                  />
+                </TouchableOpacityG>
+              ))}
+              {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />}
             </Svg>
           </Animated.View>
         </PinchGestureHandler>
@@ -142,11 +138,5 @@ const Drawer = ({ winWidth, winHeight }) => {
     </PanGestureHandler>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    borderBottomWidth: 1,
-  },
-});
 
 export default Drawer;
