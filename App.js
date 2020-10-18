@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, useWindowDimensions, View } from "react-native";
+import NestAndroid from "./components/tests/NestAndroid";
 
 import Drawer from "./feature/Drawer";
 
@@ -12,7 +13,8 @@ export default function App() {
         marginTop: winHeight * 0.04,
       }}
     >
-      <Drawer winWidth={winWidth} winHeight={winHeight} />
+      {/* <Drawer winWidth={winWidth} winHeight={winHeight} /> */}
+      <NestAndroid />
     </View>
   );
 }
