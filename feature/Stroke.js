@@ -16,7 +16,7 @@ const Stroke = ({ path, strokeWidth }) => {
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeOpacity={0.75}
+        strokeOpacity={1}
       />
       {/* <Polyline
         points={points}
