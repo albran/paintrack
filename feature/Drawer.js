@@ -10,7 +10,6 @@ import Svg, { Circle } from "react-native-svg";
 import Animated from "react-native-reanimated";
 
 import Stroke from "./Stroke";
-import TouchableOpacityG from "../components/TouchableOpacityG";
 import ModelFront from "../components/assets/ModelFront";
 import ModelBack from "../components/assets/ModelBack";
 import { set } from "react-native-reanimated";
@@ -31,10 +30,8 @@ const Drawer = ({ winWidth, winHeight }) => {
   const [strokeWidth, setStrokeWidth] = useState(defaultStrokeWidth);
 
   let AnimatedCircle = Animated.createAnimatedComponent(Circle);
-  // let AnimatedCircle = Reanimated.createAnimatedComponent(Circle);
 
   const pinchScaleRef = useRef(new Animated.Value(1));
-  // const example = Reanimated.Value.useValue(1);
 
   const circleXRef = useRef(new Animated.Value(1));
   const circleYRef = useRef(new Animated.Value(1));
@@ -64,23 +61,6 @@ const Drawer = ({ winWidth, winHeight }) => {
       setLivePath([]);
     }
   };
-
-  // const onPinchGestureEvent = (event) => {
-  //   console.log(event.nativeEvent);
-  // };
-
-  // const onPinchGestureEvent = Animated.event(
-  //   [
-  //     {
-  //       nativeEvent: {
-  //         scale: pinchScaleRef.current,
-  //         focalX: circleXRef.current,
-  //         focalY: circleYRef.current,
-  //       },
-  //     },
-  //   ],
-  //   { useNativeDriver: false }
-  // );
 
   const onPinchGestureEvent = Animated.event([
     {
@@ -112,21 +92,13 @@ const Drawer = ({ winWidth, winHeight }) => {
     <PanGestureHandler
       onGestureEvent={onPanGestureEvent}
       onHandlerStateChange={onPanHandlerStateChange}
-      // minPointers={1}
-      // maxPointers={1}
     >
       <Animated.View>
         <PinchGestureHandler
           onGestureEvent={onPinchGestureEvent}
           onHandlerStateChange={onPinchHandlerStateChange}
-          // minPointers={2}
-          // maxPointers={2}
         >
-          <Animated.View
-            style={{
-              ...styles.container,
-            }}
-          >
+          <Animated.View style={styles.container}>
             <Svg
               width={winWidth}
               height={canvasHeight}
@@ -158,24 +130,6 @@ const Drawer = ({ winWidth, winHeight }) => {
             ))}
             {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />} */}
             </Svg>
-            {/* {circleIsVisible && (
-            <Animated.View
-              style={[
-                {
-                  ...styles.circle,
-                  left: circleXRef.current,
-                  top: circleYRef.current,
-                },
-                {
-                  transform: [
-                    {
-                      scale: scaleRef.current,
-                    },
-                  ],
-                },
-              ]}
-            />
-          )} */}
           </Animated.View>
         </PinchGestureHandler>
       </Animated.View>
@@ -185,16 +139,7 @@ const Drawer = ({ winWidth, winHeight }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // borderTopWidth: 1,
     borderBottomWidth: 1,
-  },
-  circle: {
-    position: "absolute",
-    width: 50,
-    aspectRatio: 1,
-    borderRadius: 25,
-    backgroundColor: "transparent",
-    borderWidth: 1,
   },
 });
 
