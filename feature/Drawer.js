@@ -24,7 +24,7 @@ const Drawer = ({ winWidth, winHeight }) => {
   const strokeWidthsRef = useRef([]);
   const [circleIsVisible, setCircleIsVisible] = useState(false);
 
-  const defaultStrokeWidth = 30;
+  const defaultStrokeWidth = 25;
   const strokeScaleRef = useRef(1);
   const [strokeWidth, setStrokeWidth] = useState(defaultStrokeWidth);
 
@@ -39,6 +39,8 @@ const Drawer = ({ winWidth, winHeight }) => {
     baseCircleRref.current,
     pinchScaleRef.current
   );
+
+  const [viewIsFront, setViewIsFront] = useState(true);
 
   const onPanGestureEvent = (event) => {
     pathRef.current.push({
@@ -68,10 +70,9 @@ const Drawer = ({ winWidth, winHeight }) => {
         scale: (scale) =>
           Animated.block([
             Animated.set(pinchScaleRef.current, scale),
-            Animated.call(
-              [scale],
-              ([scaleListener]) => (strokeScaleRef.current = scaleListener)
-            ),
+            Animated.call([scale], ([scaleListener]) => {
+              strokeScaleRef.current = scaleListener;
+            }),
           ]),
         focalX: (x) => Animated.set(circleXRef.current, x),
         focalY: (y) => Animated.set(circleYRef.current, y),
@@ -93,52 +94,78 @@ const Drawer = ({ winWidth, winHeight }) => {
       setCircleIsVisible(false);
     }
   };
+
+  const onSwipeHandlerStateChange = (event) => {
+    if (event.nativeEvent.state === State.END) {
+      setViewIsFront(!viewIsFront);
+    }
+  };
+
   return (
     <PanGestureHandler
-      onGestureEvent={onPanGestureEvent}
-      onHandlerStateChange={onPanHandlerStateChange}
-      minPointers={1}
-      maxPointers={1}
+      minPointers={2}
+      maxPointers={2}
+      onHandlerStateChange={onSwipeHandlerStateChange}
     >
       <Animated.View>
-        <PinchGestureHandler
-          onGestureEvent={onPinchGestureEvent}
-          onHandlerStateChange={onPinchHandlerStateChange}
-          minPointers={2}
-          maxPointers={2}
+        <PanGestureHandler
+          onGestureEvent={onPanGestureEvent}
+          onHandlerStateChange={onPanHandlerStateChange}
+          minPointers={1}
+          maxPointers={1}
         >
           <Animated.View>
-            <Svg
-              width={winWidth}
-              height={canvasHeight}
-              viewBox={`0 0 ${winWidth} ${canvasHeight}`}
+            <PinchGestureHandler
+              onGestureEvent={onPinchGestureEvent}
+              onHandlerStateChange={onPinchHandlerStateChange}
+              minPointers={2}
+              maxPointers={2}
             >
-              {/* <ModelFront translateX={translateX} modelScale={modelScale} /> */}
-              <ModelBack translateX={translateX} modelScale={modelScale} />
-              {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />}
-              {circleIsVisible && (
-                <AnimatedCircle
-                  stroke="black"
-                  strokeWidth={1}
-                  fill="transparent"
-                  cx={circleXRef.current}
-                  cy={circleYRef.current}
-                  r={circleRref}
-                />
-              )}
-              {strokePathsRef.current.map((path, i) => (
-                <TouchableOpacityG key={i}>
-                  <Stroke
-                    key={i}
-                    path={path}
-                    strokeWidth={strokeWidthsRef.current[i]}
-                  />
-                </TouchableOpacityG>
-              ))}
-              {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />}
-            </Svg>
+              <Animated.View>
+                <Svg
+                  width={winWidth}
+                  height={canvasHeight}
+                  viewBox={`0 0 ${winWidth} ${canvasHeight}`}
+                >
+                  {viewIsFront && (
+                    <ModelFront
+                      translateX={translateX}
+                      modelScale={modelScale}
+                    />
+                  )}
+                  {!viewIsFront && (
+                    <ModelBack
+                      translateX={translateX}
+                      modelScale={modelScale}
+                    />
+                  )}
+                  {strokePathsRef.current.map((path, i) => (
+                    <TouchableOpacityG key={i}>
+                      <Stroke
+                        key={i}
+                        path={path}
+                        strokeWidth={strokeWidthsRef.current[i]}
+                      />
+                    </TouchableOpacityG>
+                  ))}
+                  {livePath && (
+                    <Stroke path={livePath} strokeWidth={strokeWidth} />
+                  )}
+                  {circleIsVisible && (
+                    <AnimatedCircle
+                      stroke="black"
+                      strokeWidth={1}
+                      fill="transparent"
+                      cx={circleXRef.current}
+                      cy={circleYRef.current}
+                      r={circleRref}
+                    />
+                  )}
+                </Svg>
+              </Animated.View>
+            </PinchGestureHandler>
           </Animated.View>
-        </PinchGestureHandler>
+        </PanGestureHandler>
       </Animated.View>
     </PanGestureHandler>
   );
