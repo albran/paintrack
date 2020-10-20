@@ -1,18 +1,11 @@
 import React from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  useWindowDimensions,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const Tag = ({ text }) => {
-  const height = useWindowDimensions().height;
+const Tag = ({ text, color }) => {
   return (
     <TouchableOpacity>
-      <View style={styles.container}>
-        <Text style={styles.text}>{text}</Text>
+      <View style={{ ...styles.container, backgroundColor: color }}>
+        <Text style={{ ...styles.text }}>{text}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -22,12 +15,12 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 1,
     borderRadius: 17,
     margin: 5,
   },
   text: {
     fontSize: 24,
+    color: "white",
     marginHorizontal: 9,
     marginVertical: 3,
   },
