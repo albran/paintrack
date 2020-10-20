@@ -9,7 +9,7 @@ import ModelFront from "../components/assets/ModelFront";
 import ModelBack from "../components/assets/ModelBack";
 import GesturesHandler from "../components/GesturesHandler";
 
-const Drawer = ({ winWidth, winHeight }) => {
+const Canvas = ({ winWidth, winHeight }) => {
   const modelScale = winWidth / 344;
   const translateX = 0.003 * winWidth;
   const canvasHeight = 400 * modelScale;
@@ -155,4 +155,4 @@ const Drawer = ({ winWidth, winHeight }) => {
   );
 };
 
-export default Drawer;
+export default Canvas;
