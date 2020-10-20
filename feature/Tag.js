@@ -1,13 +1,23 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  Pressable,
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
 const Tag = ({ text, color }) => {
   return (
-    <TouchableOpacity>
-      <View style={{ ...styles.container, backgroundColor: color }}>
-        <Text style={{ ...styles.text }}>{text}</Text>
-      </View>
-    </TouchableOpacity>
+    <Pressable
+      style={({ pressed }) => [
+        { opacity: pressed ? 0.66 : 1 },
+        { backgroundColor: color },
+        styles.container,
+      ]}
+    >
+      <Text style={{ ...styles.text }}>{text}</Text>
+    </Pressable>
   );
 };
 
@@ -21,8 +31,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     color: "white",
-    marginHorizontal: 9,
-    marginVertical: 3,
+    marginHorizontal: 15,
+    marginVertical: 6,
   },
 });
 
