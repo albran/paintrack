@@ -1,15 +1,10 @@
 import React from "react";
-import {
-  Pressable,
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 
 const Tag = ({ text, color }) => {
   return (
     <Pressable
+      hitSlop={3}
       style={({ pressed }) => [
         { opacity: pressed ? 0.66 : 1 },
         { backgroundColor: color },
