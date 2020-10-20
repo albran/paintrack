@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, useWindowDimensions, View } from "react-native";
 
-import Canvas from "./feature/Canvas";
+import Draw from "./feature/Draw";
 
 export default function App() {
   const { width: winWidth, height: winHeight } = useWindowDimensions();
@@ -12,7 +12,7 @@ export default function App() {
         marginTop: winHeight * 0.04,
       }}
     >
-      <Canvas winWidth={winWidth} winHeight={winHeight} />
+      <Draw winWidth={winWidth} winHeight={winHeight} />
     </View>
   );
 }

@@ -9,7 +9,7 @@ import ModelFront from "../components/assets/ModelFront";
 import ModelBack from "../components/assets/ModelBack";
 import GesturesHandler from "../components/GesturesHandler";
 
-const Canvas = ({ winWidth, winHeight }) => {
+const Canvas = ({ winWidth }) => {
   const modelScale = winWidth / 344;
   const translateX = 0.003 * winWidth;
   const canvasHeight = 400 * modelScale;
