@@ -12,19 +12,24 @@ const Stroke = ({ path, strokeWidth }) => {
     <>
       <Polyline
         points={points}
-        stroke={color}
+        stroke="black"
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeOpacity={1}
+      />
+      <Polyline
+        points={points}
+        stroke={color}
+        strokeWidth={strokeWidth - 5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       {/* <Polyline
         points={points}
         stroke="white"
-        strokeWidth={strokeWidth - 1}
-        strokeLinecap="round"
+        strokeWidth={strokeWidth - 10}
         strokeLinejoin="round"
-        strokeOpacity={0.5}
+        strokeDasharray="2, 10"
       /> */}
     </>
   );

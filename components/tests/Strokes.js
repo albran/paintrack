@@ -1,6 +1,6 @@
 import React from "react";
 import { useWindowDimensions } from "react-native";
-import colorShade from "../functions/colorShade";
+import colorShade from "../../functions/colorShade";
 import Svg, { Polyline } from "react-native-svg";
 
 const Strokes = () => {
@@ -54,9 +54,10 @@ const Strokes = () => {
           points={stroke.path}
           stroke={stroke.color}
           strokeWidth={15}
-          strokeLinecap="round"
+          // strokeLinecap="round"
           strokeLinejoin="round"
           strokeOpacity={0.6}
+          strokeDasharray="4, 2"
         />
       ))}
     </Svg>

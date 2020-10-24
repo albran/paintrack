@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, useWindowDimensions, View } from "react-native";
 
 import Draw from "./feature/Draw";
+import Strokes from "./components/tests/Strokes";
 
 export default function App() {
   const { width: winWidth, height: winHeight } = useWindowDimensions();
@@ -13,6 +14,7 @@ export default function App() {
       }}
     >
       <Draw winWidth={winWidth} winHeight={winHeight} />
+      {/* <Strokes /> */}
     </View>
   );
 }

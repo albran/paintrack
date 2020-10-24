@@ -9,7 +9,7 @@ import ModelFront from "../components/assets/ModelFront";
 import ModelBack from "../components/assets/ModelBack";
 import GesturesHandler from "../components/GesturesHandler";
 
-const Canvas = ({ winWidth }) => {
+const Canvas = ({ winWidth, liveStroke, setLiveStroke }) => {
   const modelScale = winWidth / 344;
   const translateX = 0.003 * winWidth;
   const canvasHeight = 400 * modelScale;
@@ -57,6 +57,8 @@ const Canvas = ({ winWidth }) => {
     if (event.nativeEvent.state === State.END) {
       strokePathsRef.current.push(livePath);
       strokeWidthsRef.current.push(strokeWidth);
+      setLiveStroke({ path: [...livePath], depth: depth });
+      console.log(liveStroke);
       setLivePath([]);
       setCircleIsVisible(false);
     }
