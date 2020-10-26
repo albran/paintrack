@@ -1,5 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+
+import colorShade from "../functions/colorShade";
+import { Colors } from "./colors";
 
 const generateDots = (pattern) => {
   const n = pattern === "Brief" ? 1 : 5;
@@ -10,13 +13,30 @@ const generateDots = (pattern) => {
   return pattern === "Continuous" ? <View style={styles.dash} /> : dots;
 };
 
-const PatternButton = ({ text }) => {
+const PatternButton = ({
+  text,
+  liveStroke,
+  updateLiveStroke,
+  setDrawState,
+}) => {
   const dots = generateDots(text);
   return (
-    <View style={styles.button}>
+    <Pressable
+      onPress={() => {
+        updateLiveStroke({ pattern: text });
+        setDrawState("PINCHING");
+      }}
+      style={{
+        ...styles.button,
+        backgroundColor: colorShade(
+          Colors[liveStroke.type],
+          200 - (liveStroke.scale - 1) * 20
+        ),
+      }}
+    >
       <Text style={styles.text}>{text}</Text>
       <View style={styles.dotDashWrapper}>{dots}</View>
-    </View>
+    </Pressable>
   );
 };
 
@@ -26,11 +46,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 120,
     height: 60,
-    borderWidth: 1,
     borderRadius: 20,
   },
   text: {
     fontSize: 18,
+    color: "white",
   },
   dotDashWrapper: {
     flexDirection: "row",
@@ -42,13 +62,15 @@ const styles = StyleSheet.create({
     height: 7,
     borderRadius: 7 / 2,
     margin: 1,
-    backgroundColor: "black",
+    borderWidth: 1,
+    backgroundColor: "white",
   },
   dash: {
     width: 45,
     height: 7,
     borderRadius: 20,
-    backgroundColor: "black",
+    borderWidth: 1,
+    backgroundColor: "white",
   },
 });
 

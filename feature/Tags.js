@@ -2,22 +2,30 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 import Tag from "./Tag";
+import { Colors } from "./colors";
+import colorShade from "../functions/colorShade";
 
 const tagsModel = [
-  { name: "Aching", color: "#0c451b" },
-  { name: "Cramping", color: "#3f0063" },
-  { name: "Stabbing", color: "#800101" },
-  { name: "Shooting", color: "#756f00" },
-  { name: "Burning", color: "#a35200" },
-  { name: "Throbbing", color: "#000ea3" },
-  { name: "Other", color: "#4d0087" },
+  "Aching",
+  "Cramping",
+  "Stabbing",
+  "Shooting",
+  "Burning",
+  "Throbbing",
+  "Other",
 ];
 
-const Tags = () => {
+const Tags = ({ updateLiveStroke, setDrawState }) => {
   return (
     <View style={styles.container}>
       {tagsModel.map((tag, i) => (
-        <Tag key={i} text={tag.name} color={tag.color} />
+        <Tag
+          key={i}
+          text={tag}
+          color={colorShade(Colors[tag], 0)}
+          updateLiveStroke={updateLiveStroke}
+          setDrawState={setDrawState}
+        />
       ))}
     </View>
   );

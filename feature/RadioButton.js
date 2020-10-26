@@ -1,7 +1,14 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-const RadioButton = ({ color, number, selection, setSelection }) => {
+const RadioButton = ({
+  color,
+  number,
+  selection,
+  setSelection,
+  updateLiveStroke,
+  setDrawState,
+}) => {
   return (
     <View style={styles.container}>
       {selection === number && (
@@ -12,7 +19,11 @@ const RadioButton = ({ color, number, selection, setSelection }) => {
       )}
       <Pressable
         style={{ ...styles.touchable, backgroundColor: color }}
-        onPress={() => setSelection(number)}
+        onPressIn={() => setSelection(number)}
+        onPressOut={() => {
+          updateLiveStroke({ scale: number });
+          setDrawState("PATTERNING");
+        }}
       >
         <Text style={styles.number}>{number}</Text>
       </Pressable>

@@ -5,11 +5,17 @@ import PatternButton from "./PatternButton";
 
 const patterns = ["Brief", "Periodical", "Continuous"];
 
-const Pattern = ({ setLiveStroke }) => {
+const Pattern = ({ liveStroke, updateLiveStroke, setDrawState }) => {
   return (
     <View style={styles.container}>
       {patterns.map((pattern, i) => (
-        <PatternButton key={i} text={pattern} />
+        <PatternButton
+          key={i}
+          text={pattern}
+          liveStroke={liveStroke}
+          updateLiveStroke={updateLiveStroke}
+          setDrawState={setDrawState}
+        />
       ))}
     </View>
   );

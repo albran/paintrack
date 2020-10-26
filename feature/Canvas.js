@@ -9,7 +9,13 @@ import ModelFront from "../components/assets/ModelFront";
 import ModelBack from "../components/assets/ModelBack";
 import GesturesHandler from "../components/GesturesHandler";
 
-const Canvas = ({ winWidth, liveStroke, setLiveStroke }) => {
+const Canvas = ({
+  winWidth,
+  liveStroke,
+  setLiveStroke,
+  drawState,
+  setDrawState,
+}) => {
   const modelScale = winWidth / 344;
   const translateX = 0.003 * winWidth;
   const canvasHeight = 400 * modelScale;
@@ -23,7 +29,7 @@ const Canvas = ({ winWidth, liveStroke, setLiveStroke }) => {
 
   const defaultStrokeWidth = 25;
   const strokeScaleRef = useRef(1);
-  const [strokeWidth, setStrokeWidth] = useState(defaultStrokeWidth);
+  const [liveStrokeWidth, setLiveStrokeWidth] = useState(defaultStrokeWidth);
 
   let AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
@@ -55,12 +61,23 @@ const Canvas = ({ winWidth, liveStroke, setLiveStroke }) => {
     }
 
     if (event.nativeEvent.state === State.END) {
-      strokePathsRef.current.push(livePath);
-      strokeWidthsRef.current.push(strokeWidth);
-      setLiveStroke({ path: [...livePath], depth: depth });
-      console.log(liveStroke);
+      // strokePathsRef.current.push(livePath);
+      // strokeWidthsRef.current.push(strokeWidth);
+      // setLiveStroke({
+      //   path: [...livePath],
+      //   width: liveStrokeWidth,
+      //   view: viewIsFront ? "front" : "back",
+      //   depth: depth,
+      // });
+      setLiveStroke({
+        path: [...livePath],
+        width: liveStrokeWidth,
+        view: viewIsFront ? "front" : "back",
+        depth: depth,
+      });
       setLivePath([]);
       setCircleIsVisible(false);
+      setDrawState("TYPING");
     }
   };
 
@@ -86,8 +103,9 @@ const Canvas = ({ winWidth, liveStroke, setLiveStroke }) => {
     }
 
     if (event.nativeEvent.state === State.END) {
-      setStrokeWidth(defaultStrokeWidth * strokeScaleRef.current);
+      setLiveStrokeWidth(defaultStrokeWidth * strokeScaleRef.current);
       setCircleIsVisible(false);
+      setDrawState("DRAWING");
     }
   };
 
@@ -132,7 +150,7 @@ const Canvas = ({ winWidth, liveStroke, setLiveStroke }) => {
             depth={depth}
           />
         )}
-        {strokePathsRef.current.map((path, i) => (
+        {/* {strokePathsRef.current.map((path, i) => (
           <TouchableOpacityG key={i}>
             <Stroke
               key={i}
@@ -140,8 +158,11 @@ const Canvas = ({ winWidth, liveStroke, setLiveStroke }) => {
               strokeWidth={strokeWidthsRef.current[i]}
             />
           </TouchableOpacityG>
-        ))}
-        {livePath && <Stroke path={livePath} strokeWidth={strokeWidth} />}
+        ))} */}
+        {livePath && (
+          <Stroke livePath={livePath} liveStrokeWidth={liveStrokeWidth} />
+        )}
+        {liveStroke && <Stroke stroke={liveStroke} />}
         {circleIsVisible && (
           <AnimatedCircle
             stroke="black"

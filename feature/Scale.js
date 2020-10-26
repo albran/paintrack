@@ -4,8 +4,15 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import RadioButton from "./RadioButton";
 import colorShade from "../functions/colorShade";
+import { Colors } from "./colors";
 
-const generateButtons = (color, selection, setSelection) => {
+const generateButtons = (
+  color,
+  selection,
+  setSelection,
+  updateLiveStroke,
+  setDrawState
+) => {
   const buttons = [];
   for (let i = 1, j = 10, k = 0; i <= 10; i++, j--, k += 20) {
     buttons.unshift(
@@ -15,15 +22,24 @@ const generateButtons = (color, selection, setSelection) => {
         color={colorShade(color, k)}
         selection={selection}
         setSelection={setSelection}
+        updateLiveStroke={updateLiveStroke}
+        setDrawState={setDrawState}
       />
     );
   }
   return buttons;
 };
 
-const Scale = ({ color = "#780000" }) => {
+const Scale = ({ liveStroke, updateLiveStroke, setDrawState }) => {
+  const color = colorShade(Colors[liveStroke.type], 0);
   const [selection, setSelection] = useState(1);
-  const buttons = generateButtons(color, selection, setSelection);
+  const buttons = generateButtons(
+    color,
+    selection,
+    setSelection,
+    updateLiveStroke,
+    setDrawState
+  );
   return (
     <View style={styles.container}>
       <View style={styles.barWrapper}>
