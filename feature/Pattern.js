@@ -23,11 +23,10 @@ const Pattern = ({ liveStroke, updateLiveStroke, setDrawState }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     width: "95%",
-    height: 100,
+    height: 175,
   },
 });
 

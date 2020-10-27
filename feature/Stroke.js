@@ -9,6 +9,7 @@ const Stroke = ({ livePath, liveStrokeWidth, stroke = {} }) => {
     width = liveStrokeWidth,
     type = "Undefined",
     scale = 1,
+    pattern,
   } = stroke;
 
   const points = path.map((p) => `${p.x},${p.y}`).join(" ");
@@ -33,13 +34,24 @@ const Stroke = ({ livePath, liveStrokeWidth, stroke = {} }) => {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      {/* <Polyline
-        points={points}
-        stroke="white"
-        strokeWidth={strokeWidth - 10}
-        strokeLinejoin="round"
-        strokeDasharray="2, 10"
-      /> */}
+      {pattern === "Periodical" && (
+        <Polyline
+          points={points}
+          stroke="white"
+          strokeWidth={5}
+          strokeLinejoin="round"
+          strokeDasharray="2, 10"
+        />
+      )}
+      {pattern === "Continuous" && (
+        <Polyline
+          points={points}
+          stroke="white"
+          strokeWidth={2}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+      )}
     </>
   );
 };
