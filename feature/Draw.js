@@ -38,7 +38,10 @@ const Draw = ({ winWidth, winHeight }) => {
     setLiveStroke({ ...(liveStroke ? liveStroke : {}), ...obj });
   };
   const [strokes, setStrokes] = useState([]);
-  const saveStroke = () => setStrokes([...strokes, liveStroke]);
+  const saveStroke = () => {
+    setStrokes([...strokes, liveStroke]);
+    setLiveStroke();
+  };
 
   const [keyboard, setKeyboard] = useState(false);
 

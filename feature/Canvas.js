@@ -7,6 +7,7 @@ import TouchableOpacityG from "../components/TouchableOpacityG";
 import Stroke from "./Stroke";
 import GesturesHandler from "../components/GesturesHandler";
 import Model from "../components/assets/Model";
+import StrokeRenderer from "./StrokeRenderer";
 
 const Canvas = ({
   winWidth,
@@ -143,9 +144,12 @@ const Canvas = ({
           depth={depth}
           viewIsFront={viewIsFront}
         />
-        {strokes.map((stroke, i) => (
-          <Stroke key={i} stroke={stroke} />
-        ))}
+        <StrokeRenderer
+          drawState={drawState}
+          viewIsFront={viewIsFront}
+          depth={depth}
+          strokes={strokes}
+        />
         {/* {strokePathsRef.current.map((path, i) => (
           <TouchableOpacityG key={i}>
             <Stroke
@@ -155,9 +159,6 @@ const Canvas = ({
             />
           </TouchableOpacityG>
         ))} */}
-        {livePath && (
-          <Stroke livePath={livePath} liveStrokeWidth={liveStrokeWidth} />
-        )}
         {liveStroke && <Stroke stroke={liveStroke} />}
         {circleIsVisible && (
           <AnimatedCircle
@@ -168,6 +169,9 @@ const Canvas = ({
             cy={circleYRef.current}
             r={circleRref}
           />
+        )}
+        {livePath && (
+          <Stroke livePath={livePath} liveStrokeWidth={liveStrokeWidth} />
         )}
       </Svg>
     </GesturesHandler>
