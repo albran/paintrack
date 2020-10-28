@@ -5,9 +5,8 @@ import Animated from "react-native-reanimated";
 
 import TouchableOpacityG from "../components/TouchableOpacityG";
 import Stroke from "./Stroke";
-import ModelFront from "../components/assets/ModelFront";
-import ModelBack from "../components/assets/ModelBack";
 import GesturesHandler from "../components/GesturesHandler";
+import Model from "../components/assets/Model";
 
 const Canvas = ({
   winWidth,
@@ -136,20 +135,12 @@ const Canvas = ({
         height={canvasHeight}
         viewBox={`0 0 ${winWidth} ${canvasHeight}`}
       >
-        {viewIsFront && (
-          <ModelFront
-            translateX={translateX}
-            modelScale={modelScale}
-            depth={depth}
-          />
-        )}
-        {!viewIsFront && (
-          <ModelBack
-            translateX={translateX}
-            modelScale={modelScale}
-            depth={depth}
-          />
-        )}
+        <Model
+          translateX={translateX}
+          modelScale={modelScale}
+          depth={depth}
+          viewIsFront={viewIsFront}
+        />
         {/* {strokePathsRef.current.map((path, i) => (
           <TouchableOpacityG key={i}>
             <Stroke
