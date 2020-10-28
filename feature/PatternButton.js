@@ -24,7 +24,7 @@ const PatternButton = ({
     <Pressable
       onPress={() => {
         updateLiveStroke({ pattern: text });
-        setDrawState("PINCHING");
+        setDrawState("NOTING");
       }}
       style={{
         ...styles.button,

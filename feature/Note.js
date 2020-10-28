@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-const Note = () => {
+const Note = ({ updateLiveStroke, setDrawState }) => {
   return (
     <View style={styles.container}>
       <Text>Note</Text>
@@ -12,6 +12,10 @@ const Note = () => {
         placeholder="Leave a note..."
         importantForAutofill="no"
         scrollEnabled={false}
+        onEndEditing={(event) => {
+          updateLiveStroke({ note: event.nativeEvent.text });
+          setDrawState("PINCHING");
+        }}
       />
     </View>
   );
@@ -19,16 +23,15 @@ const Note = () => {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
-    width: "95%",
-    height: "85%",
+    width: "100%",
+    height: "100%",
     borderWidth: 1,
   },
   input: {
-    flex: 1,
     width: "95%",
-    backgroundColor: "pink",
+    height: "85%",
   },
 });
 
