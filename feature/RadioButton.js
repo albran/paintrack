@@ -1,6 +1,8 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+import { DrawStates } from "./globals";
+
 const RadioButton = ({
   color,
   number,
@@ -22,7 +24,7 @@ const RadioButton = ({
         onPressIn={() => setSelection(number)}
         onPressOut={() => {
           updateLiveStroke({ scale: number });
-          setDrawState("PATTERNING");
+          setDrawState(DrawStates.Patterning);
         }}
       >
         <Text style={styles.number}>{number}</Text>

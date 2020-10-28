@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
+import { DrawStates } from "./globals";
+
 const Note = ({ updateLiveStroke, setDrawState, saveStroke }) => {
   return (
     <View style={styles.container}>
@@ -15,7 +17,7 @@ const Note = ({ updateLiveStroke, setDrawState, saveStroke }) => {
         onEndEditing={(event) => {
           updateLiveStroke({ note: event.nativeEvent.text });
           saveStroke();
-          setDrawState("VIEWING");
+          setDrawState(DrawStates.Navigating);
         }}
       />
     </View>

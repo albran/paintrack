@@ -1,11 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+import { DrawStates } from "./globals";
+
 const DrawButton = ({ setDrawState }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        setDrawState("PINCHING");
+        setDrawState(DrawStates.Pinching);
       }}
       style={styles.container}
     >

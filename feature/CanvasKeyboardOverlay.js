@@ -1,12 +1,7 @@
 import React from "react";
 import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
 
-const CanvasKeyboardOverlay = ({
-  keyboard,
-  winWidth,
-  canvasHeight,
-  setDrawState,
-}) => {
+const CanvasKeyboardOverlay = ({ keyboard, winWidth, canvasHeight }) => {
   return (
     <TouchableWithoutFeedback
       disabled={!keyboard}

@@ -2,9 +2,11 @@ import React from "react";
 import TouchableOpacityG from "../components/TouchableOpacityG";
 import Stroke from "./Stroke";
 
+import { DrawStates } from "./globals";
+
 const StrokeRenderer = ({ drawState, viewIsFront, depth, strokes }) => {
   const view = viewIsFront ? "front" : "back";
-  if (drawState === "VIEWING")
+  if (drawState === DrawStates.Navigating || drawState === DrawStates.Viewing)
     return (
       <>
         {strokes.map(

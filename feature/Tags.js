@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 import Tag from "./Tag";
-import { Colors } from "./colors";
+import { Colors } from "./globals";
 import colorShade from "../functions/colorShade";
 
 const tagsModel = [

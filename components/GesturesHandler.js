@@ -7,6 +7,8 @@ import {
 } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 
+import { DrawStates } from "../feature/globals";
+
 const GesturesHandler = ({
   children,
   drawState,
@@ -17,7 +19,7 @@ const GesturesHandler = ({
   onPinchGestureEvent,
   onPinchHandlerStateChange,
 }) => {
-  if (drawState === "VIEWING")
+  if (drawState === DrawStates.Navigating)
     return (
       <TapGestureHandler
         minPointers={2}
@@ -36,7 +38,7 @@ const GesturesHandler = ({
       </TapGestureHandler>
     );
 
-  if (drawState === "PINCHING")
+  if (drawState === DrawStates.Pinching)
     return (
       <PinchGestureHandler
         onGestureEvent={onPinchGestureEvent}
@@ -48,7 +50,7 @@ const GesturesHandler = ({
       </PinchGestureHandler>
     );
 
-  if (drawState === "DRAWING")
+  if (drawState === DrawStates.Drawing)
     return (
       <PanGestureHandler
         onGestureEvent={onDrawGestureEvent}

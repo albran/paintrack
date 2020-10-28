@@ -1,38 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { Keyboard, KeyboardAvoidingView, View } from "react-native";
 
 import Canvas from "./Canvas";
 import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Tooltip from "./Tooltip";
-
-const DrawStates = Object.freeze({
-  Viewing: "VIEWING",
-  Pinching: "PINCHING",
-  Drawing: "DRAWING",
-  Typing: "TYPING",
-  Scaling: "SCALING",
-  Patterning: "PATTERNING",
-  Noting: "NOTING",
-});
-
-const Stroke = Object.freeze({
-  path: "path",
-  width: "width",
-  view: "view",
-  depth: "depth",
-  type: "type",
-  scale: "scale",
-  pattern: "pattern",
-  note: "note",
-});
+import { DrawStates } from "./globals";
 
 const Draw = ({ winWidth, winHeight }) => {
-  const [drawState, setDrawState] = useState(DrawStates.Viewing);
+  const [drawState, setDrawState] = useState(DrawStates.Navigating);
   const [liveStroke, setLiveStroke] = useState();
   const updateLiveStroke = (obj) => {
     setLiveStroke({ ...(liveStroke ? liveStroke : {}), ...obj });

@@ -7,6 +7,8 @@ import Pattern from "./Pattern";
 import Note from "./Note";
 import DrawButton from "./DrawButton";
 
+import { DrawStates } from "./globals";
+
 const Tooltip = ({
   liveStroke,
   updateLiveStroke,
@@ -16,29 +18,33 @@ const Tooltip = ({
 }) => {
   return (
     <View style={styles.container}>
-      {drawState === "VIEWING" && <DrawButton setDrawState={setDrawState} />}
-      {drawState === "PINCHING" && <Text>Pinch to adjust stroke size</Text>}
-      {drawState === "DRAWING" && (
+      {drawState === DrawStates.Navigating && (
+        <DrawButton setDrawState={setDrawState} />
+      )}
+      {drawState === DrawStates.Pinching && (
+        <Text>Pinch to adjust stroke size</Text>
+      )}
+      {drawState === DrawStates.Drawing && (
         <Text>Draw an area of pain using your finger.</Text>
       )}
-      {drawState === "TYPING" && (
+      {drawState === DrawStates.Typing && (
         <Tags updateLiveStroke={updateLiveStroke} setDrawState={setDrawState} />
       )}
-      {drawState === "SCALING" && (
+      {drawState === DrawStates.Scaling && (
         <Scale
           liveStroke={liveStroke}
           updateLiveStroke={updateLiveStroke}
           setDrawState={setDrawState}
         />
       )}
-      {drawState === "PATTERNING" && (
+      {drawState === DrawStates.Patterning && (
         <Pattern
           liveStroke={liveStroke}
           updateLiveStroke={updateLiveStroke}
           setDrawState={setDrawState}
         />
       )}
-      {drawState === "NOTING" && (
+      {drawState === DrawStates.Noting && (
         <Note
           updateLiveStroke={updateLiveStroke}
           setDrawState={setDrawState}

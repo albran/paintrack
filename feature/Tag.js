@@ -1,6 +1,8 @@
 import React from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 
+import { DrawStates } from "./globals";
+
 const Tag = ({ text, color, updateLiveStroke, setDrawState }) => {
   return (
     <Pressable
@@ -12,7 +14,7 @@ const Tag = ({ text, color, updateLiveStroke, setDrawState }) => {
       ]}
       onPress={() => {
         updateLiveStroke({ type: text });
-        setDrawState("SCALING");
+        setDrawState(DrawStates.Scaling);
       }}
     >
       <Text style={{ ...styles.text }}>{text}</Text>

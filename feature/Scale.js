@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import RadioButton from "./RadioButton";
 import colorShade from "../functions/colorShade";
-import { Colors } from "./colors";
+import { Colors } from "./globals";
 
 const generateButtons = (
   color,

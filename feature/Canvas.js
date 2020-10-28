@@ -8,6 +8,7 @@ import Stroke from "./Stroke";
 import GesturesHandler from "../components/GesturesHandler";
 import Model from "../components/assets/Model";
 import StrokeRenderer from "./StrokeRenderer";
+import { DrawStates } from "./globals";
 
 const Canvas = ({
   winWidth,
@@ -78,7 +79,7 @@ const Canvas = ({
       });
       setLivePath([]);
       setCircleIsVisible(false);
-      setDrawState("TYPING");
+      setDrawState(DrawStates.Typing);
     }
   };
 
@@ -106,7 +107,7 @@ const Canvas = ({
     if (event.nativeEvent.state === State.END) {
       setLiveStrokeWidth(defaultStrokeWidth * strokeScaleRef.current);
       setCircleIsVisible(false);
-      setDrawState("DRAWING");
+      setDrawState(DrawStates.Drawing);
     }
   };
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import colorShade from "../functions/colorShade";
-import { Colors } from "./colors";
+import { Colors, DrawStates } from "./globals";
 
 const generateDots = (pattern) => {
   const n = pattern === "Brief" ? 1 : 5;
@@ -24,7 +24,7 @@ const PatternButton = ({
     <Pressable
       onPress={() => {
         updateLiveStroke({ pattern: text });
-        setDrawState("NOTING");
+        setDrawState(DrawStates.Noting);
       }}
       style={{
         ...styles.button,
