@@ -2,8 +2,8 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 import Tag from "./Tag";
-import { Colors } from "./globals";
-import colorShade from "../functions/colorShade";
+import { Colors } from "../library/globals";
+import colorShade from "../library/colorShade";
 
 const tagsModel = [
   "Aching",

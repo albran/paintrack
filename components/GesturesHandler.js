@@ -7,7 +7,7 @@ import {
 } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 
-import { DrawStates } from "../feature/globals";
+import { DrawStates } from "../library/globals";
 
 const GesturesHandler = ({
   children,

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-import { DrawStates } from "./globals";
+import { DrawStates } from "../library/globals";
 
 const Note = ({ updateLiveStroke, setDrawState, saveStroke }) => {
   return (

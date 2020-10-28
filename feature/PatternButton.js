@@ -1,8 +1,8 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-import colorShade from "../functions/colorShade";
-import { Colors, DrawStates } from "./globals";
+import colorShade from "../library/colorShade";
+import { Colors, DrawStates } from "../library/globals";
 
 const generateDots = (pattern) => {
   const n = pattern === "Brief" ? 1 : 5;

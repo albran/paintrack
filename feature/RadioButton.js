@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-import { DrawStates } from "./globals";
+import { DrawStates } from "../library/globals";
 
 const RadioButton = ({
   color,

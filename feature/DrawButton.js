@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import { DrawStates } from "./globals";
+import { DrawStates } from "../library/globals";
 
 const DrawButton = ({ setDrawState }) => {
   return (

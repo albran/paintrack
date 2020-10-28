@@ -3,8 +3,8 @@ import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import RadioButton from "./RadioButton";
-import colorShade from "../functions/colorShade";
-import { Colors } from "./globals";
+import colorShade from "../library/colorShade";
+import { Colors } from "../library/globals";
 
 const generateButtons = (
   color,

@@ -8,7 +8,7 @@ import Stroke from "./Stroke";
 import GesturesHandler from "../components/GesturesHandler";
 import Model from "../components/assets/Model";
 import StrokeRenderer from "./StrokeRenderer";
-import { DrawStates } from "./globals";
+import { DrawStates } from "../library/globals";
 
 const Canvas = ({
   winWidth,
@@ -17,6 +17,7 @@ const Canvas = ({
   drawState,
   setDrawState,
   strokes,
+  setInfoStroke,
 }) => {
   const modelScale = winWidth / 344;
   const translateX = 0.003 * winWidth;
@@ -147,9 +148,11 @@ const Canvas = ({
         />
         <StrokeRenderer
           drawState={drawState}
+          setDrawState={setDrawState}
           viewIsFront={viewIsFront}
           depth={depth}
           strokes={strokes}
+          setInfoStroke={setInfoStroke}
         />
         {/* {strokePathsRef.current.map((path, i) => (
           <TouchableOpacityG key={i}>

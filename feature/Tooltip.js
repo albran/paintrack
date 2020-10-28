@@ -7,7 +7,8 @@ import Pattern from "./Pattern";
 import Note from "./Note";
 import DrawButton from "./DrawButton";
 
-import { DrawStates } from "./globals";
+import { DrawStates } from "../library/globals";
+import StrokeInfo from "./StrokeInfo";
 
 const Tooltip = ({
   liveStroke,
@@ -15,11 +16,15 @@ const Tooltip = ({
   drawState,
   setDrawState,
   saveStroke,
+  infoStroke,
 }) => {
   return (
     <View style={styles.container}>
       {drawState === DrawStates.Navigating && (
         <DrawButton setDrawState={setDrawState} />
+      )}
+      {drawState === DrawStates.Viewing && (
+        <StrokeInfo infoStroke={infoStroke} />
       )}
       {drawState === DrawStates.Pinching && (
         <Text>Pinch to adjust stroke size</Text>

@@ -2,9 +2,16 @@ import React from "react";
 import TouchableOpacityG from "../components/TouchableOpacityG";
 import Stroke from "./Stroke";
 
-import { DrawStates } from "./globals";
+import { DrawStates } from "../library/globals";
 
-const StrokeRenderer = ({ drawState, viewIsFront, depth, strokes }) => {
+const StrokeRenderer = ({
+  drawState,
+  setDrawState,
+  viewIsFront,
+  depth,
+  strokes,
+  setInfoStroke,
+}) => {
   const view = viewIsFront ? "front" : "back";
   if (drawState === DrawStates.Navigating || drawState === DrawStates.Viewing)
     return (
@@ -13,7 +20,13 @@ const StrokeRenderer = ({ drawState, viewIsFront, depth, strokes }) => {
           (stroke, i) =>
             depth === stroke.depth &&
             view === stroke.view && (
-              <TouchableOpacityG key={i}>
+              <TouchableOpacityG
+                key={i}
+                onPress={() => {
+                  setInfoStroke(stroke);
+                  setDrawState(DrawStates.Viewing);
+                }}
+              >
                 <Stroke stroke={stroke} />
               </TouchableOpacityG>
             )

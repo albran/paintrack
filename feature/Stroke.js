@@ -1,7 +1,7 @@
 import { Polyline } from "react-native-svg";
 import React from "react";
-import colorShade from "../functions/colorShade";
-import { Colors } from "./globals";
+import colorShade from "../library/colorShade";
+import { Colors } from "../library/globals";
 
 const Stroke = ({ livePath, liveStrokeWidth, stroke = {} }) => {
   const {

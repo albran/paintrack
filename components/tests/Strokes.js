@@ -1,6 +1,6 @@
 import React from "react";
 import { useWindowDimensions } from "react-native";
-import colorShade from "../../functions/colorShade";
+import colorShade from "../../library/colorShade";
 import Svg, { Polyline } from "react-native-svg";
 
 const Strokes = () => {

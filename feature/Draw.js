@@ -4,7 +4,7 @@ import { Keyboard, KeyboardAvoidingView, View } from "react-native";
 import Canvas from "./Canvas";
 import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Tooltip from "./Tooltip";
-import { DrawStates } from "./globals";
+import { DrawStates } from "../library/globals";
 
 const Draw = ({ winWidth, winHeight }) => {
   const [drawState, setDrawState] = useState(DrawStates.Navigating);
@@ -17,6 +17,7 @@ const Draw = ({ winWidth, winHeight }) => {
     setStrokes([...strokes, liveStroke]);
     setLiveStroke();
   };
+  const [infoStroke, setInfoStroke] = useState();
 
   const [keyboard, setKeyboard] = useState(false);
 
@@ -56,6 +57,7 @@ const Draw = ({ winWidth, winHeight }) => {
           drawState={drawState}
           setDrawState={setDrawState}
           strokes={strokes}
+          setInfoStroke={setInfoStroke}
         />
         {keyboard && (
           <CanvasKeyboardOverlay
@@ -72,6 +74,7 @@ const Draw = ({ winWidth, winHeight }) => {
         drawState={drawState}
         setDrawState={setDrawState}
         saveStroke={saveStroke}
+        infoStroke={infoStroke}
       />
     </KeyboardAvoidingView>
   );
