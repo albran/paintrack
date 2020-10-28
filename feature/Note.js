@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-const Note = ({ updateLiveStroke, setDrawState }) => {
+const Note = ({ updateLiveStroke, setDrawState, saveStroke }) => {
   return (
     <View style={styles.container}>
       <Text>Note</Text>
@@ -14,6 +14,7 @@ const Note = ({ updateLiveStroke, setDrawState }) => {
         scrollEnabled={false}
         onEndEditing={(event) => {
           updateLiveStroke({ note: event.nativeEvent.text });
+          saveStroke();
           setDrawState("VIEWING");
         }}
       />

@@ -7,7 +7,13 @@ import Pattern from "./Pattern";
 import Note from "./Note";
 import DrawButton from "./DrawButton";
 
-const Tooltip = ({ liveStroke, updateLiveStroke, drawState, setDrawState }) => {
+const Tooltip = ({
+  liveStroke,
+  updateLiveStroke,
+  drawState,
+  setDrawState,
+  saveStroke,
+}) => {
   return (
     <View style={styles.container}>
       {drawState === "VIEWING" && <DrawButton setDrawState={setDrawState} />}
@@ -33,7 +39,11 @@ const Tooltip = ({ liveStroke, updateLiveStroke, drawState, setDrawState }) => {
         />
       )}
       {drawState === "NOTING" && (
-        <Note updateLiveStroke={updateLiveStroke} setDrawState={setDrawState} />
+        <Note
+          updateLiveStroke={updateLiveStroke}
+          setDrawState={setDrawState}
+          saveStroke={saveStroke}
+        />
       )}
     </View>
   );

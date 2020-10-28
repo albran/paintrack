@@ -14,6 +14,7 @@ const Canvas = ({
   setLiveStroke,
   drawState,
   setDrawState,
+  strokes,
 }) => {
   const modelScale = winWidth / 344;
   const translateX = 0.003 * winWidth;
@@ -142,6 +143,9 @@ const Canvas = ({
           depth={depth}
           viewIsFront={viewIsFront}
         />
+        {strokes.map((stroke, i) => (
+          <Stroke key={i} stroke={stroke} />
+        ))}
         {/* {strokePathsRef.current.map((path, i) => (
           <TouchableOpacityG key={i}>
             <Stroke

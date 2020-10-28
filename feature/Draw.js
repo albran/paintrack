@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -37,6 +37,8 @@ const Draw = ({ winWidth, winHeight }) => {
   const updateLiveStroke = (obj) => {
     setLiveStroke({ ...(liveStroke ? liveStroke : {}), ...obj });
   };
+  const [strokes, setStrokes] = useState([]);
+  const saveStroke = () => setStrokes([...strokes, liveStroke]);
 
   const [keyboard, setKeyboard] = useState(false);
 
@@ -75,6 +77,7 @@ const Draw = ({ winWidth, winHeight }) => {
           setLiveStroke={setLiveStroke}
           drawState={drawState}
           setDrawState={setDrawState}
+          strokes={strokes}
         />
         {keyboard && (
           <CanvasKeyboardOverlay
@@ -90,6 +93,7 @@ const Draw = ({ winWidth, winHeight }) => {
         updateLiveStroke={updateLiveStroke}
         drawState={drawState}
         setDrawState={setDrawState}
+        saveStroke={saveStroke}
       />
     </KeyboardAvoidingView>
   );
