@@ -10,7 +10,7 @@ import DrawButton from "./DrawButton";
 const Tooltip = ({ liveStroke, updateLiveStroke, drawState, setDrawState }) => {
   return (
     <View style={styles.container}>
-      {drawState === "VIEWING" && <DrawButton />}
+      {drawState === "VIEWING" && <DrawButton setDrawState={setDrawState} />}
       {drawState === "PINCHING" && <Text>Pinch to adjust stroke size</Text>}
       {drawState === "DRAWING" && (
         <Text>Draw an area of pain using your finger.</Text>

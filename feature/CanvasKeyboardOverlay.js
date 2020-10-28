@@ -12,7 +12,6 @@ const CanvasKeyboardOverlay = ({
       disabled={!keyboard}
       onPress={() => {
         Keyboard.dismiss();
-        //setDrawState("PINCHING");
       }}
     >
       <View

@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "react-native";
 import {
   PanGestureHandler,
   PinchGestureHandler,
@@ -8,6 +9,7 @@ import Animated from "react-native-reanimated";
 
 const GesturesHandler = ({
   children,
+  drawState,
   onTwoFingerTapHandlerStateChange,
   onSwipeHandlerStateChange,
   onDrawGestureEvent,
@@ -15,41 +17,49 @@ const GesturesHandler = ({
   onPinchGestureEvent,
   onPinchHandlerStateChange,
 }) => {
-  return (
-    <TapGestureHandler
-      minPointers={2}
-      maxPointers={2}
-      onHandlerStateChange={onTwoFingerTapHandlerStateChange}
-    >
-      <Animated.View>
-        <PanGestureHandler
-          minPointers={2}
-          maxPointers={2}
-          onHandlerStateChange={onSwipeHandlerStateChange}
-        >
-          <Animated.View>
-            <PanGestureHandler
-              onGestureEvent={onDrawGestureEvent}
-              onHandlerStateChange={onDrawHandlerStateChange}
-              minPointers={1}
-              maxPointers={1}
-            >
-              <Animated.View>
-                <PinchGestureHandler
-                  onGestureEvent={onPinchGestureEvent}
-                  onHandlerStateChange={onPinchHandlerStateChange}
-                  minPointers={2}
-                  maxPointers={2}
-                >
-                  <Animated.View>{children}</Animated.View>
-                </PinchGestureHandler>
-              </Animated.View>
-            </PanGestureHandler>
-          </Animated.View>
-        </PanGestureHandler>
-      </Animated.View>
-    </TapGestureHandler>
-  );
+  if (drawState === "VIEWING")
+    return (
+      <TapGestureHandler
+        minPointers={2}
+        maxPointers={2}
+        onHandlerStateChange={onTwoFingerTapHandlerStateChange}
+      >
+        <Animated.View>
+          <PanGestureHandler
+            minPointers={2}
+            maxPointers={2}
+            onHandlerStateChange={onSwipeHandlerStateChange}
+          >
+            <Animated.View>{children}</Animated.View>
+          </PanGestureHandler>
+        </Animated.View>
+      </TapGestureHandler>
+    );
+
+  if (drawState === "PINCHING")
+    return (
+      <PinchGestureHandler
+        onGestureEvent={onPinchGestureEvent}
+        onHandlerStateChange={onPinchHandlerStateChange}
+        minPointers={2}
+        maxPointers={2}
+      >
+        <Animated.View>{children}</Animated.View>
+      </PinchGestureHandler>
+    );
+
+  if (drawState === "DRAWING")
+    return (
+      <PanGestureHandler
+        onGestureEvent={onDrawGestureEvent}
+        onHandlerStateChange={onDrawHandlerStateChange}
+        minPointers={1}
+        maxPointers={1}
+      >
+        <Animated.View>{children}</Animated.View>
+      </PanGestureHandler>
+    );
+  else return <View>{children}</View>;
 };
 
 export default GesturesHandler;

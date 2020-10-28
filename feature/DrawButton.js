@@ -1,9 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const DrawButton = () => {
+const DrawButton = ({ setDrawState }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      onPress={() => {
+        setDrawState("PINCHING");
+      }}
+      style={styles.container}
+    >
       <Text>Draw</Text>
     </TouchableOpacity>
   );

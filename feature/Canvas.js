@@ -123,6 +123,7 @@ const Canvas = ({
 
   return (
     <GesturesHandler
+      drawState={drawState}
       onTwoFingerTapHandlerStateChange={onTwoFingerTapHandlerStateChange}
       onSwipeHandlerStateChange={onSwipeHandlerStateChange}
       onDrawGestureEvent={onDrawGestureEvent}

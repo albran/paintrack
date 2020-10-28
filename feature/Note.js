@@ -14,7 +14,7 @@ const Note = ({ updateLiveStroke, setDrawState }) => {
         scrollEnabled={false}
         onEndEditing={(event) => {
           updateLiveStroke({ note: event.nativeEvent.text });
-          setDrawState("PINCHING");
+          setDrawState("VIEWING");
         }}
       />
     </View>
