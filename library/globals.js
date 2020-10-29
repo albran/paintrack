@@ -17,6 +17,7 @@ export const DrawStates = Object.freeze({
   Scaling: "SCALING",
   Patterning: "PATTERNING",
   Noting: "NOTING",
+  Reviewing: "REVIEWING",
 });
 
 const Stroke = Object.freeze({

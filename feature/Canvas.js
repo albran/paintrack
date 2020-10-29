@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { State } from "react-native-gesture-handler";
-import Svg, { Circle } from "react-native-svg";
+import Svg, { Circle, Rect } from "react-native-svg";
 import Animated from "react-native-reanimated";
 
 import TouchableOpacityG from "../components/TouchableOpacityG";
@@ -17,6 +17,7 @@ const Canvas = ({
   drawState,
   setDrawState,
   strokes,
+  infoStroke,
   setInfoStroke,
 }) => {
   const modelScale = winWidth / 344;
@@ -152,8 +153,19 @@ const Canvas = ({
           viewIsFront={viewIsFront}
           depth={depth}
           strokes={strokes}
+          infoStroke={infoStroke}
           setInfoStroke={setInfoStroke}
         />
+        {drawState === DrawStates.Viewing && (
+          <>
+            <TouchableOpacityG
+              onPress={() => setDrawState(DrawStates.Navigating)}
+            >
+              <Rect x={0} y={0} width="100%" height="100%" />
+            </TouchableOpacityG>
+            <Stroke stroke={infoStroke} />
+          </>
+        )}
         {/* {strokePathsRef.current.map((path, i) => (
           <TouchableOpacityG key={i}>
             <Stroke

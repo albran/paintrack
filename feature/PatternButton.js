@@ -1,8 +1,8 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-import colorShade from "../library/colorShade";
-import { Colors, DrawStates } from "../library/globals";
+import colorFromStroke from "../library/colorFromStroke";
+import { DrawStates } from "../library/globals";
 
 const generateDots = (pattern) => {
   const n = pattern === "Brief" ? 1 : 5;
@@ -28,10 +28,7 @@ const PatternButton = ({
       }}
       style={{
         ...styles.button,
-        backgroundColor: colorShade(
-          Colors[liveStroke.type],
-          200 - (liveStroke.scale - 1) * 20
-        ),
+        backgroundColor: colorFromStroke(liveStroke.type, liveStroke.scale),
       }}
     >
       <Text style={styles.text}>{text}</Text>

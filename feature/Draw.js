@@ -57,6 +57,7 @@ const Draw = ({ winWidth, winHeight }) => {
           drawState={drawState}
           setDrawState={setDrawState}
           strokes={strokes}
+          infoStroke={infoStroke}
           setInfoStroke={setInfoStroke}
         />
         {keyboard && (

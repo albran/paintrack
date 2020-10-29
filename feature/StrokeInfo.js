@@ -1,16 +1,25 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import colorFromStroke from "../library/colorFromStroke";
 
 const StrokeInfo = ({ infoStroke }) => {
   const { type, scale, pattern, note } = infoStroke;
   return (
     <View style={styles.container}>
-      <View style={styles.circle}>
+      <View
+        style={{
+          ...styles.circle,
+          backgroundColor: colorFromStroke(type, scale),
+        }}
+      >
         <Text style={styles.type}>{type}</Text>
         <Text style={styles.scale}>{scale}</Text>
         <Text style={styles.pattern}>{pattern}</Text>
+        <Text style={styles.type}>Shallow</Text>
       </View>
-      <View style={styles.note} />
+      <View style={styles.note}>
+        <Text>{note}</Text>
+      </View>
     </View>
   );
 };
@@ -22,7 +31,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     height: "100%",
-    backgroundColor: "pink",
   },
   circle: {
     justifyContent: "center",
@@ -45,7 +53,7 @@ const styles = StyleSheet.create({
   note: {
     width: "60%",
     height: "80%",
-    backgroundColor: "cyan",
+    borderWidth: 1,
   },
 });
 

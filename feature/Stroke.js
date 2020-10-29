@@ -1,9 +1,8 @@
 import { Polyline } from "react-native-svg";
 import React from "react";
-import colorShade from "../library/colorShade";
-import { Colors } from "../library/globals";
+import colorFromStroke from "../library/colorFromStroke";
 
-const Stroke = ({ livePath, liveStrokeWidth, stroke = {} }) => {
+const Stroke = ({ livePath, liveStrokeWidth, stroke = {}, opacity = 1 }) => {
   const {
     path = livePath,
     width = liveStrokeWidth,
@@ -13,10 +12,7 @@ const Stroke = ({ livePath, liveStrokeWidth, stroke = {} }) => {
   } = stroke;
 
   const points = path.map((p) => `${p.x},${p.y}`).join(" ");
-  const color =
-    type === "Undefined"
-      ? "white"
-      : colorShade(Colors[type], 200 - (scale - 1) * 20);
+  const color = colorFromStroke(type, scale);
 
   return (
     <>
@@ -26,6 +22,7 @@ const Stroke = ({ livePath, liveStrokeWidth, stroke = {} }) => {
         strokeWidth={width}
         strokeLinecap="round"
         strokeLinejoin="round"
+        opacity={opacity}
       />
       <Polyline
         points={points}
@@ -33,6 +30,7 @@ const Stroke = ({ livePath, liveStrokeWidth, stroke = {} }) => {
         strokeWidth={width - 5}
         strokeLinecap="round"
         strokeLinejoin="round"
+        opacity={opacity}
       />
       {pattern === "Periodical" && (
         <Polyline
@@ -41,6 +39,7 @@ const Stroke = ({ livePath, liveStrokeWidth, stroke = {} }) => {
           strokeWidth={5}
           strokeLinejoin="round"
           strokeDasharray="2, 10"
+          opacity={opacity}
         />
       )}
       {pattern === "Continuous" && (
@@ -50,6 +49,7 @@ const Stroke = ({ livePath, liveStrokeWidth, stroke = {} }) => {
           strokeWidth={2}
           strokeLinejoin="round"
           strokeLinecap="round"
+          opacity={opacity}
         />
       )}
     </>

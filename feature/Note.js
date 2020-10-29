@@ -15,7 +15,8 @@ const Note = ({ updateLiveStroke, setDrawState, saveStroke }) => {
         importantForAutofill="no"
         scrollEnabled={false}
         onEndEditing={(event) => {
-          updateLiveStroke({ note: event.nativeEvent.text });
+          const noteText = event.nativeEvent.text.slice();
+          updateLiveStroke({ note: noteText });
           saveStroke();
           setDrawState(DrawStates.Navigating);
         }}

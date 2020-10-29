@@ -13,7 +13,7 @@ const StrokeRenderer = ({
   setInfoStroke,
 }) => {
   const view = viewIsFront ? "front" : "back";
-  if (drawState === DrawStates.Navigating || drawState === DrawStates.Viewing)
+  if (drawState === DrawStates.Navigating)
     return (
       <>
         {strokes.map(
@@ -39,7 +39,9 @@ const StrokeRenderer = ({
         {strokes.map(
           (stroke, i) =>
             depth === stroke.depth &&
-            view === stroke.view && <Stroke key={i} stroke={stroke} />
+            view === stroke.view && (
+              <Stroke key={i} stroke={stroke} opacity={0.3} />
+            )
         )}
       </>
     );

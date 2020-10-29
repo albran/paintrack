@@ -2,8 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 import Tag from "./Tag";
-import { Colors } from "../library/globals";
-import colorShade from "../library/colorShade";
+import colorFromStroke from "../library/colorFromStroke";
 
 const tagsModel = [
   "Aching",
@@ -22,7 +21,7 @@ const Tags = ({ updateLiveStroke, setDrawState }) => {
         <Tag
           key={i}
           text={tag}
-          color={colorShade(Colors[tag], 0)}
+          color={colorFromStroke(tag, 5)}
           updateLiveStroke={updateLiveStroke}
           setDrawState={setDrawState}
         />

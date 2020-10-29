@@ -56,6 +56,9 @@ const Tooltip = ({
           saveStroke={saveStroke}
         />
       )}
+      {drawState === DrawStates.Reviewing && (
+        <StrokeInfo infoStroke={liveStroke} />
+      )}
     </View>
   );
 };

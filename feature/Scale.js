@@ -3,23 +3,22 @@ import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import RadioButton from "./RadioButton";
-import colorShade from "../library/colorShade";
-import { Colors } from "../library/globals";
+import colorFromStroke from "../library/colorFromStroke";
 
 const generateButtons = (
-  color,
+  liveStroke,
   selection,
   setSelection,
   updateLiveStroke,
   setDrawState
 ) => {
   const buttons = [];
-  for (let i = 1, j = 10, k = 0; i <= 10; i++, j--, k += 20) {
+  for (let i = 1, j = 10; i <= 10; i++, j--) {
     buttons.unshift(
       <RadioButton
         key={i}
         number={j}
-        color={colorShade(color, k)}
+        color={colorFromStroke(liveStroke.type, j)}
         selection={selection}
         setSelection={setSelection}
         updateLiveStroke={updateLiveStroke}
@@ -31,10 +30,11 @@ const generateButtons = (
 };
 
 const Scale = ({ liveStroke, updateLiveStroke, setDrawState }) => {
-  const color = colorShade(Colors[liveStroke.type], 0);
+  const minColor = colorFromStroke(liveStroke.type, 1);
+  const maxColor = colorFromStroke(liveStroke.type, 10);
   const [selection, setSelection] = useState(1);
   const buttons = generateButtons(
-    color,
+    liveStroke,
     selection,
     setSelection,
     updateLiveStroke,
@@ -44,7 +44,7 @@ const Scale = ({ liveStroke, updateLiveStroke, setDrawState }) => {
     <View style={styles.container}>
       <View style={styles.barWrapper}>
         <LinearGradient
-          colors={[colorShade(color, 200), color]}
+          colors={[minColor, maxColor]}
           start={[0, 0.5]}
           end={[1, 0.5]}
           style={styles.bar}
