@@ -18,13 +18,13 @@ const liveStrokeReducer = (state, action) => {
 };
 
 const Draw = ({ winWidth, winHeight }) => {
-  const [lsstate, dispatch] = useReducer(liveStrokeReducer, null);
+  const [liveStroke, updateLiveStroke] = useReducer(liveStrokeReducer, null);
 
   const [drawState, setDrawState] = useState(DrawStates.Navigating);
-  const [liveStroke, setLiveStroke] = useState();
-  const updateLiveStroke = (obj) => {
-    setLiveStroke({ ...(liveStroke ? liveStroke : {}), ...obj });
-  };
+  // const [liveStroke, setLiveStroke] = useState();
+  // const updateLiveStroke = (obj) => {
+  //   setLiveStroke({ ...(liveStroke ? liveStroke : {}), ...obj });
+  // };
   const [strokes, setStrokes] = useState([]);
   const saveStroke = () => {
     setStrokes([...strokes, liveStroke]);
@@ -66,15 +66,13 @@ const Draw = ({ winWidth, winHeight }) => {
         <Canvas
           winWidth={winWidth}
           liveStroke={liveStroke}
-          setLiveStroke={setLiveStroke}
+          updateLiveStroke={updateLiveStroke}
           drawState={drawState}
           setDrawState={setDrawState}
           strokes={strokes}
           infoStroke={infoStroke}
           setInfoStroke={setInfoStroke}
           saveStroke={saveStroke}
-          lsstate={lsstate}
-          dispatch={dispatch}
         />
         {keyboard && (
           <CanvasKeyboardOverlay
@@ -87,14 +85,11 @@ const Draw = ({ winWidth, winHeight }) => {
       </View>
       <Tooltip
         liveStroke={liveStroke}
-        setLiveStroke={setLiveStroke}
         updateLiveStroke={updateLiveStroke}
         drawState={drawState}
         setDrawState={setDrawState}
         saveStroke={saveStroke}
         infoStroke={infoStroke}
-        lsstate={lsstate}
-        dispatch={dispatch}
       />
     </KeyboardAvoidingView>
   );

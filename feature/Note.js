@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 
 import { DrawStates } from "../library/globals";
 
-const Note = ({ updateLiveStroke, setDrawState, dispatch }) => {
+const Note = ({ updateLiveStroke, setDrawState }) => {
   return (
     <View style={styles.container}>
       <Text>Note</Text>
@@ -16,8 +16,10 @@ const Note = ({ updateLiveStroke, setDrawState, dispatch }) => {
         scrollEnabled={false}
         onEndEditing={(event) => {
           setDrawState(DrawStates.Reviewing);
-          updateLiveStroke({ note: event.nativeEvent.text });
-          dispatch({ do: "update", payload: { note: event.nativeEvent.text } });
+          updateLiveStroke({
+            do: "update",
+            payload: { note: event.nativeEvent.text },
+          });
         }}
       />
     </View>

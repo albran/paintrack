@@ -14,7 +14,7 @@ const tagsModel = [
   "Other",
 ];
 
-const Tags = ({ updateLiveStroke, setDrawState, lsstate, dispatch }) => {
+const Tags = ({ updateLiveStroke, setDrawState }) => {
   return (
     <View style={styles.container}>
       {tagsModel.map((tag, i) => (
@@ -24,8 +24,6 @@ const Tags = ({ updateLiveStroke, setDrawState, lsstate, dispatch }) => {
           color={colorFromStroke(tag, 5)}
           updateLiveStroke={updateLiveStroke}
           setDrawState={setDrawState}
-          lsstate={lsstate}
-          dispatch={dispatch}
         />
       ))}
     </View>

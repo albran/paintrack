@@ -13,15 +13,13 @@ import { DrawStates } from "../library/globals";
 const Canvas = ({
   winWidth,
   liveStroke,
-  setLiveStroke,
+  updateLiveStroke,
   drawState,
   setDrawState,
   strokes,
   infoStroke,
   setInfoStroke,
   saveStroke,
-  lsstate,
-  dispatch,
 }) => {
   const modelScale = winWidth / 344;
   const translateX = 0.003 * winWidth;
@@ -66,21 +64,14 @@ const Canvas = ({
     }
 
     if (event.nativeEvent.state === State.END) {
-      // strokePathsRef.current.push(livePath);
-      // strokeWidthsRef.current.push(strokeWidth);
       // setLiveStroke({
       //   path: [...livePath],
       //   width: liveStrokeWidth,
       //   view: viewIsFront ? "front" : "back",
       //   depth: depth,
       // });
-      setLiveStroke({
-        path: [...livePath],
-        width: liveStrokeWidth,
-        view: viewIsFront ? "front" : "back",
-        depth: depth,
-      });
-      dispatch({
+      setDrawState(DrawStates.Typing);
+      updateLiveStroke({
         do: "init",
         payload: {
           path: [...livePath],
@@ -91,7 +82,6 @@ const Canvas = ({
       });
       setLivePath([]);
       setCircleIsVisible(false);
-      setDrawState(DrawStates.Typing);
     }
   };
 

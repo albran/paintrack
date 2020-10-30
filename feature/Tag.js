@@ -3,14 +3,7 @@ import { Pressable, StyleSheet, Text } from "react-native";
 
 import { DrawStates } from "../library/globals";
 
-const Tag = ({
-  text,
-  color,
-  updateLiveStroke,
-  setDrawState,
-  lsstate,
-  dispatch,
-}) => {
+const Tag = ({ text, color, updateLiveStroke, setDrawState }) => {
   return (
     <Pressable
       hitSlop={3}
@@ -21,8 +14,7 @@ const Tag = ({
       ]}
       onPress={() => {
         setDrawState(DrawStates.Scaling);
-        updateLiveStroke({ type: text });
-        dispatch({ do: "update", payload: { type: text } });
+        updateLiveStroke({ do: "update", payload: { type: text } });
       }}
     >
       <Text style={{ ...styles.text }}>{text}</Text>

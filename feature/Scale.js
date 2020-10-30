@@ -6,13 +6,11 @@ import RadioButton from "./RadioButton";
 import colorFromStroke from "../library/colorFromStroke";
 
 const generateButtons = (
-  liveStroke,
   selection,
   setSelection,
+  liveStroke,
   updateLiveStroke,
-  setDrawState,
-  lsstate,
-  dispatch
+  setDrawState
 ) => {
   const buttons = [];
   for (let i = 1, j = 10; i <= 10; i++, j--) {
@@ -25,32 +23,22 @@ const generateButtons = (
         setSelection={setSelection}
         updateLiveStroke={updateLiveStroke}
         setDrawState={setDrawState}
-        lsstate={lsstate}
-        dispatch={dispatch}
       />
     );
   }
   return buttons;
 };
 
-const Scale = ({
-  liveStroke,
-  updateLiveStroke,
-  setDrawState,
-  lsstate,
-  dispatch,
-}) => {
+const Scale = ({ liveStroke, updateLiveStroke, setDrawState }) => {
   const minColor = colorFromStroke(liveStroke.type, 1);
   const maxColor = colorFromStroke(liveStroke.type, 10);
   const [selection, setSelection] = useState(1);
   const buttons = generateButtons(
-    liveStroke,
     selection,
     setSelection,
+    liveStroke,
     updateLiveStroke,
-    setDrawState,
-    lsstate,
-    dispatch
+    setDrawState
   );
   return (
     <View style={styles.container}>

@@ -16,10 +16,7 @@ const Tooltip = ({
   updateLiveStroke,
   drawState,
   setDrawState,
-  saveStroke,
   infoStroke,
-  lsstate,
-  dispatch,
 }) => {
   return (
     <View style={styles.container}>
@@ -36,20 +33,13 @@ const Tooltip = ({
         <Text>Draw an area of pain using your finger.</Text>
       )}
       {drawState === DrawStates.Typing && (
-        <Tags
-          updateLiveStroke={updateLiveStroke}
-          setDrawState={setDrawState}
-          lsstate={lsstate}
-          dispatch={dispatch}
-        />
+        <Tags updateLiveStroke={updateLiveStroke} setDrawState={setDrawState} />
       )}
       {drawState === DrawStates.Scaling && (
         <Scale
           liveStroke={liveStroke}
           updateLiveStroke={updateLiveStroke}
           setDrawState={setDrawState}
-          lsstate={lsstate}
-          dispatch={dispatch}
         />
       )}
       {drawState === DrawStates.Patterning && (
@@ -57,23 +47,16 @@ const Tooltip = ({
           liveStroke={liveStroke}
           updateLiveStroke={updateLiveStroke}
           setDrawState={setDrawState}
-          lsstate={lsstate}
-          dispatch={dispatch}
         />
       )}
       {drawState === DrawStates.Noting && (
-        <Note
-          updateLiveStroke={updateLiveStroke}
-          setDrawState={setDrawState}
-          dispatch={dispatch}
-        />
+        <Note updateLiveStroke={updateLiveStroke} setDrawState={setDrawState} />
       )}
       {drawState === DrawStates.Reviewing && (
         <StrokeInfo
           stroke={liveStroke}
-          setLiveStroke={setLiveStroke}
           setDrawState={setDrawState}
-          dispatch={dispatch}
+          updateLiveStroke={updateLiveStroke}
         />
       )}
     </View>

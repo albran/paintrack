@@ -5,13 +5,7 @@ import PatternButton from "./PatternButton";
 
 const patterns = ["Brief", "Periodical", "Continuous"];
 
-const Pattern = ({
-  liveStroke,
-  updateLiveStroke,
-  setDrawState,
-  lsstate,
-  dispatch,
-}) => {
+const Pattern = ({ liveStroke, updateLiveStroke, setDrawState }) => {
   return (
     <View style={styles.container}>
       {patterns.map((pattern, i) => (
@@ -21,8 +15,6 @@ const Pattern = ({
           liveStroke={liveStroke}
           updateLiveStroke={updateLiveStroke}
           setDrawState={setDrawState}
-          lsstate={lsstate}
-          dispatch={dispatch}
         />
       ))}
     </View>
