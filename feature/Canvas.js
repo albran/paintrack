@@ -19,6 +19,9 @@ const Canvas = ({
   strokes,
   infoStroke,
   setInfoStroke,
+  saveStroke,
+  lsstate,
+  dispatch,
 }) => {
   const modelScale = winWidth / 344;
   const translateX = 0.003 * winWidth;
@@ -27,8 +30,6 @@ const Canvas = ({
   const pathRef = useRef([]);
   const [livePath, setLivePath] = useState();
 
-  const strokePathsRef = useRef([]);
-  const strokeWidthsRef = useRef([]);
   const [circleIsVisible, setCircleIsVisible] = useState(false);
 
   const defaultStrokeWidth = 25;
@@ -78,6 +79,15 @@ const Canvas = ({
         width: liveStrokeWidth,
         view: viewIsFront ? "front" : "back",
         depth: depth,
+      });
+      dispatch({
+        do: "init",
+        payload: {
+          path: [...livePath],
+          width: liveStrokeWidth,
+          view: viewIsFront ? "front" : "back",
+          depth: depth,
+        },
       });
       setLivePath([]);
       setCircleIsVisible(false);
@@ -147,6 +157,7 @@ const Canvas = ({
           depth={depth}
           viewIsFront={viewIsFront}
         />
+
         <StrokeRenderer
           drawState={drawState}
           setDrawState={setDrawState}
@@ -156,26 +167,25 @@ const Canvas = ({
           infoStroke={infoStroke}
           setInfoStroke={setInfoStroke}
         />
-        {drawState === DrawStates.Viewing && (
+
+        {(drawState === DrawStates.Viewing ||
+          drawState === DrawStates.Reviewing) && (
           <>
             <TouchableOpacityG
-              onPress={() => setDrawState(DrawStates.Navigating)}
+              onPress={() => {
+                drawState === DrawStates.Reviewing && saveStroke();
+                setDrawState(DrawStates.Navigating);
+              }}
             >
               <Rect x={0} y={0} width="100%" height="100%" />
             </TouchableOpacityG>
-            <Stroke stroke={infoStroke} />
           </>
         )}
-        {/* {strokePathsRef.current.map((path, i) => (
-          <TouchableOpacityG key={i}>
-            <Stroke
-              key={i}
-              path={path}
-              strokeWidth={strokeWidthsRef.current[i]}
-            />
-          </TouchableOpacityG>
-        ))} */}
+
+        {drawState === DrawStates.Viewing && <Stroke stroke={infoStroke} />}
+
         {liveStroke && <Stroke stroke={liveStroke} />}
+
         {circleIsVisible && (
           <AnimatedCircle
             stroke="black"

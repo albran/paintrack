@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import { Keyboard, KeyboardAvoidingView, View } from "react-native";
 
 import Canvas from "./Canvas";
@@ -6,7 +6,20 @@ import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Tooltip from "./Tooltip";
 import { DrawStates } from "../library/globals";
 
+const liveStrokeReducer = (state, action) => {
+  switch (action.do) {
+    case "init":
+      return { ...action.payload };
+    case "update":
+      return { ...state, ...action.payload };
+    case "delete":
+      return null;
+  }
+};
+
 const Draw = ({ winWidth, winHeight }) => {
+  const [lsstate, dispatch] = useReducer(liveStrokeReducer, null);
+
   const [drawState, setDrawState] = useState(DrawStates.Navigating);
   const [liveStroke, setLiveStroke] = useState();
   const updateLiveStroke = (obj) => {
@@ -59,6 +72,9 @@ const Draw = ({ winWidth, winHeight }) => {
           strokes={strokes}
           infoStroke={infoStroke}
           setInfoStroke={setInfoStroke}
+          saveStroke={saveStroke}
+          lsstate={lsstate}
+          dispatch={dispatch}
         />
         {keyboard && (
           <CanvasKeyboardOverlay
@@ -71,11 +87,14 @@ const Draw = ({ winWidth, winHeight }) => {
       </View>
       <Tooltip
         liveStroke={liveStroke}
+        setLiveStroke={setLiveStroke}
         updateLiveStroke={updateLiveStroke}
         drawState={drawState}
         setDrawState={setDrawState}
         saveStroke={saveStroke}
         infoStroke={infoStroke}
+        lsstate={lsstate}
+        dispatch={dispatch}
       />
     </KeyboardAvoidingView>
   );

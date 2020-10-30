@@ -18,13 +18,16 @@ const PatternButton = ({
   liveStroke,
   updateLiveStroke,
   setDrawState,
+  lsstate,
+  dispatch,
 }) => {
   const dots = generateDots(text);
   return (
     <Pressable
       onPress={() => {
-        updateLiveStroke({ pattern: text });
         setDrawState(DrawStates.Noting);
+        updateLiveStroke({ pattern: text });
+        dispatch({ do: "update", payload: { pattern: text } });
       }}
       style={{
         ...styles.button,

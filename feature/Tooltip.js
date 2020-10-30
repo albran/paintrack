@@ -12,11 +12,14 @@ import StrokeInfo from "./StrokeInfo";
 
 const Tooltip = ({
   liveStroke,
+  setLiveStroke,
   updateLiveStroke,
   drawState,
   setDrawState,
   saveStroke,
   infoStroke,
+  lsstate,
+  dispatch,
 }) => {
   return (
     <View style={styles.container}>
@@ -24,7 +27,7 @@ const Tooltip = ({
         <DrawButton setDrawState={setDrawState} />
       )}
       {drawState === DrawStates.Viewing && (
-        <StrokeInfo infoStroke={infoStroke} />
+        <StrokeInfo stroke={infoStroke} setDrawState={setDrawState} />
       )}
       {drawState === DrawStates.Pinching && (
         <Text>Pinch to adjust stroke size</Text>
@@ -33,13 +36,20 @@ const Tooltip = ({
         <Text>Draw an area of pain using your finger.</Text>
       )}
       {drawState === DrawStates.Typing && (
-        <Tags updateLiveStroke={updateLiveStroke} setDrawState={setDrawState} />
+        <Tags
+          updateLiveStroke={updateLiveStroke}
+          setDrawState={setDrawState}
+          lsstate={lsstate}
+          dispatch={dispatch}
+        />
       )}
       {drawState === DrawStates.Scaling && (
         <Scale
           liveStroke={liveStroke}
           updateLiveStroke={updateLiveStroke}
           setDrawState={setDrawState}
+          lsstate={lsstate}
+          dispatch={dispatch}
         />
       )}
       {drawState === DrawStates.Patterning && (
@@ -47,17 +57,24 @@ const Tooltip = ({
           liveStroke={liveStroke}
           updateLiveStroke={updateLiveStroke}
           setDrawState={setDrawState}
+          lsstate={lsstate}
+          dispatch={dispatch}
         />
       )}
       {drawState === DrawStates.Noting && (
         <Note
           updateLiveStroke={updateLiveStroke}
           setDrawState={setDrawState}
-          saveStroke={saveStroke}
+          dispatch={dispatch}
         />
       )}
       {drawState === DrawStates.Reviewing && (
-        <StrokeInfo infoStroke={liveStroke} />
+        <StrokeInfo
+          stroke={liveStroke}
+          setLiveStroke={setLiveStroke}
+          setDrawState={setDrawState}
+          dispatch={dispatch}
+        />
       )}
     </View>
   );

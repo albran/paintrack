@@ -10,7 +10,9 @@ const generateButtons = (
   selection,
   setSelection,
   updateLiveStroke,
-  setDrawState
+  setDrawState,
+  lsstate,
+  dispatch
 ) => {
   const buttons = [];
   for (let i = 1, j = 10; i <= 10; i++, j--) {
@@ -23,13 +25,21 @@ const generateButtons = (
         setSelection={setSelection}
         updateLiveStroke={updateLiveStroke}
         setDrawState={setDrawState}
+        lsstate={lsstate}
+        dispatch={dispatch}
       />
     );
   }
   return buttons;
 };
 
-const Scale = ({ liveStroke, updateLiveStroke, setDrawState }) => {
+const Scale = ({
+  liveStroke,
+  updateLiveStroke,
+  setDrawState,
+  lsstate,
+  dispatch,
+}) => {
   const minColor = colorFromStroke(liveStroke.type, 1);
   const maxColor = colorFromStroke(liveStroke.type, 10);
   const [selection, setSelection] = useState(1);
@@ -38,7 +48,9 @@ const Scale = ({ liveStroke, updateLiveStroke, setDrawState }) => {
     selection,
     setSelection,
     updateLiveStroke,
-    setDrawState
+    setDrawState,
+    lsstate,
+    dispatch
   );
   return (
     <View style={styles.container}>

@@ -10,6 +10,8 @@ const RadioButton = ({
   setSelection,
   updateLiveStroke,
   setDrawState,
+  lsstate,
+  dispatch,
 }) => {
   return (
     <View style={styles.container}>
@@ -23,8 +25,9 @@ const RadioButton = ({
         style={{ ...styles.touchable, backgroundColor: color }}
         onPressIn={() => setSelection(number)}
         onPressOut={() => {
-          updateLiveStroke({ scale: number });
           setDrawState(DrawStates.Patterning);
+          updateLiveStroke({ scale: number });
+          dispatch({ do: "update", payload: { scale: number } });
         }}
       >
         <Text style={styles.number}>{number}</Text>
