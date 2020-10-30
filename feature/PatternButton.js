@@ -24,7 +24,7 @@ const PatternButton = ({
     <Pressable
       onPress={() => {
         setDrawState(DrawStates.Noting);
-        updateLiveStroke({ do: "update", payload: { pattern: text } });
+        updateLiveStroke({ do: "append", props: { pattern: text } });
       }}
       style={{
         ...styles.button,

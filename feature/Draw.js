@@ -6,12 +6,12 @@ import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Tooltip from "./Tooltip";
 import { DrawStates } from "../library/globals";
 
-const liveStrokeReducer = (state, action) => {
-  switch (action.do) {
+const liveStrokeReducer = (state, dispatch) => {
+  switch (dispatch.do) {
     case "init":
-      return { ...action.payload };
-    case "update":
-      return { ...state, ...action.payload };
+      return { ...dispatch.props };
+    case "append":
+      return { ...state, ...dispatch.props };
     case "delete":
       return null;
   }
@@ -21,10 +21,7 @@ const Draw = ({ winWidth, winHeight }) => {
   const [liveStroke, updateLiveStroke] = useReducer(liveStrokeReducer, null);
 
   const [drawState, setDrawState] = useState(DrawStates.Navigating);
-  // const [liveStroke, setLiveStroke] = useState();
-  // const updateLiveStroke = (obj) => {
-  //   setLiveStroke({ ...(liveStroke ? liveStroke : {}), ...obj });
-  // };
+
   const [strokes, setStrokes] = useState([]);
   const saveStroke = () => {
     setStrokes([...strokes, liveStroke]);

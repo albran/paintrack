@@ -73,7 +73,7 @@ const Canvas = ({
       setDrawState(DrawStates.Typing);
       updateLiveStroke({
         do: "init",
-        payload: {
+        props: {
           path: [...livePath],
           width: liveStrokeWidth,
           view: viewIsFront ? "front" : "back",

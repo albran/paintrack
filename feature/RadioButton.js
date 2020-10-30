@@ -24,7 +24,7 @@ const RadioButton = ({
         onPressIn={() => setSelection(number)}
         onPressOut={() => {
           setDrawState(DrawStates.Patterning);
-          updateLiveStroke({ do: "update", payload: { scale: number } });
+          updateLiveStroke({ do: "append", props: { scale: number } });
         }}
       >
         <Text style={styles.number}>{number}</Text>

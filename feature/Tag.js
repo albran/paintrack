@@ -14,7 +14,7 @@ const Tag = ({ text, color, updateLiveStroke, setDrawState }) => {
       ]}
       onPress={() => {
         setDrawState(DrawStates.Scaling);
-        updateLiveStroke({ do: "update", payload: { type: text } });
+        updateLiveStroke({ do: "append", props: { type: text } });
       }}
     >
       <Text style={{ ...styles.text }}>{text}</Text>

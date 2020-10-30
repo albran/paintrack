@@ -17,8 +17,8 @@ const Note = ({ updateLiveStroke, setDrawState }) => {
         onEndEditing={(event) => {
           setDrawState(DrawStates.Reviewing);
           updateLiveStroke({
-            do: "update",
-            payload: { note: event.nativeEvent.text },
+            do: "append",
+            props: { note: event.nativeEvent.text },
           });
         }}
       />
