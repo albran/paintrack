@@ -4,8 +4,13 @@ import colorFromStroke from "../library/colorFromStroke";
 
 import { DrawStates } from "../library/globals";
 
-const StrokeInfo = ({ stroke, setDrawState, updateLiveStroke }) => {
-  const { type, scale, pattern, note } = stroke;
+const StrokeInfo = ({
+  stroke,
+  setDrawState,
+  updateLiveStroke,
+  updateStrokes,
+}) => {
+  const { type, scale, pattern, note, i = -1 } = stroke;
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -29,6 +34,7 @@ const StrokeInfo = ({ stroke, setDrawState, updateLiveStroke }) => {
         <Pressable
           onPress={() => {
             setDrawState(DrawStates.Navigating);
+            i > -1 && updateStrokes({ do: "delete", i: i });
             updateLiveStroke({ do: "delete" });
           }}
           style={styles.x}

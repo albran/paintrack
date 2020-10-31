@@ -24,7 +24,7 @@ const StrokeRenderer = ({
                 key={i}
                 onPress={() => {
                   setDrawState(DrawStates.Reviewing);
-                  updateLiveStroke({ do: "set", props: { ...stroke } });
+                  updateLiveStroke({ do: "set", props: { ...stroke, i: i } });
                 }}
               >
                 <Stroke stroke={stroke} />

@@ -10,7 +10,13 @@ import DrawButton from "./DrawButton";
 import { DrawStates } from "../library/globals";
 import StrokeInfo from "./StrokeInfo";
 
-const Tooltip = ({ liveStroke, updateLiveStroke, drawState, setDrawState }) => {
+const Tooltip = ({
+  liveStroke,
+  updateLiveStroke,
+  drawState,
+  setDrawState,
+  updateStrokes,
+}) => {
   return (
     <View style={styles.container}>
       {drawState === DrawStates.Navigating && (
@@ -50,6 +56,7 @@ const Tooltip = ({ liveStroke, updateLiveStroke, drawState, setDrawState }) => {
           stroke={liveStroke}
           setDrawState={setDrawState}
           updateLiveStroke={updateLiveStroke}
+          updateStrokes={updateStrokes}
         />
       )}
     </View>
