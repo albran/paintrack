@@ -12,23 +12,26 @@ const liveStrokeReducer = (state, dispatch) => {
       return { ...dispatch.props };
     case "append":
       return { ...state, ...dispatch.props };
+    case "set":
+      return { ...dispatch.props };
     case "delete":
       return null;
   }
 };
 
+const strokesReducer = (state, dispatch) => {
+  switch (dispatch.do) {
+    case "append":
+      return [...state, { ...dispatch.payload }];
+    case "delete":
+      return state.splice(dispatch.index, 1);
+  }
+};
+
 const Draw = ({ winWidth, winHeight }) => {
-  const [liveStroke, updateLiveStroke] = useReducer(liveStrokeReducer, null);
-
   const [drawState, setDrawState] = useState(DrawStates.Navigating);
-
-  const [strokes, setStrokes] = useState([]);
-  const saveStroke = () => {
-    setStrokes([...strokes, liveStroke]);
-    setLiveStroke();
-  };
-  const [infoStroke, setInfoStroke] = useState();
-
+  const [liveStroke, updateLiveStroke] = useReducer(liveStrokeReducer, null);
+  const [strokes, updateStrokes] = useReducer(strokesReducer, []);
   const [keyboard, setKeyboard] = useState(false);
 
   const modelScale = winWidth / 344;
@@ -67,9 +70,7 @@ const Draw = ({ winWidth, winHeight }) => {
           drawState={drawState}
           setDrawState={setDrawState}
           strokes={strokes}
-          infoStroke={infoStroke}
-          setInfoStroke={setInfoStroke}
-          saveStroke={saveStroke}
+          updateStrokes={updateStrokes}
         />
         {keyboard && (
           <CanvasKeyboardOverlay
@@ -85,8 +86,6 @@ const Draw = ({ winWidth, winHeight }) => {
         updateLiveStroke={updateLiveStroke}
         drawState={drawState}
         setDrawState={setDrawState}
-        saveStroke={saveStroke}
-        infoStroke={infoStroke}
       />
     </KeyboardAvoidingView>
   );

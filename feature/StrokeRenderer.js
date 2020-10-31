@@ -10,7 +10,7 @@ const StrokeRenderer = ({
   viewIsFront,
   depth,
   strokes,
-  setInfoStroke,
+  updateLiveStroke,
 }) => {
   const view = viewIsFront ? "front" : "back";
   if (drawState === DrawStates.Navigating)
@@ -23,8 +23,8 @@ const StrokeRenderer = ({
               <TouchableOpacityG
                 key={i}
                 onPress={() => {
-                  setInfoStroke(stroke);
-                  setDrawState(DrawStates.Viewing);
+                  setDrawState(DrawStates.Reviewing);
+                  updateLiveStroke({ do: "set", props: { ...stroke } });
                 }}
               >
                 <Stroke stroke={stroke} />

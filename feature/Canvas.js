@@ -17,9 +17,7 @@ const Canvas = ({
   drawState,
   setDrawState,
   strokes,
-  infoStroke,
-  setInfoStroke,
-  saveStroke,
+  updateStrokes,
 }) => {
   const modelScale = winWidth / 344;
   const translateX = 0.003 * winWidth;
@@ -154,8 +152,7 @@ const Canvas = ({
           viewIsFront={viewIsFront}
           depth={depth}
           strokes={strokes}
-          infoStroke={infoStroke}
-          setInfoStroke={setInfoStroke}
+          updateLiveStroke={updateLiveStroke}
         />
 
         {(drawState === DrawStates.Viewing ||
@@ -163,7 +160,9 @@ const Canvas = ({
           <>
             <TouchableOpacityG
               onPress={() => {
-                drawState === DrawStates.Reviewing && saveStroke();
+                drawState === DrawStates.Reviewing &&
+                  updateStrokes({ do: "append", payload: liveStroke });
+                updateLiveStroke({ do: "delete" });
                 setDrawState(DrawStates.Navigating);
               }}
             >
@@ -172,7 +171,7 @@ const Canvas = ({
           </>
         )}
 
-        {drawState === DrawStates.Viewing && <Stroke stroke={infoStroke} />}
+        {/* {drawState === DrawStates.Viewing && <Stroke stroke={infoStroke} />} */}
 
         {liveStroke && <Stroke stroke={liveStroke} />}
 
