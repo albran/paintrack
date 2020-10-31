@@ -6,12 +6,6 @@ import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Tooltip from "./Tooltip";
 import { DrawStates } from "../library/globals";
 
-const arrayWithoutElementAtIndex = function (arr, index) {
-  return arr.filter(function (value, arrIndex) {
-    return index !== arrIndex;
-  });
-};
-
 const liveStrokeReducer = (state, dispatch) => {
   switch (dispatch.do) {
     case "init":
@@ -30,7 +24,7 @@ const strokesReducer = (state, dispatch) => {
     case "append":
       return [...state, { ...dispatch.payload }];
     case "delete":
-      return arrayWithoutElementAtIndex(state, dispatch.i);
+      return state.filter((val, i) => dispatch.i !== i);
   }
 };
 
