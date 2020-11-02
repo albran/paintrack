@@ -5,10 +5,10 @@ import Tags from "./Tags";
 import Scale from "./Scale";
 import Pattern from "./Pattern";
 import Note from "./Note";
-import DrawButton from "./DrawButton";
 
 import { DrawStates } from "../library/globals";
 import StrokeInfo from "./StrokeInfo";
+import Navigation from "./Navigation";
 
 const Tooltip = ({
   liveStroke,
@@ -20,11 +20,8 @@ const Tooltip = ({
   return (
     <View style={styles.container}>
       {drawState === DrawStates.Navigating && (
-        <DrawButton setDrawState={setDrawState} />
+        <Navigation setDrawState={setDrawState} />
       )}
-      {/* {drawState === DrawStates.Viewing && (
-        <StrokeInfo stroke={infoStroke} setDrawState={setDrawState} />
-      )} */}
       {drawState === DrawStates.Pinching && (
         <Text>Pinch to adjust stroke size</Text>
       )}
