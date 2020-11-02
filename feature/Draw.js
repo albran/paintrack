@@ -1,10 +1,12 @@
-import React, { useEffect, useReducer, useRef, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { Keyboard, KeyboardAvoidingView, View } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Canvas from "./Canvas";
 import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Tooltip from "./Tooltip";
 import { DrawStates } from "../library/globals";
+import getYYYYMMDD from "../library/getYYYYMMDD";
 
 const liveStrokeReducer = (state, dispatch) => {
   switch (dispatch.do) {
@@ -23,21 +25,46 @@ const strokesReducer = (state, dispatch) => {
   switch (dispatch.do) {
     case "append":
       return [...state, { ...dispatch.payload }];
+    case "set":
+      return [...dispatch.payload];
     case "delete":
       return state.filter((val, i) => dispatch.i !== i);
   }
 };
 
 const Draw = ({ winWidth, winHeight }) => {
+  const modelScale = winWidth / 344;
+  const canvasHeight = 400 * modelScale;
+
   const [drawState, setDrawState] = useState(DrawStates.Navigating);
   const [liveStroke, updateLiveStroke] = useReducer(liveStrokeReducer, null);
   const [strokes, updateStrokes] = useReducer(strokesReducer, []);
   const [keyboard, setKeyboard] = useState(false);
 
-  const modelScale = winWidth / 344;
-  const canvasHeight = 400 * modelScale;
+  const saveDay = async () => {
+    try {
+      const datestampKey = getYYYYMMDD(Date());
+      const jsonVal = JSON.stringify(strokes);
+      await AsyncStorage.setItem(datestampKey, jsonVal);
+    } catch (e) {
+      console.log(`Error saving strokes: ${e}`);
+    }
+  };
+
+  const getDay = async (datestampKey) => {
+    try {
+      const jsonVal = await AsyncStorage.getItem(datestampKey);
+      return jsonVal != null ? JSON.parse(jsonVal) : [];
+    } catch (e) {
+      console.log(`Error retrieving strokes: ${e}`);
+    }
+  };
 
   useEffect(() => {
+    getDay(getYYYYMMDD(Date())).then((val) =>
+      updateStrokes({ do: "set", payload: val })
+    );
+
     Keyboard.addListener("keyboardWillShow", keyboardWillShow);
     Keyboard.addListener("keyboardWillHide", keyboardWillHide);
 
@@ -87,6 +114,7 @@ const Draw = ({ winWidth, winHeight }) => {
         drawState={drawState}
         setDrawState={setDrawState}
         updateStrokes={updateStrokes}
+        saveDay={saveDay}
       />
     </KeyboardAvoidingView>
   );

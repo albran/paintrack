@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { DrawStates } from "../library/globals";
 
-const Navigation = ({ setDrawState }) => {
+const Navigation = ({ setDrawState, saveDay }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -14,7 +14,7 @@ const Navigation = ({ setDrawState }) => {
       >
         <Text>Draw</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.drawButton}>
+      <TouchableOpacity onPress={() => saveDay()} style={styles.drawButton}>
         <Text>Save</Text>
       </TouchableOpacity>
     </View>

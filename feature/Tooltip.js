@@ -16,11 +16,12 @@ const Tooltip = ({
   drawState,
   setDrawState,
   updateStrokes,
+  saveDay,
 }) => {
   return (
     <View style={styles.container}>
       {drawState === DrawStates.Navigating && (
-        <Navigation setDrawState={setDrawState} />
+        <Navigation setDrawState={setDrawState} saveDay={saveDay} />
       )}
       {drawState === DrawStates.Pinching && (
         <Text>Pinch to adjust stroke size</Text>

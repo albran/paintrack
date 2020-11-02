@@ -5,6 +5,8 @@ import { Calendar as RNCalendar } from "react-native-calendars";
 import getYYYYMMDD from "../library/getYYYYMMDD";
 
 const Calendar = ({ winWidth }) => {
+  const getDate = (date) => {};
+
   return (
     <View style={styles.container}>
       <RNCalendar
