@@ -13,8 +13,8 @@ export default function App() {
         marginTop: winHeight * 0.04,
       }}
     >
-      <Draw winWidth={winWidth} winHeight={winHeight} />
-      {/* <Calendar winWidth={winWidth} /> */}
+      {/* <Draw winWidth={winWidth} winHeight={winHeight} /> */}
+      <Calendar winWidth={winWidth} />
     </View>
   );
 }

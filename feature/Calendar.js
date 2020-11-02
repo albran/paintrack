@@ -1,22 +1,20 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Calendar as RNCalendar } from "react-native-calendars";
+import { Calendar as RNCcalendar } from "react-native-calendars";
 
 import getYYYYMMDD from "../library/getYYYYMMDD";
 
 const Calendar = ({ winWidth }) => {
-  const getDate = (date) => {};
-
   return (
     <View style={styles.container}>
-      <RNCalendar
+      <RNCcalendar
         firstDay={1}
         maxDate={getYYYYMMDD(Date())}
         hideExtraDays={true}
         hideArrows={true}
         enableSwipeMonths={true}
         onDayPress={(day) => {
-          console.log(day);
+          console.log(day.dateString);
         }}
         theme={{
           textMonthFontSize: 24,
