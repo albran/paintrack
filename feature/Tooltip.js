@@ -9,6 +9,7 @@ import Note from "./Note";
 import { DrawStates } from "../library/globals";
 import StrokeInfo from "./StrokeInfo";
 import Navigation from "./Navigation";
+import Factors from "./Factors";
 
 const Tooltip = ({
   liveStroke,
@@ -22,6 +23,9 @@ const Tooltip = ({
     <View style={styles.container}>
       {drawState === DrawStates.Navigating && (
         <Navigation setDrawState={setDrawState} saveDay={saveDay} />
+      )}
+      {drawState === DrawStates.Factoring && (
+        <Factors setDrawState={setDrawState} />
       )}
       {drawState === DrawStates.Pinching && (
         <Text>Pinch to adjust stroke size</Text>

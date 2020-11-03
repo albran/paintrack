@@ -10,6 +10,7 @@ export const Colors = {
 
 export const DrawStates = Object.freeze({
   Navigating: "NAVIGATING",
+  Factoring: "FACTORING",
   Viewing: "VIEWING",
   Pinching: "PINCHING",
   Drawing: "DRAWING",
