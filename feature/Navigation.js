@@ -1,9 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { DrawStates } from "../library/globals";
 
 const Navigation = ({ setDrawState, saveDay }) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -17,7 +19,10 @@ const Navigation = ({ setDrawState, saveDay }) => {
       <TouchableOpacity onPress={() => saveDay()} style={styles.drawButton}>
         <Text>Save</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.drawButton}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Calendar")}
+        style={styles.drawButton}
+      >
         <Text>Calendar</Text>
       </TouchableOpacity>
     </View>
