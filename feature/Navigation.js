@@ -56,18 +56,18 @@ const styles = StyleSheet.create({
   drawButton: {
     justifyContent: "center",
     alignItems: "center",
-    width: 100,
+    width: 120,
     aspectRatio: 1,
-    borderRadius: 100 / 2,
+    borderRadius: 120 / 2,
     backgroundColor: "pink",
     marginHorizontal: 10,
   },
   factorsButton: {
     justifyContent: "center",
     alignItems: "center",
-    width: 60,
+    width: 80,
     aspectRatio: 1,
-    borderRadius: 60 / 2,
+    borderRadius: 80 / 2,
     backgroundColor: "pink",
   },
 });

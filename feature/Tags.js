@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
     flexWrap: "wrap",
-    width: "90%",
+    width: "95%",
   },
 });
 
