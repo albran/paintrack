@@ -12,7 +12,7 @@ import { DrawStates } from "../library/globals";
 const GesturesHandler = ({
   children,
   drawState,
-  onTwoFingerTapHandlerStateChange,
+  onTapHandlerStateChange,
   onSwipeHandlerStateChange,
   onDrawGestureEvent,
   onDrawHandlerStateChange,
@@ -22,14 +22,16 @@ const GesturesHandler = ({
   if (drawState === DrawStates.Navigating)
     return (
       <TapGestureHandler
-        minPointers={2}
-        maxPointers={2}
-        onHandlerStateChange={onTwoFingerTapHandlerStateChange}
+        minPointers={1}
+        maxPointers={1}
+        maxDist={1}
+        onHandlerStateChange={onTapHandlerStateChange}
       >
         <Animated.View>
           <PanGestureHandler
-            minPointers={2}
-            maxPointers={2}
+            minPointers={1}
+            maxPointers={1}
+            minDist={100}
             onHandlerStateChange={onSwipeHandlerStateChange}
           >
             <Animated.View>{children}</Animated.View>

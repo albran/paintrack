@@ -114,7 +114,7 @@ const Canvas = ({
     }
   };
 
-  const onTwoFingerTapHandlerStateChange = (event) => {
+  const onTapHandlerStateChange = (event) => {
     if (event.nativeEvent.state === State.END) {
       setDepth((depth + 1) % 3);
     }
@@ -124,7 +124,7 @@ const Canvas = ({
     <View>
       <GesturesHandler
         drawState={drawState}
-        onTwoFingerTapHandlerStateChange={onTwoFingerTapHandlerStateChange}
+        onTapHandlerStateChange={onTapHandlerStateChange}
         onSwipeHandlerStateChange={onSwipeHandlerStateChange}
         onDrawGestureEvent={onDrawGestureEvent}
         onDrawHandlerStateChange={onDrawHandlerStateChange}
