@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { Text, View } from "react-native";
 import { State } from "react-native-gesture-handler";
 import Svg, { Circle, Rect } from "react-native-svg";
 import Animated from "react-native-reanimated";
@@ -22,6 +23,7 @@ const Canvas = ({
   const modelScale = winWidth / 344;
   const translateX = 0.003 * winWidth;
   const canvasHeight = 400 * modelScale;
+  const legendHeight = 15 * modelScale;
 
   const pathRef = useRef([]);
   const [livePath, setLivePath] = useState();
@@ -62,12 +64,6 @@ const Canvas = ({
     }
 
     if (event.nativeEvent.state === State.END) {
-      // setLiveStroke({
-      //   path: [...livePath],
-      //   width: liveStrokeWidth,
-      //   view: viewIsFront ? "front" : "back",
-      //   depth: depth,
-      // });
       setDrawState(DrawStates.Typing);
       updateLiveStroke({
         do: "init",
@@ -125,71 +121,93 @@ const Canvas = ({
   };
 
   return (
-    <GesturesHandler
-      drawState={drawState}
-      onTwoFingerTapHandlerStateChange={onTwoFingerTapHandlerStateChange}
-      onSwipeHandlerStateChange={onSwipeHandlerStateChange}
-      onDrawGestureEvent={onDrawGestureEvent}
-      onDrawHandlerStateChange={onDrawHandlerStateChange}
-      onPinchGestureEvent={onPinchGestureEvent}
-      onPinchHandlerStateChange={onPinchHandlerStateChange}
-    >
-      <Svg
-        width={winWidth}
-        height={canvasHeight}
-        viewBox={`0 0 ${winWidth} ${canvasHeight}`}
+    <View>
+      <GesturesHandler
+        drawState={drawState}
+        onTwoFingerTapHandlerStateChange={onTwoFingerTapHandlerStateChange}
+        onSwipeHandlerStateChange={onSwipeHandlerStateChange}
+        onDrawGestureEvent={onDrawGestureEvent}
+        onDrawHandlerStateChange={onDrawHandlerStateChange}
+        onPinchGestureEvent={onPinchGestureEvent}
+        onPinchHandlerStateChange={onPinchHandlerStateChange}
       >
-        <Model
-          translateX={translateX}
-          modelScale={modelScale}
-          depth={depth}
-          viewIsFront={viewIsFront}
-        />
-
-        <StrokeRenderer
-          drawState={drawState}
-          setDrawState={setDrawState}
-          viewIsFront={viewIsFront}
-          depth={depth}
-          strokes={strokes}
-          updateLiveStroke={updateLiveStroke}
-        />
-
-        {(drawState === DrawStates.Viewing ||
-          drawState === DrawStates.Reviewing) && (
-          <>
-            <TouchableOpacityG
-              onPress={() => {
-                drawState === DrawStates.Reviewing &&
-                  updateStrokes({ do: "append", payload: liveStroke });
-                updateLiveStroke({ do: "delete" });
-                setDrawState(DrawStates.Navigating);
-              }}
-            >
-              <Rect x={0} y={0} width="100%" height="100%" />
-            </TouchableOpacityG>
-          </>
-        )}
-
-        {/* {drawState === DrawStates.Viewing && <Stroke stroke={infoStroke} />} */}
-
-        {liveStroke && <Stroke stroke={liveStroke} />}
-
-        {circleIsVisible && (
-          <AnimatedCircle
-            stroke="black"
-            strokeWidth={1}
-            fill="transparent"
-            cx={circleXRef.current}
-            cy={circleYRef.current}
-            r={circleRref}
+        <Svg
+          width={winWidth}
+          height={canvasHeight}
+          viewBox={`0 0 ${winWidth} ${canvasHeight}`}
+        >
+          <Model
+            translateX={translateX}
+            modelScale={modelScale}
+            depth={depth}
+            viewIsFront={viewIsFront}
           />
-        )}
-        {livePath && (
-          <Stroke livePath={livePath} liveStrokeWidth={liveStrokeWidth} />
-        )}
-      </Svg>
-    </GesturesHandler>
+
+          <StrokeRenderer
+            drawState={drawState}
+            setDrawState={setDrawState}
+            viewIsFront={viewIsFront}
+            depth={depth}
+            strokes={strokes}
+            updateLiveStroke={updateLiveStroke}
+          />
+
+          {(drawState === DrawStates.Viewing ||
+            drawState === DrawStates.Reviewing) && (
+            <>
+              <TouchableOpacityG
+                onPress={() => {
+                  drawState === DrawStates.Reviewing &&
+                    updateStrokes({ do: "append", payload: liveStroke });
+                  updateLiveStroke({ do: "delete" });
+                  setDrawState(DrawStates.Navigating);
+                }}
+              >
+                <Rect x={0} y={0} width="100%" height="100%" />
+              </TouchableOpacityG>
+            </>
+          )}
+
+          {/* {drawState === DrawStates.Viewing && <Stroke stroke={infoStroke} />} */}
+
+          {liveStroke && <Stroke stroke={liveStroke} />}
+
+          {circleIsVisible && (
+            <AnimatedCircle
+              stroke="black"
+              strokeWidth={1}
+              fill="transparent"
+              cx={circleXRef.current}
+              cy={circleYRef.current}
+              r={circleRref}
+            />
+          )}
+          {livePath && (
+            <Stroke livePath={livePath} liveStrokeWidth={liveStrokeWidth} />
+          )}
+        </Svg>
+      </GesturesHandler>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: legendHeight,
+        }}
+      >
+        <View
+          style={{
+            width: "50%",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Text>{viewIsFront ? "Front" : "Back"}</Text>
+          <Text>{["Surface", "Shallow", "Deep"][depth]}</Text>
+        </View>
+      </View>
+    </View>
   );
 };
 
