@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, useWindowDimensions, View } from "react-native";
 import { Calendar as RNCcalendar } from "react-native-calendars";
 
 import getYYYYMMDD from "../library/getYYYYMMDD";
 
-const Calendar = ({ winWidth }) => {
+const Calendar = () => {
+  const winWidth = useWindowDimensions().width;
   return (
     <View style={styles.container}>
       <RNCcalendar
@@ -32,6 +33,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
+    backgroundColor: "white",
   },
   square: {
     width: 100,

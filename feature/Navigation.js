@@ -17,6 +17,9 @@ const Navigation = ({ setDrawState, saveDay }) => {
       <TouchableOpacity onPress={() => saveDay()} style={styles.drawButton}>
         <Text>Save</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.drawButton}>
+        <Text>Calendar</Text>
+      </TouchableOpacity>
     </View>
   );
 };

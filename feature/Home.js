@@ -1,14 +1,17 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonWrapper}>
         <Pressable style={styles.button}>
           <Text>Record for today</Text>
         </Pressable>
-        <Pressable style={styles.button}>
+        <Pressable
+          onPress={() => navigation.navigate("Calendar")}
+          style={styles.button}
+        >
           <Text>Calendar</Text>
         </Pressable>
       </View>

@@ -1,5 +1,10 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { Keyboard, KeyboardAvoidingView, View } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import Canvas from "./Canvas";
@@ -32,7 +37,8 @@ const strokesReducer = (state, dispatch) => {
   }
 };
 
-const Draw = ({ winWidth, winHeight }) => {
+const Draw = () => {
+  const { width: winWidth, height: winHeight } = useWindowDimensions();
   const modelScale = winWidth / 344;
   const canvasHeight = 400 * modelScale;
 
@@ -84,39 +90,44 @@ const Draw = ({ winWidth, winHeight }) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior="position"
-      keyboardVerticalOffset={20}
-      contentContainerStyle={{ width: "100%", height: "100%" }}
-    >
-      <View>
-        <Canvas
-          winWidth={winWidth}
+    <View style={{ flex: 1, marginTop: winHeight * 0.04 }}>
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={20}
+        contentContainerStyle={{
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <View>
+          <Canvas
+            winWidth={winWidth}
+            liveStroke={liveStroke}
+            updateLiveStroke={updateLiveStroke}
+            drawState={drawState}
+            setDrawState={setDrawState}
+            strokes={strokes}
+            updateStrokes={updateStrokes}
+          />
+          {keyboard && (
+            <CanvasKeyboardOverlay
+              keyboard={keyboard}
+              winWidth={winHeight}
+              canvasHeight={canvasHeight}
+              setDrawState={setDrawState}
+            />
+          )}
+        </View>
+        <Tooltip
           liveStroke={liveStroke}
           updateLiveStroke={updateLiveStroke}
           drawState={drawState}
           setDrawState={setDrawState}
-          strokes={strokes}
           updateStrokes={updateStrokes}
+          saveDay={saveDay}
         />
-        {keyboard && (
-          <CanvasKeyboardOverlay
-            keyboard={keyboard}
-            winWidth={winHeight}
-            canvasHeight={canvasHeight}
-            setDrawState={setDrawState}
-          />
-        )}
-      </View>
-      <Tooltip
-        liveStroke={liveStroke}
-        updateLiveStroke={updateLiveStroke}
-        drawState={drawState}
-        setDrawState={setDrawState}
-        updateStrokes={updateStrokes}
-        saveDay={saveDay}
-      />
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </View>
   );
 };
 
