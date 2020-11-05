@@ -2,22 +2,30 @@ import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 
 import { DrawStates } from "../library/globals";
+import BleedScale from "./BleedScale";
+import FactorButton from "./FactorButton";
 
-const Factors = ({ setDrawState }) => {
+const Factors = ({ setDrawState, factors, setFactors, updateFactors }) => {
+  const labels = ["sex", "one", "two"];
+
   return (
     <View style={styles.container}>
       <View style={styles.buttonPanel}>
-        <Pressable style={styles.button} />
-        <Pressable style={styles.button} />
-        <Pressable style={styles.button} />
+        {labels.map((label, i) => (
+          <FactorButton
+            key={i}
+            factor={label}
+            updateFactors={updateFactors}
+            style={styles.button}
+          />
+        ))}
       </View>
-      <View style={styles.buttonPanel}>
-        <Pressable style={styles.button} />
-        <Pressable style={styles.button} />
-        <Pressable style={styles.button} />
-      </View>
+      <BleedScale updateFactors={updateFactors} />
       <Pressable
-        onPress={() => setDrawState(DrawStates.Navigating)}
+        onPress={() => {
+          console.log(factors);
+          setDrawState(DrawStates.Navigating);
+        }}
         style={styles.xButton}
       />
     </View>
@@ -36,10 +44,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   button: {
-    width: 60,
-    aspectRatio: 1,
-    borderRadius: 60 / 2,
-    backgroundColor: "pink",
     marginHorizontal: 5,
   },
   xButton: {

@@ -37,6 +37,24 @@ const strokesReducer = (state, dispatch) => {
   }
 };
 
+const factorsReducer = (state, dispatch) => {
+  switch (dispatch.do) {
+    case "set":
+      return { ...state, ...dispatch.payload };
+    case "print":
+      console.log(state);
+      return state;
+  }
+};
+
+const factorsInitialState = {
+  opened: false,
+  sex: false,
+  one: false,
+  two: false,
+  bleeding: "none",
+};
+
 const Draw = () => {
   const { width: winWidth, height: winHeight } = useWindowDimensions();
   const modelScale = winWidth / 344;
@@ -45,6 +63,10 @@ const Draw = () => {
   const [drawState, setDrawState] = useState(DrawStates.Navigating);
   const [liveStroke, updateLiveStroke] = useReducer(liveStrokeReducer, null);
   const [strokes, updateStrokes] = useReducer(strokesReducer, []);
+  const [factors, updateFactors] = useReducer(
+    factorsReducer,
+    factorsInitialState
+  );
   const [keyboard, setKeyboard] = useState(false);
 
   const saveDay = async () => {
@@ -125,6 +147,8 @@ const Draw = () => {
           setDrawState={setDrawState}
           updateStrokes={updateStrokes}
           saveDay={saveDay}
+          factors={factors}
+          updateFactors={updateFactors}
         />
       </KeyboardAvoidingView>
     </View>

@@ -18,6 +18,8 @@ const Tooltip = ({
   setDrawState,
   updateStrokes,
   saveDay,
+  factors,
+  updateFactors,
 }) => {
   return (
     <View style={styles.container}>
@@ -25,7 +27,11 @@ const Tooltip = ({
         <Navigation setDrawState={setDrawState} saveDay={saveDay} />
       )}
       {drawState === DrawStates.Factoring && (
-        <Factors setDrawState={setDrawState} />
+        <Factors
+          setDrawState={setDrawState}
+          factors={factors}
+          updateFactors={updateFactors}
+        />
       )}
       {drawState === DrawStates.Pinching && (
         <Text>Pinch to adjust stroke size</Text>
