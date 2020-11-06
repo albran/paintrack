@@ -5,7 +5,13 @@ import { DrawStates } from "../library/globals";
 import BleedScale from "./BleedScale";
 import FactorButton from "./FactorButton";
 
-const Factors = ({ setDrawState, factors, setFactors, updateFactors }) => {
+const Factors = ({
+  setDrawState,
+  factors,
+  setFactors,
+  updateFactors,
+  saveDay,
+}) => {
   const labels = ["sex", "one", "two"];
 
   return (
@@ -23,7 +29,7 @@ const Factors = ({ setDrawState, factors, setFactors, updateFactors }) => {
       <BleedScale updateFactors={updateFactors} />
       <Pressable
         onPress={() => {
-          console.log(factors);
+          saveDay();
           setDrawState(DrawStates.Navigating);
         }}
         style={styles.xButton}

@@ -4,7 +4,7 @@ import { StyleSheet, Pressable } from "react-native";
 const FactorButton = ({ style, icon, factor, updateFactors }) => {
   const [selected, setSelected] = useState(false);
   const onPress = () => {
-    updateFactors({ do: "set", payload: { [factor]: !selected } });
+    updateFactors({ do: "toggle", payload: { [factor]: !selected } });
     setSelected(!selected);
   };
 

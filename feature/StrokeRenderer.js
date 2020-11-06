@@ -23,7 +23,7 @@ const StrokeRenderer = ({
               <TouchableOpacityG
                 key={i}
                 onPress={() => {
-                  setDrawState(DrawStates.Reviewing);
+                  setDrawState(DrawStates.Viewing);
                   updateLiveStroke({ do: "set", props: { ...stroke, i: i } });
                 }}
               >

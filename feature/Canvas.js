@@ -156,21 +156,23 @@ const Canvas = ({
             drawState === DrawStates.Reviewing) && (
             <>
               <TouchableOpacityG
-                onPress={() => {
-                  drawState === DrawStates.Reviewing &&
-                    updateStrokes({ do: "append", payload: liveStroke });
-                  updateLiveStroke({ do: "delete" });
-                  setDrawState(DrawStates.Navigating);
-                }}
+              // onPress={() => {
+              //   drawState === DrawStates.Reviewing &&
+              //     updateStrokes({ do: "append", payload: liveStroke });
+              //   updateLiveStroke({ do: "delete" });
+              //   setDrawState(DrawStates.Navigating);
+              // }}
               >
                 <Rect x={0} y={0} width="100%" height="100%" />
               </TouchableOpacityG>
             </>
           )}
 
-          {/* {drawState === DrawStates.Viewing && <Stroke stroke={infoStroke} />} */}
-
           {liveStroke && <Stroke stroke={liveStroke} />}
+
+          {livePath && (
+            <Stroke livePath={livePath} liveStrokeWidth={liveStrokeWidth} />
+          )}
 
           {circleIsVisible && (
             <AnimatedCircle
@@ -181,9 +183,6 @@ const Canvas = ({
               cy={circleYRef.current}
               r={circleRref}
             />
-          )}
-          {livePath && (
-            <Stroke livePath={livePath} liveStrokeWidth={liveStrokeWidth} />
           )}
         </Svg>
       </GesturesHandler>

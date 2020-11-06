@@ -31,6 +31,7 @@ const Tooltip = ({
           setDrawState={setDrawState}
           factors={factors}
           updateFactors={updateFactors}
+          saveDay={saveDay}
         />
       )}
       {drawState === DrawStates.Pinching && (
@@ -59,10 +60,13 @@ const Tooltip = ({
       {drawState === DrawStates.Noting && (
         <Note updateLiveStroke={updateLiveStroke} setDrawState={setDrawState} />
       )}
-      {drawState === DrawStates.Reviewing && (
+      {(drawState === DrawStates.Reviewing ||
+        drawState === DrawStates.Viewing) && (
         <StrokeInfo
           stroke={liveStroke}
+          drawState={drawState}
           setDrawState={setDrawState}
+          liveStroke={liveStroke}
           updateLiveStroke={updateLiveStroke}
           updateStrokes={updateStrokes}
         />

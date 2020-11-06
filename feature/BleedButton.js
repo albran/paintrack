@@ -11,7 +11,7 @@ const BleedButton = ({
   const onPress = () => {
     const update = selected === scale ? "none" : scale;
     setSelected(update);
-    updateFactors({ do: "set", payload: { bleeding: update } });
+    updateFactors({ do: "toggle", payload: { bleeding: update } });
   };
   return (
     <Pressable

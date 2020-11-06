@@ -40,10 +40,9 @@ const strokesReducer = (state, dispatch) => {
 const factorsReducer = (state, dispatch) => {
   switch (dispatch.do) {
     case "set":
+      return { ...dispatch.payload };
+    case "toggle":
       return { ...state, ...dispatch.payload };
-    case "print":
-      console.log(state);
-      return state;
   }
 };
 
@@ -72,7 +71,8 @@ const Draw = () => {
   const saveDay = async () => {
     try {
       const datestampKey = getYYYYMMDD(Date());
-      const jsonVal = JSON.stringify(strokes);
+      const data = { strokes: strokes, factors: factors };
+      const jsonVal = JSON.stringify(data);
       await AsyncStorage.setItem(datestampKey, jsonVal);
     } catch (e) {
       console.log(`Error saving strokes: ${e}`);
@@ -81,17 +81,22 @@ const Draw = () => {
 
   const getDay = async (datestampKey) => {
     try {
-      const jsonVal = await AsyncStorage.getItem(datestampKey);
-      return jsonVal != null ? JSON.parse(jsonVal) : [];
+      return await AsyncStorage.getItem(datestampKey);
     } catch (e) {
       console.log(`Error retrieving strokes: ${e}`);
     }
   };
 
   useEffect(() => {
-    getDay(getYYYYMMDD(Date())).then((val) =>
-      updateStrokes({ do: "set", payload: val })
-    );
+    getDay(getYYYYMMDD(Date())).then((data) => {
+      {
+        if (data === null) return;
+        data.strokes !== undefined &&
+          updateStrokes({ do: "set", payload: data.strokes });
+        // updateStrokes({ do: "set", payload: data.strokes });
+        // updateFactors({ do: "set", payload: data.factors });
+      }
+    });
 
     Keyboard.addListener("keyboardWillShow", keyboardWillShow);
     Keyboard.addListener("keyboardWillHide", keyboardWillHide);
