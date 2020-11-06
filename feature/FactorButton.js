@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Pressable } from "react-native";
 
 const FactorButton = ({ style, icon, factor, updateFactors }) => {
   const [selected, setSelected] = useState(false);
+
   const onPress = () => {
-    updateFactors({ do: "toggle", payload: { [factor]: !selected } });
     setSelected(!selected);
   };
+
+  useEffect(() => {
+    updateFactors({ do: "toggle", payload: { [factor]: selected } });
+  }, [selected]);
 
   return (
     <Pressable

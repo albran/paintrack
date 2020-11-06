@@ -17,21 +17,23 @@ const Tooltip = ({
   drawState,
   setDrawState,
   updateStrokes,
-  saveDay,
   factors,
   updateFactors,
+  saveStroke,
+  deleteStroke,
+  saveFactors,
 }) => {
   return (
     <View style={styles.container}>
       {drawState === DrawStates.Navigating && (
-        <Navigation setDrawState={setDrawState} saveDay={saveDay} />
+        <Navigation setDrawState={setDrawState} />
       )}
       {drawState === DrawStates.Factoring && (
         <Factors
           setDrawState={setDrawState}
           factors={factors}
           updateFactors={updateFactors}
-          saveDay={saveDay}
+          saveFactors={saveFactors}
         />
       )}
       {drawState === DrawStates.Pinching && (
@@ -63,12 +65,13 @@ const Tooltip = ({
       {(drawState === DrawStates.Reviewing ||
         drawState === DrawStates.Viewing) && (
         <StrokeInfo
-          stroke={liveStroke}
+          liveStroke={liveStroke}
           drawState={drawState}
           setDrawState={setDrawState}
-          liveStroke={liveStroke}
           updateLiveStroke={updateLiveStroke}
           updateStrokes={updateStrokes}
+          saveStroke={saveStroke}
+          deleteStroke={deleteStroke}
         />
       )}
     </View>

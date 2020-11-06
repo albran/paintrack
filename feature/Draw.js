@@ -68,20 +68,38 @@ const Draw = () => {
   );
   const [keyboard, setKeyboard] = useState(false);
 
-  const saveDay = async () => {
+  const saveStroke = async () => {
     try {
       const datestampKey = getYYYYMMDD(Date());
-      const data = { strokes: strokes, factors: factors };
-      const jsonVal = JSON.stringify(data);
-      await AsyncStorage.setItem(datestampKey, jsonVal);
+      const data = { strokes: [...strokes, { ...liveStroke }] };
+      await AsyncStorage.mergeItem(datestampKey, JSON.stringify(data));
+      updateStrokes({ do: "append", payload: { ...liveStroke } });
     } catch (e) {
-      console.log(`Error saving strokes: ${e}`);
+      console.log(`Error saving stroke array ${e}`);
     }
+  };
+
+  const deleteStroke = async (i) => {
+    try {
+      const datestampKey = getYYYYMMDD(Date());
+      const data = { strokes: strokes.filter((val, j) => i !== j) };
+      await AsyncStorage.setItem(datestampKey, JSON.stringify(data));
+      updateStrokes({ do: "set", payload: data.strokes });
+    } catch (e) {
+      console.log(`Error deleting stroke ${e}`);
+    }
+  };
+
+  const saveFactors = async () => {
+    const datestampKey = getYYYYMMDD(Date());
+    const data = { factors: { ...factors } };
+    await AsyncStorage.mergeItem(datestampKey, data);
   };
 
   const getDay = async (datestampKey) => {
     try {
-      return await AsyncStorage.getItem(datestampKey);
+      const jsonData = await AsyncStorage.getItem(datestampKey);
+      return jsonData != null ? JSON.parse(jsonData) : null;
     } catch (e) {
       console.log(`Error retrieving strokes: ${e}`);
     }
@@ -91,13 +109,14 @@ const Draw = () => {
     getDay(getYYYYMMDD(Date())).then((data) => {
       {
         if (data === null) return;
-        data.strokes !== undefined &&
-          updateStrokes({ do: "set", payload: data.strokes });
-        // updateStrokes({ do: "set", payload: data.strokes });
+        console.log(data.strokes);
+        updateStrokes({ do: "set", payload: data.strokes });
         // updateFactors({ do: "set", payload: data.factors });
       }
     });
+  }, []);
 
+  useEffect(() => {
     Keyboard.addListener("keyboardWillShow", keyboardWillShow);
     Keyboard.addListener("keyboardWillHide", keyboardWillHide);
 
@@ -151,9 +170,11 @@ const Draw = () => {
           drawState={drawState}
           setDrawState={setDrawState}
           updateStrokes={updateStrokes}
-          saveDay={saveDay}
           factors={factors}
           updateFactors={updateFactors}
+          saveStroke={saveStroke}
+          deleteStroke={deleteStroke}
+          saveFactors={saveFactors}
         />
       </KeyboardAvoidingView>
     </View>

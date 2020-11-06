@@ -1,16 +1,10 @@
 import React from "react";
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { DrawStates } from "../library/globals";
 
-const Navigation = ({ setDrawState, saveDay }) => {
+const Navigation = ({ setDrawState }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>

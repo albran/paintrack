@@ -10,9 +10,14 @@ const Factors = ({
   factors,
   setFactors,
   updateFactors,
-  saveDay,
+  saveFactors,
 }) => {
   const labels = ["sex", "one", "two"];
+
+  const closeAndSave = () => {
+    console.log(factors);
+    setDrawState(DrawStates.Navigating);
+  };
 
   return (
     <View style={styles.container}>
@@ -21,19 +26,14 @@ const Factors = ({
           <FactorButton
             key={i}
             factor={label}
+            factors={factors}
             updateFactors={updateFactors}
             style={styles.button}
           />
         ))}
       </View>
       <BleedScale updateFactors={updateFactors} />
-      <Pressable
-        onPress={() => {
-          saveDay();
-          setDrawState(DrawStates.Navigating);
-        }}
-        style={styles.xButton}
-      />
+      <Pressable onPress={closeAndSave} style={styles.xButton} />
     </View>
   );
 };

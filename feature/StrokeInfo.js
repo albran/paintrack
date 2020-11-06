@@ -5,14 +5,28 @@ import colorFromStroke from "../library/colorFromStroke";
 import { DrawStates } from "../library/globals";
 
 const StrokeInfo = ({
-  stroke,
+  liveStroke,
   drawState,
   setDrawState,
-  liveStroke,
   updateLiveStroke,
-  updateStrokes,
+  saveStroke,
+  deleteStroke,
 }) => {
-  const { type, scale, pattern, note, i = -1 } = stroke;
+  const { type, scale, pattern, note, i = -1 } = liveStroke;
+
+  const closeAndSave = () => {
+    drawState === DrawStates.Reviewing && saveStroke();
+    setDrawState(DrawStates.Navigating);
+    updateLiveStroke({ do: "delete" });
+  };
+
+  //todo: delete from memory
+  const closeAndDelete = () => {
+    setDrawState(DrawStates.Navigating);
+    i > -1 && deleteStroke(i);
+    updateLiveStroke({ do: "delete" });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.infoWrapper}>
@@ -31,25 +45,10 @@ const StrokeInfo = ({
           <Text>{note}</Text>
         </View>
         <View>
-          <Pressable
-            onPress={() => {
-              drawState === DrawStates.Reviewing &&
-                updateStrokes({ do: "append", payload: liveStroke });
-              updateLiveStroke({ do: "delete" });
-              setDrawState(DrawStates.Navigating);
-            }}
-            style={styles.x}
-          >
+          <Pressable onPress={closeAndSave} style={styles.x}>
             <Text>X</Text>
           </Pressable>
-          <Pressable
-            onPress={() => {
-              setDrawState(DrawStates.Navigating);
-              i > -1 && updateStrokes({ do: "delete", i: i });
-              updateLiveStroke({ do: "delete" });
-            }}
-            style={styles.x}
-          >
+          <Pressable onPress={closeAndDelete} style={styles.x}>
             <Text>D</Text>
           </Pressable>
         </View>
