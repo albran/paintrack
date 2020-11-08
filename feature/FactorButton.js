@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Pressable } from "react-native";
 
-const FactorButton = ({ style, icon, factor, updateFactors }) => {
+const FactorButton = ({ style, icon, label, updateFactors, value }) => {
   const [selected, setSelected] = useState(false);
 
   const onPress = () => {
@@ -9,7 +9,11 @@ const FactorButton = ({ style, icon, factor, updateFactors }) => {
   };
 
   useEffect(() => {
-    updateFactors({ do: "toggle", payload: { [factor]: selected } });
+    setSelected(value);
+  }, []);
+
+  useEffect(() => {
+    updateFactors({ do: "toggle", payload: { [label]: selected } });
   }, [selected]);
 
   return (

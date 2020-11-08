@@ -5,17 +5,11 @@ import { DrawStates } from "../library/globals";
 import BleedScale from "./BleedScale";
 import FactorButton from "./FactorButton";
 
-const Factors = ({
-  setDrawState,
-  factors,
-  setFactors,
-  updateFactors,
-  saveFactors,
-}) => {
+const Factors = ({ setDrawState, factors, updateFactors, saveFactors }) => {
   const labels = ["sex", "one", "two"];
 
   const closeAndSave = () => {
-    console.log(factors);
+    saveFactors();
     setDrawState(DrawStates.Navigating);
   };
 
@@ -25,14 +19,14 @@ const Factors = ({
         {labels.map((label, i) => (
           <FactorButton
             key={i}
-            factor={label}
-            factors={factors}
+            label={label}
+            value={factors[label]}
             updateFactors={updateFactors}
             style={styles.button}
           />
         ))}
       </View>
-      <BleedScale updateFactors={updateFactors} />
+      <BleedScale value={factors.bleeding} updateFactors={updateFactors} />
       <Pressable onPress={closeAndSave} style={styles.xButton} />
     </View>
   );

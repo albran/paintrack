@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import BleedButton from "./BleedButton";
 
-const BleedScale = ({ updateFactors }) => {
+const BleedScale = ({ value, updateFactors }) => {
   const [selected, setSelected] = useState("none");
+
+  useEffect(() => {
+    setSelected(value);
+  }, []);
+
   return (
     <View style={styles.container}>
       <BleedButton

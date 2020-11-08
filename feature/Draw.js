@@ -93,7 +93,7 @@ const Draw = () => {
   const saveFactors = async () => {
     const datestampKey = getYYYYMMDD(Date());
     const data = { factors: { ...factors } };
-    await AsyncStorage.mergeItem(datestampKey, data);
+    await AsyncStorage.mergeItem(datestampKey, JSON.stringify(data));
   };
 
   const getDay = async (datestampKey) => {
@@ -109,9 +109,8 @@ const Draw = () => {
     getDay(getYYYYMMDD(Date())).then((data) => {
       {
         if (data === null) return;
-        console.log(data.strokes);
-        updateStrokes({ do: "set", payload: data.strokes });
-        // updateFactors({ do: "set", payload: data.factors });
+        data.strokes && updateStrokes({ do: "set", payload: data.strokes });
+        data.factors && updateFactors({ do: "set", payload: data.factors });
       }
     });
   }, []);
