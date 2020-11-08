@@ -54,7 +54,7 @@ const factorsInitialState = {
   bleeding: "none",
 };
 
-const Draw = () => {
+const Draw = ({ date }) => {
   const { width: winWidth, height: winHeight } = useWindowDimensions();
   const modelScale = winWidth / 344;
   const canvasHeight = 400 * modelScale;
@@ -180,4 +180,4 @@ const Draw = () => {
   );
 };
 
-export default Draw;
+export default React.memo(Draw);

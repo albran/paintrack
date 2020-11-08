@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Calendar;
+export default React.memo(Calendar);
