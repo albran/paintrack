@@ -4,6 +4,7 @@ import BleedButton from "./BleedButton";
 
 const BleedScale = ({ value, updateFactors }) => {
   const [selected, setSelected] = useState("none");
+  const bleedValues = ["spotting", "light", "heavy"];
 
   useEffect(() => {
     setSelected(value);
@@ -11,27 +12,16 @@ const BleedScale = ({ value, updateFactors }) => {
 
   return (
     <View style={styles.container}>
-      <BleedButton
-        scale="spotting"
-        style={styles.button}
-        selected={selected}
-        setSelected={setSelected}
-        updateFactors={updateFactors}
-      />
-      <BleedButton
-        scale="light"
-        style={styles.button}
-        selected={selected}
-        setSelected={setSelected}
-        updateFactors={updateFactors}
-      />
-      <BleedButton
-        scale="heavy"
-        style={styles.button}
-        selected={selected}
-        setSelected={setSelected}
-        updateFactors={updateFactors}
-      />
+      {bleedValues.map((val, i) => (
+        <BleedButton
+          key={i}
+          scale={val}
+          style={styles.button}
+          selected={selected}
+          setSelected={setSelected}
+          updateFactors={updateFactors}
+        />
+      ))}
     </View>
   );
 };
