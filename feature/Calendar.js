@@ -10,7 +10,7 @@ import { Calendar as RNCcalendar } from "react-native-calendars";
 
 import getYYYYMMDD from "../library/getYYYYMMDD";
 
-const Calendar = ({ navigation }) => {
+const Calendar = ({ navigation, setDate }) => {
   const winWidth = useWindowDimensions().width;
   return (
     <View style={styles.container}>
@@ -22,7 +22,9 @@ const Calendar = ({ navigation }) => {
           hideArrows={true}
           enableSwipeMonths={true}
           onDayPress={(day) => {
-            console.log(day.dateString);
+            // console.log(day.dateString);
+            setDate(day.dateString);
+            navigation.navigate("Draw");
           }}
           theme={{
             textMonthFontSize: 24,

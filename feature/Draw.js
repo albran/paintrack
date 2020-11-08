@@ -70,9 +70,9 @@ const Draw = ({ date }) => {
 
   const saveStroke = async () => {
     try {
-      const datestampKey = getYYYYMMDD(Date());
+      const dateKey = date;
       const data = { strokes: [...strokes, { ...liveStroke }] };
-      await AsyncStorage.mergeItem(datestampKey, JSON.stringify(data));
+      await AsyncStorage.mergeItem(dateKey, JSON.stringify(data));
       updateStrokes({ do: "append", payload: { ...liveStroke } });
     } catch (e) {
       console.log(`Error saving stroke array ${e}`);
@@ -81,9 +81,9 @@ const Draw = ({ date }) => {
 
   const deleteStroke = async (i) => {
     try {
-      const datestampKey = getYYYYMMDD(Date());
+      const dateKey = date;
       const data = { strokes: strokes.filter((val, j) => i !== j) };
-      await AsyncStorage.setItem(datestampKey, JSON.stringify(data));
+      await AsyncStorage.setItem(dateKey, JSON.stringify(data));
       updateStrokes({ do: "set", payload: data.strokes });
     } catch (e) {
       console.log(`Error deleting stroke ${e}`);
@@ -91,29 +91,34 @@ const Draw = ({ date }) => {
   };
 
   const saveFactors = async () => {
-    const datestampKey = getYYYYMMDD(Date());
+    const dateKey = date;
     const data = { factors: { ...factors } };
-    await AsyncStorage.mergeItem(datestampKey, JSON.stringify(data));
+    await AsyncStorage.mergeItem(dateKey, JSON.stringify(data));
   };
 
-  const getDay = async (datestampKey) => {
+  const getDay = async () => {
     try {
-      const jsonData = await AsyncStorage.getItem(datestampKey);
-      return jsonData != null ? JSON.parse(jsonData) : null;
+      const dateKey = date;
+      const jsonVal = await AsyncStorage.getItem(dateKey);
+      return jsonVal != null ? JSON.parse(jsonVal) : null;
     } catch (e) {
-      console.log(`Error retrieving strokes: ${e}`);
+      console.log(`Error retrieving date for date: ${e}`);
     }
   };
 
   useEffect(() => {
-    getDay(getYYYYMMDD(Date())).then((data) => {
+    getDay().then((data) => {
       {
-        if (data === null) return;
+        if (data === null) {
+          updateStrokes({ do: "set", payload: [] });
+          updateFactors({ do: "set", payload: factorsInitialState });
+          return;
+        }
         data.strokes && updateStrokes({ do: "set", payload: data.strokes });
         data.factors && updateFactors({ do: "set", payload: data.factors });
       }
     });
-  }, []);
+  }, [date]);
 
   useEffect(() => {
     Keyboard.addListener("keyboardWillShow", keyboardWillShow);

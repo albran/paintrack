@@ -15,7 +15,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Draw" headerMode="none">
         <Stack.Screen name="Calendar">
-          {(props) => <Calendar {...props} date={date} />}
+          {(props) => <Calendar {...props} setDate={setDate} />}
         </Stack.Screen>
         <Stack.Screen name="Draw">
           {(props) => <Draw {...props} date={date} />}
