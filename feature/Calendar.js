@@ -1,17 +1,16 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { StyleSheet, useWindowDimensions, View } from "react-native";
 import { Calendar as RNCcalendar } from "react-native-calendars";
 
 import getYYYYMMDD from "../library/getYYYYMMDD";
 
 const Calendar = ({ navigation, setDate }) => {
   const winWidth = useWindowDimensions().width;
+  const goToDay = (day) => {
+    setDate(day.dateString);
+    navigation.navigate("Draw");
+  };
+
   return (
     <View style={styles.container}>
       <View style={{ ...styles.contentWrapper, width: 0.9 * winWidth }}>
@@ -22,9 +21,7 @@ const Calendar = ({ navigation, setDate }) => {
           hideArrows={true}
           enableSwipeMonths={true}
           onDayPress={(day) => {
-            // console.log(day.dateString);
-            setDate(day.dateString);
-            navigation.navigate("Draw");
+            goToDay(day);
           }}
           theme={{
             textMonthFontSize: 24,
@@ -33,12 +30,6 @@ const Calendar = ({ navigation, setDate }) => {
           }}
           style={{ width: 0.9 * winWidth }}
         />
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Draw")}
-          style={styles.button}
-        >
-          <Text>Draw</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

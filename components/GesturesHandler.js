@@ -22,8 +22,8 @@ const GesturesHandler = ({
   if (drawState === DrawStates.Navigating)
     return (
       <TapGestureHandler
-        minPointers={1}
-        maxPointers={1}
+        minPointers={2}
+        maxPointers={2}
         maxDist={1}
         onHandlerStateChange={onTapHandlerStateChange}
       >
@@ -31,7 +31,7 @@ const GesturesHandler = ({
           <PanGestureHandler
             minPointers={1}
             maxPointers={1}
-            minDist={100}
+            minDist={20}
             onHandlerStateChange={onSwipeHandlerStateChange}
           >
             <Animated.View>{children}</Animated.View>

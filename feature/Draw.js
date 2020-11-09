@@ -11,7 +11,6 @@ import Canvas from "./Canvas";
 import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Tooltip from "./Tooltip";
 import { DrawStates } from "../library/globals";
-import getYYYYMMDD from "../library/getYYYYMMDD";
 
 const liveStrokeReducer = (state, dispatch) => {
   switch (dispatch.do) {

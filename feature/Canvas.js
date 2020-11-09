@@ -109,6 +109,14 @@ const Canvas = ({
 
   const onSwipeHandlerStateChange = (event) => {
     if (event.nativeEvent.state === State.END) {
+      //workaround for android
+      const { translationX, translationY } = event.nativeEvent;
+      const minPanVal = 20;
+      const belowPanThreshold =
+        Math.abs(translationX) < minPanVal &&
+        Math.abs(translationY) < minPanVal;
+      if (belowPanThreshold) return;
+
       setViewIsFront(!viewIsFront);
       setDepth(0);
     }
