@@ -1,6 +1,7 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import colorFromStroke from "../library/colorFromStroke";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 
 import { DrawStates } from "../library/globals";
 
@@ -46,10 +47,10 @@ const StrokeInfo = ({
         </View>
         <View>
           <Pressable onPress={closeAndSave} style={styles.x}>
-            <Text>X</Text>
+            <FontAwesome name="save" size={20} color="white" />
           </Pressable>
           <Pressable onPress={closeAndDelete} style={styles.x}>
-            <Text>D</Text>
+            <AntDesign name="delete" size={20} color="white" />
           </Pressable>
         </View>
       </View>
