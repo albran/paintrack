@@ -32,6 +32,9 @@ const FactorButton = ({ style, icon, label, updateFactors, value }) => {
 
 const styles = StyleSheet.create({
   button: {
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
     width: 60,
     aspectRatio: 1,
     borderRadius: 60 / 2,

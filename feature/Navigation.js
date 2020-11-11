@@ -1,6 +1,7 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { AntDesign, Octicons } from "@expo/vector-icons";
 
 import { DrawStates } from "../library/globals";
 
@@ -15,7 +16,7 @@ const Navigation = ({ setDrawState }) => {
           }}
           style={styles.factorsButton}
         >
-          <Text>F</Text>
+          <AntDesign name="book" size={30} color="white" />
         </Pressable>
         <Pressable
           onPress={() => {
@@ -23,13 +24,13 @@ const Navigation = ({ setDrawState }) => {
           }}
           style={styles.drawButton}
         >
-          <Text>Draw</Text>
+          <Octicons name="pencil" size={60} color="white" />
         </Pressable>
         <Pressable
           onPress={() => navigation.navigate("Calendar")}
           style={styles.factorsButton}
         >
-          <Text>C</Text>
+          <AntDesign name="calendar" size={30} color="white" />
         </Pressable>
       </View>
     </View>

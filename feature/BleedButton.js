@@ -3,6 +3,7 @@ import { StyleSheet, Pressable } from "react-native";
 
 const BleedButton = ({
   style,
+  icon,
   scale,
   selected,
   setSelected,
@@ -21,12 +22,16 @@ const BleedButton = ({
         ...style,
         backgroundColor: scale === selected ? "red" : "gray",
       }}
-    ></Pressable>
+    >
+      {icon}
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
+    justifyContent: "center",
+    alignItems: "center",
     width: 60,
     aspectRatio: 1,
     borderRadius: 60 / 2,

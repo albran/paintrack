@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
+import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 
 import { DrawStates } from "../library/globals";
 import BleedScale from "./BleedScale";
@@ -7,6 +8,11 @@ import FactorButton from "./FactorButton";
 
 const Factors = ({ setDrawState, factors, updateFactors, saveFactors }) => {
   const labels = ["sex", "one", "two"];
+  const icons = [
+    <Ionicons name="ios-bed" size={24} color="white" />,
+    <FontAwesome5 name="water" size={24} color="white" />,
+    <FontAwesome5 name="poop" size={24} color="white" />,
+  ];
 
   const closeAndSave = () => {
     saveFactors();
@@ -19,6 +25,7 @@ const Factors = ({ setDrawState, factors, updateFactors, saveFactors }) => {
         {labels.map((label, i) => (
           <FactorButton
             key={i}
+            icon={icons[i]}
             label={label}
             value={factors[label]}
             updateFactors={updateFactors}
