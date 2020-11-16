@@ -1,63 +1,25 @@
 import React, { useEffect, useReducer, useState } from "react";
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { useWindowDimensions, View } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import Canvas from "./Canvas";
 import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Tooltip from "./Tooltip";
 import { DrawStates } from "../library/globals";
-
-const liveStrokeReducer = (state, dispatch) => {
-  switch (dispatch.do) {
-    case "init":
-      return { ...dispatch.props };
-    case "append":
-      return { ...state, ...dispatch.props };
-    case "set":
-      return { ...dispatch.props };
-    case "delete":
-      return null;
-  }
-};
-
-const strokesReducer = (state, dispatch) => {
-  switch (dispatch.do) {
-    case "append":
-      return [...state, { ...dispatch.payload }];
-    case "set":
-      return [...dispatch.payload];
-    case "delete":
-      return state.filter((val, i) => dispatch.i !== i);
-  }
-};
-
-const factorsReducer = (state, dispatch) => {
-  switch (dispatch.do) {
-    case "set":
-      return { ...dispatch.payload };
-    case "toggle":
-      return { ...state, ...dispatch.payload };
-  }
-};
-
-const factorsInitialState = {
-  opened: false,
-  sex: false,
-  one: false,
-  two: false,
-  bleeding: "none",
-};
+import KeyboardViewHandler from "./KeyboardViewHandler";
+import {
+  liveStrokeReducer,
+  strokesReducer,
+  factorsReducer,
+  factorsInitialState,
+} from "../library/reducers";
 
 const Draw = ({ date }) => {
   const { width: winWidth, height: winHeight } = useWindowDimensions();
   const modelScale = winWidth / 344;
   const canvasHeight = 400 * modelScale;
 
+  const [keyboard, setKeyboard] = useState(false);
   const [drawState, setDrawState] = useState(DrawStates.Navigating);
   const [liveStroke, updateLiveStroke] = useReducer(liveStrokeReducer, null);
   const [strokes, updateStrokes] = useReducer(strokesReducer, []);
@@ -65,7 +27,6 @@ const Draw = ({ date }) => {
     factorsReducer,
     factorsInitialState
   );
-  const [keyboard, setKeyboard] = useState(false);
 
   const saveStroke = async () => {
     try {
@@ -119,35 +80,9 @@ const Draw = ({ date }) => {
     });
   }, [date]);
 
-  useEffect(() => {
-    Keyboard.addListener("keyboardWillShow", keyboardWillShow);
-    Keyboard.addListener("keyboardWillHide", keyboardWillHide);
-
-    // cleanup function
-    return () => {
-      Keyboard.removeListener("keyboardWillShow", keyboardWillShow);
-      Keyboard.removeListener("keyboardWillHide", keyboardWillHide);
-    };
-  }, []);
-
-  const keyboardWillShow = () => {
-    setKeyboard(true);
-  };
-
-  const keyboardWillHide = () => {
-    setKeyboard(false);
-  };
-
   return (
     <View style={{ flex: 1, marginTop: winHeight * 0.04 }}>
-      <KeyboardAvoidingView
-        behavior="position"
-        keyboardVerticalOffset={20}
-        contentContainerStyle={{
-          width: "100%",
-          height: "100%",
-        }}
-      >
+      <KeyboardViewHandler setKeyboard={setKeyboard}>
         <View>
           <Canvas
             winWidth={winWidth}
@@ -172,14 +107,13 @@ const Draw = ({ date }) => {
           updateLiveStroke={updateLiveStroke}
           drawState={drawState}
           setDrawState={setDrawState}
-          updateStrokes={updateStrokes}
           factors={factors}
           updateFactors={updateFactors}
           saveStroke={saveStroke}
           deleteStroke={deleteStroke}
           saveFactors={saveFactors}
         />
-      </KeyboardAvoidingView>
+      </KeyboardViewHandler>
     </View>
   );
 };

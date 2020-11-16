@@ -20,14 +20,3 @@ export const DrawStates = Object.freeze({
   Noting: "NOTING",
   Reviewing: "REVIEWING",
 });
-
-const Stroke = Object.freeze({
-  path: "path",
-  width: "width",
-  view: "view",
-  depth: "depth",
-  type: "type",
-  scale: "scale",
-  pattern: "pattern",
-  note: "note",
-});
