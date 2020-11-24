@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, View } from "react-native";
-import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { Entypo, FontAwesome5, Ionicons } from "@expo/vector-icons";
 
 import { DrawStates } from "../library/globals";
 import BleedScale from "./BleedScale";
@@ -34,7 +34,9 @@ const Factors = ({ setDrawState, factors, updateFactors, saveFactors }) => {
         ))}
       </View>
       <BleedScale value={factors.bleeding} updateFactors={updateFactors} />
-      <Pressable onPress={closeAndSave} style={styles.xButton} />
+      <Pressable onPress={closeAndSave} style={styles.xButton}>
+        <Entypo name="cross" size={24} color="white" />
+      </Pressable>
     </View>
   );
 };
@@ -54,10 +56,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   xButton: {
+    justifyContent: "center",
+    alignItems: "center",
     position: "absolute",
     top: 5,
     right: 15,
-    width: 35,
+    width: 40,
     aspectRatio: 1,
     borderRadius: 60 / 2,
     backgroundColor: "pink",

@@ -9,6 +9,9 @@ const Navigation = ({ setDrawState }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
+      <Pressable style={styles.tutorial}>
+        <AntDesign name="question" size={24} color="white" />
+      </Pressable>
       <View style={styles.buttonPanel}>
         <Pressable
           onPress={() => {
@@ -43,6 +46,17 @@ const styles = StyleSheet.create({
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
+  },
+  tutorial: {
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: 5,
+    right: 15,
+    width: 40,
+    aspectRatio: 1,
+    borderRadius: 40 / 2,
+    backgroundColor: "pink",
   },
   buttonPanel: {
     flexDirection: "row",

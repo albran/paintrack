@@ -13,7 +13,7 @@ const StrokeRenderer = ({
   updateLiveStroke,
 }) => {
   const view = viewIsFront ? "front" : "back";
-  if (drawState === DrawStates.Navigating)
+  if (drawState === DrawStates.Navigating || drawState === DrawStates.Factoring)
     return (
       <>
         {strokes.map(
