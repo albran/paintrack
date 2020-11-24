@@ -9,7 +9,10 @@ const Navigation = ({ setDrawState }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Pressable style={styles.tutorial}>
+      <Pressable
+        onPress={() => navigation.navigate("Tutorial")}
+        style={styles.tutorial}
+      >
         <AntDesign name="question" size={24} color="white" />
       </Pressable>
       <View style={styles.buttonPanel}>
