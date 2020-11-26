@@ -16,9 +16,6 @@ import {
 
 const Draw = ({ date }) => {
   const { width: winWidth, height: winHeight } = useWindowDimensions();
-  const modelScale = winWidth / Constants.modelScaler;
-  const canvasHeight = Constants.canvasScaler * modelScale;
-
   const [keyboard, setKeyboard] = useState(false);
   const [drawState, setDrawState] = useState(DrawStates.Navigating);
   const [liveStroke, updateLiveStroke] = useReducer(liveStrokeReducer, null);
@@ -83,25 +80,16 @@ const Draw = ({ date }) => {
   return (
     <View style={{ flex: 1, marginTop: winHeight * 0.04 }}>
       <KeyboardViewHandler setKeyboard={setKeyboard}>
-        <View>
-          <Canvas
-            winWidth={winWidth}
-            liveStroke={liveStroke}
-            updateLiveStroke={updateLiveStroke}
-            drawState={drawState}
-            setDrawState={setDrawState}
-            strokes={strokes}
-            updateStrokes={updateStrokes}
-          />
-          {keyboard && (
-            <CanvasKeyboardOverlay
-              keyboard={keyboard}
-              winWidth={winWidth}
-              canvasHeight={canvasHeight}
-              setDrawState={setDrawState}
-            />
-          )}
-        </View>
+        <Canvas
+          winWidth={winWidth}
+          liveStroke={liveStroke}
+          updateLiveStroke={updateLiveStroke}
+          drawState={drawState}
+          setDrawState={setDrawState}
+          strokes={strokes}
+          updateStrokes={updateStrokes}
+          keyboard={keyboard}
+        />
         <Tooltip
           liveStroke={liveStroke}
           updateLiveStroke={updateLiveStroke}

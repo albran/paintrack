@@ -4,6 +4,7 @@ import { State } from "react-native-gesture-handler";
 import Svg, { Circle, Rect } from "react-native-svg";
 import Animated from "react-native-reanimated";
 
+import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import TouchableOpacityG from "../components/TouchableOpacityG";
 import Stroke from "./Stroke";
 import GesturesHandler from "../components/GesturesHandler";
@@ -18,25 +19,26 @@ const Canvas = ({
   drawState,
   setDrawState,
   strokes,
+  keyboard,
 }) => {
   const modelScale = winWidth / Constants.modelScaler;
   const translateX = Constants.xScaler * winWidth;
   const canvasHeight = Constants.canvasScaler * modelScale;
   const legendHeight = Constants.legendScaler * modelScale;
 
+  const [viewIsFront, setViewIsFront] = useState(true);
+  const [depth, setDepth] = useState(0);
+
   const pathRef = useRef([]);
   const [livePath, setLivePath] = useState();
-
-  const [circleIsVisible, setCircleIsVisible] = useState(false);
 
   const defaultStrokeWidth = 25;
   const strokeScaleRef = useRef(1);
   const [liveStrokeWidth, setLiveStrokeWidth] = useState(defaultStrokeWidth);
 
   let AnimatedCircle = Animated.createAnimatedComponent(Circle);
-
+  const [circleIsVisible, setCircleIsVisible] = useState(false);
   const pinchScaleRef = useRef(new Animated.Value(1));
-
   const circleXRef = useRef(new Animated.Value(1));
   const circleYRef = useRef(new Animated.Value(1));
   const baseCircleRref = useRef(new Animated.Value(defaultStrokeWidth * 0.5));
@@ -44,9 +46,6 @@ const Canvas = ({
     baseCircleRref.current,
     pinchScaleRef.current
   );
-
-  const [viewIsFront, setViewIsFront] = useState(true);
-  const [depth, setDepth] = useState(0);
 
   const onDrawGestureEvent = (event) => {
     pathRef.current.push({
@@ -129,83 +128,93 @@ const Canvas = ({
 
   return (
     <View>
-      <GesturesHandler
-        drawState={drawState}
-        onTapHandlerStateChange={onTapHandlerStateChange}
-        onSwipeHandlerStateChange={onSwipeHandlerStateChange}
-        onDrawGestureEvent={onDrawGestureEvent}
-        onDrawHandlerStateChange={onDrawHandlerStateChange}
-        onPinchGestureEvent={onPinchGestureEvent}
-        onPinchHandlerStateChange={onPinchHandlerStateChange}
-      >
-        <Svg
-          width={winWidth}
-          height={canvasHeight}
-          viewBox={`0 0 ${winWidth} ${canvasHeight}`}
+      <View>
+        <GesturesHandler
+          drawState={drawState}
+          onTapHandlerStateChange={onTapHandlerStateChange}
+          onSwipeHandlerStateChange={onSwipeHandlerStateChange}
+          onDrawGestureEvent={onDrawGestureEvent}
+          onDrawHandlerStateChange={onDrawHandlerStateChange}
+          onPinchGestureEvent={onPinchGestureEvent}
+          onPinchHandlerStateChange={onPinchHandlerStateChange}
         >
-          <Model
-            translateX={translateX}
-            modelScale={modelScale}
-            depth={depth}
-            viewIsFront={viewIsFront}
-          />
-
-          <StrokeRenderer
-            drawState={drawState}
-            setDrawState={setDrawState}
-            viewIsFront={viewIsFront}
-            depth={depth}
-            strokes={strokes}
-            updateLiveStroke={updateLiveStroke}
-          />
-
-          {(drawState === DrawStates.Viewing ||
-            drawState === DrawStates.Reviewing) && (
-            <>
-              <TouchableOpacityG>
-                <Rect x={0} y={0} width="100%" height="100%" />
-              </TouchableOpacityG>
-            </>
-          )}
-
-          {liveStroke && <Stroke stroke={liveStroke} />}
-
-          {livePath && (
-            <Stroke livePath={livePath} liveStrokeWidth={liveStrokeWidth} />
-          )}
-
-          {circleIsVisible && (
-            <AnimatedCircle
-              stroke="black"
-              strokeWidth={1}
-              fill="transparent"
-              cx={circleXRef.current}
-              cy={circleYRef.current}
-              r={circleRref}
+          <Svg
+            width={winWidth}
+            height={canvasHeight}
+            viewBox={`0 0 ${winWidth} ${canvasHeight}`}
+          >
+            <Model
+              translateX={translateX}
+              modelScale={modelScale}
+              depth={depth}
+              viewIsFront={viewIsFront}
             />
-          )}
-        </Svg>
-      </GesturesHandler>
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          height: legendHeight,
-        }}
-      >
+
+            <StrokeRenderer
+              drawState={drawState}
+              setDrawState={setDrawState}
+              viewIsFront={viewIsFront}
+              depth={depth}
+              strokes={strokes}
+              updateLiveStroke={updateLiveStroke}
+            />
+
+            {(drawState === DrawStates.Viewing ||
+              drawState === DrawStates.Reviewing) && (
+              <>
+                <TouchableOpacityG>
+                  <Rect x={0} y={0} width="100%" height="100%" />
+                </TouchableOpacityG>
+              </>
+            )}
+
+            {liveStroke && <Stroke stroke={liveStroke} />}
+
+            {livePath && (
+              <Stroke livePath={livePath} liveStrokeWidth={liveStrokeWidth} />
+            )}
+
+            {circleIsVisible && (
+              <AnimatedCircle
+                stroke="black"
+                strokeWidth={1}
+                fill="transparent"
+                cx={circleXRef.current}
+                cy={circleYRef.current}
+                r={circleRref}
+              />
+            )}
+          </Svg>
+        </GesturesHandler>
         <View
           style={{
-            width: "50%",
-            flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
+            width: "100%",
+            height: legendHeight,
           }}
         >
-          <Text>{viewIsFront ? "Front" : "Back"}</Text>
-          <Text>{["Surface", "Shallow", "Deep"][depth]}</Text>
+          <View
+            style={{
+              width: "50%",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text>{viewIsFront ? "Front" : "Back"}</Text>
+            <Text>{["Surface", "Shallow", "Deep"][depth]}</Text>
+          </View>
         </View>
       </View>
+      {keyboard && (
+        <CanvasKeyboardOverlay
+          keyboard={keyboard}
+          winWidth={winWidth}
+          canvasHeight={canvasHeight}
+          setDrawState={setDrawState}
+        />
+      )}
     </View>
   );
 };
