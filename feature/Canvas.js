@@ -9,7 +9,7 @@ import Stroke from "./Stroke";
 import GesturesHandler from "../components/GesturesHandler";
 import Model from "../components/assets/Model";
 import StrokeRenderer from "./StrokeRenderer";
-import { DrawStates } from "../library/globals";
+import { DrawStates, Constants } from "../library/globals";
 
 const Canvas = ({
   winWidth,
@@ -19,10 +19,10 @@ const Canvas = ({
   setDrawState,
   strokes,
 }) => {
-  const modelScale = winWidth / 344;
-  const translateX = 0.003 * winWidth;
-  const canvasHeight = 400 * modelScale;
-  const legendHeight = 15 * modelScale;
+  const modelScale = winWidth / Constants.modelScaler;
+  const translateX = Constants.xScaler * winWidth;
+  const canvasHeight = Constants.canvasScaler * modelScale;
+  const legendHeight = Constants.legendScaler * modelScale;
 
   const pathRef = useRef([]);
   const [livePath, setLivePath] = useState();

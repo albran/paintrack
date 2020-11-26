@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import Canvas from "./Canvas";
 import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Tooltip from "./Tooltip";
-import { DrawStates } from "../library/globals";
+import { DrawStates, Constants } from "../library/globals";
 import KeyboardViewHandler from "./KeyboardViewHandler";
 import {
   liveStrokeReducer,
@@ -16,8 +16,8 @@ import {
 
 const Draw = ({ date }) => {
   const { width: winWidth, height: winHeight } = useWindowDimensions();
-  const modelScale = winWidth / 344;
-  const canvasHeight = 400 * modelScale;
+  const modelScale = winWidth / Constants.modelScaler;
+  const canvasHeight = Constants.canvasScaler * modelScale;
 
   const [keyboard, setKeyboard] = useState(false);
   const [drawState, setDrawState] = useState(DrawStates.Navigating);
@@ -96,7 +96,7 @@ const Draw = ({ date }) => {
           {keyboard && (
             <CanvasKeyboardOverlay
               keyboard={keyboard}
-              winWidth={winHeight}
+              winWidth={winWidth}
               canvasHeight={canvasHeight}
               setDrawState={setDrawState}
             />

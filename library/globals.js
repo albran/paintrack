@@ -20,3 +20,10 @@ export const DrawStates = Object.freeze({
   Noting: "NOTING",
   Reviewing: "REVIEWING",
 });
+
+export const Constants = {
+  modelScaler: 344,
+  canvasScaler: 400,
+  xScaler: 0.003,
+  legendScaler: 15,
+};
