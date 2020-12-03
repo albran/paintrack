@@ -20,6 +20,10 @@ const BleedScale = ({ value, updateFactors }) => {
     setSelected(value);
   }, []);
 
+  useEffect(() => {
+    updateFactors({ do: "toggle", payload: { bleeding: selected } });
+  }, [selected]);
+
   return (
     <View style={styles.container}>
       {bleedValues.map((val, i) => (

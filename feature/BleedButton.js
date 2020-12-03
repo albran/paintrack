@@ -18,7 +18,6 @@ const BleedButton = ({
         ? "none"
         : bleedValue;
     setSelected(update);
-    updateFactors({ do: "toggle", payload: { bleeding: update } });
   };
 
   return (
