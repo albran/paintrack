@@ -26,7 +26,7 @@ const BleedScale = ({ value, updateFactors }) => {
         <BleedButton
           key={i}
           icon={generateIcons(i)}
-          scale={val}
+          bleedValue={val}
           style={styles.button}
           selected={selected}
           setSelected={setSelected}

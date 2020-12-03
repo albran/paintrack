@@ -34,7 +34,7 @@ const Canvas = ({
 
   const defaultStrokeWidth = 25;
   const strokeScaleRef = useRef(1);
-  const [liveStrokeWidth, setLiveStrokeWidth] = useState(defaultStrokeWidth);
+  const [livePathWidth, setLivePathWidth] = useState(defaultStrokeWidth);
 
   let AnimatedCircle = Animated.createAnimatedComponent(Circle);
   const [circleIsVisible, setCircleIsVisible] = useState(false);
@@ -67,7 +67,7 @@ const Canvas = ({
         do: "init",
         props: {
           path: [...livePath],
-          width: liveStrokeWidth,
+          width: livePathWidth,
           view: viewIsFront ? "front" : "back",
           depth: depth,
         },
@@ -99,7 +99,7 @@ const Canvas = ({
     }
 
     if (event.nativeEvent.state === State.END) {
-      setLiveStrokeWidth(defaultStrokeWidth * strokeScaleRef.current);
+      setLivePathWidth(defaultStrokeWidth * strokeScaleRef.current);
       setCircleIsVisible(false);
       setDrawState(DrawStates.Drawing);
     }
@@ -171,7 +171,7 @@ const Canvas = ({
             {liveStroke && <Stroke stroke={liveStroke} />}
 
             {livePath && (
-              <Stroke livePath={livePath} liveStrokeWidth={liveStrokeWidth} />
+              <Stroke livePath={livePath} livePathWidth={livePathWidth} />
             )}
 
             {circleIsVisible && (

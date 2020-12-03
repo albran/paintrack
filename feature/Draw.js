@@ -3,9 +3,8 @@ import { useWindowDimensions, View } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import Canvas from "./Canvas";
-import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Tooltip from "./Tooltip";
-import { DrawStates, Constants } from "../library/globals";
+import { DrawStates } from "../library/globals";
 import KeyboardViewHandler from "./KeyboardViewHandler";
 import {
   liveStrokeReducer,
