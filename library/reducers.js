@@ -32,7 +32,6 @@ export const factorsReducer = (state, dispatch) => {
 };
 
 export const factorsInitialState = {
-  opened: false,
   sex: false,
   one: false,
   two: false,
