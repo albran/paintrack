@@ -1,18 +1,24 @@
 import React from "react";
-import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import {
   AntDesign,
   FontAwesome5,
   Fontisto,
   Ionicons,
 } from "@expo/vector-icons";
+import Constants from "expo-constants";
 
 const TutorialFactors = () => {
-  const { width, height } = useWindowDimensions();
   return (
-    <View style={{ ...styles.container, marginTop: height * 0.04 }}>
-      <View style={styles.contentContainer}>
-        <Text style={styles.swipe}>Swipe down to close</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.swipeContainer}>
+        <Text style={styles.swipe}>Swipe down here to close</Text>
+      </View>
+      <ScrollView
+        contentContainerStyle={{
+          ...styles.contentContainer,
+        }}
+      >
         <Text style={styles.title}>Tracking factors</Text>
         <Text style={styles.text}>
           Activites that are known to cause pain in connection to endometriosis
@@ -80,25 +86,27 @@ const TutorialFactors = () => {
             <Text style={styles.buttonText}>Heavy</Text>
           </View>
         </View>
-      </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     flex: 1,
+    marginTop: Constants.statusBarHeight,
   },
   contentContainer: {
     alignItems: "center",
+  },
+  swipeContainer: {
     justifyContent: "center",
-    height: "100%",
-    width: "90%",
+    alignItems: "center",
+    height: 50,
   },
   swipe: {
-    position: "absolute",
-    top: 10,
+    fontSize: 10,
+    color: "grey",
   },
   title: {
     fontSize: 25,
@@ -107,6 +115,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     marginVertical: 10,
+    marginHorizontal: 20,
   },
   button: {
     justifyContent: "center",

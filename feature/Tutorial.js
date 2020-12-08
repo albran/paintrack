@@ -1,13 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import Constants from "expo-constants";
 
 const Tutorial = ({ navigation }) => {
-  const { width, height } = useWindowDimensions();
   return (
-    <View style={{ ...styles.container, marginTop: height * 0.04 }}>
-      <View style={styles.contentContainer}>
-        <Text style={styles.swipe}>Swipe down to close</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.swipeContainer}>
+        <Text style={styles.swipe}>Swipe down here to close</Text>
+      </View>
+      <ScrollView
+        contentContainerStyle={{
+          ...styles.contentContainer,
+        }}
+      >
         <Text style={styles.title}>Welcome!</Text>
         <Text style={styles.text}>
           This tool offers visual tracking of pelvic pain associated with
@@ -33,25 +39,27 @@ const Tutorial = ({ navigation }) => {
           Any tracking period can be edited retroactively, so if you forget to
           track but still remember how it felt you can still record it.
         </Text>
-      </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     flex: 1,
+    marginTop: Constants.statusBarHeight,
   },
   contentContainer: {
     alignItems: "center",
+  },
+  swipeContainer: {
     justifyContent: "center",
-    height: "100%",
-    width: "90%",
+    alignItems: "center",
+    height: 50,
   },
   swipe: {
-    position: "absolute",
-    top: 10,
+    fontSize: 10,
+    color: "grey",
   },
   title: {
     fontSize: 25,
@@ -60,6 +68,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     marginVertical: 10,
+    marginHorizontal: 20,
   },
   factorsButton: {
     justifyContent: "center",

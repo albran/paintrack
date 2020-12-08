@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import Constants from "expo-constants";
 import { Octicons } from "@expo/vector-icons";
 
 const steps = [
@@ -21,11 +22,16 @@ const step = (i, string) => (
 );
 
 const TutorialDraw = () => {
-  const { width, height } = useWindowDimensions();
   return (
-    <View style={{ ...styles.container, marginTop: height * 0.04 }}>
-      <View style={styles.contentContainer}>
-        <Text style={styles.swipe}>Swipe down to close</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.swipeContainer}>
+        <Text style={styles.swipe}>Swipe down here to close</Text>
+      </View>
+      <ScrollView
+        contentContainerStyle={{
+          ...styles.contentContainer,
+        }}
+      >
         <Text style={styles.title}>Tracking pain</Text>
         <Text style={styles.text}>
           Pain areas are indicated by adding 'strokes' to the model of the
@@ -41,7 +47,10 @@ const TutorialDraw = () => {
         <View style={styles.factorsButton}>
           <Octicons name="pencil" size={20} color="white" />
         </View>
-        <View>{steps.map((string, i) => step(i, string))}</View>
+        <Text style={styles.text}>To draw a stroke:</Text>
+        <View style={styles.steps}>
+          {steps.map((string, i) => step(i, string))}
+        </View>
         <Text style={styles.text}>
           After the note step, the tooltip will display stroke data for review.
           If something isn't correct, you can delete the stroke in order to
@@ -51,25 +60,27 @@ const TutorialDraw = () => {
           You can access the stroke summary tooltip by clicking on any existing
           stroke from its model location.
         </Text>
-      </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     flex: 1,
+    marginTop: Constants.statusBarHeight,
   },
   contentContainer: {
     alignItems: "center",
+  },
+  swipeContainer: {
     justifyContent: "center",
-    height: "100%",
-    width: "90%",
+    alignItems: "center",
+    height: 50,
   },
   swipe: {
-    position: "absolute",
-    top: 10,
+    fontSize: 10,
+    color: "grey",
   },
   title: {
     fontSize: 25,
@@ -78,6 +89,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     marginVertical: 10,
+    marginHorizontal: 20,
   },
   factorsButton: {
     justifyContent: "center",
@@ -87,10 +99,8 @@ const styles = StyleSheet.create({
     borderRadius: 50 / 2,
     backgroundColor: "pink",
   },
-  button: {
-    width: 50,
-    height: 50,
-    backgroundColor: "cyan",
+  steps: {
+    marginHorizontal: 15,
   },
 });
 
