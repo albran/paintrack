@@ -1,18 +1,39 @@
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Platform,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import {
   AntDesign,
+  Entypo,
   FontAwesome5,
   Fontisto,
   Ionicons,
 } from "@expo/vector-icons";
 import Constants from "expo-constants";
 
-const TutorialFactors = () => {
+const TutorialFactors = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.swipeContainer}>
-        <Text style={styles.swipe}>Swipe down here to close</Text>
+        {Platform.OS === "ios" && (
+          <Text style={styles.swipe}>Swipe down here to close</Text>
+        )}
+        {Platform.OS === "android" && (
+          <Pressable
+            onPress={() => {
+              navigation.popToTop();
+            }}
+            style={styles.androidClose}
+          >
+            <Entypo name="cross" size={10} color="white" />
+          </Pressable>
+        )}
       </View>
       <ScrollView
         contentContainerStyle={{
@@ -103,6 +124,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: 50,
+  },
+  androidClose: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 20,
+    aspectRatio: 1,
+    borderRadius: 20 / 2,
+    backgroundColor: "grey",
   },
   swipe: {
     fontSize: 10,
