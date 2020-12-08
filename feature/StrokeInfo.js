@@ -13,7 +13,7 @@ const StrokeInfo = ({
   saveStroke,
   deleteStroke,
 }) => {
-  const { type, scale, pattern, note, i = -1 } = liveStroke;
+  const { type, scale, pattern, depth, note, i = -1 } = liveStroke;
 
   const closeAndSave = () => {
     drawState === DrawStates.Reviewing && saveStroke();
@@ -40,7 +40,9 @@ const StrokeInfo = ({
           <Text style={styles.type}>{type}</Text>
           <Text style={styles.scale}>{scale}</Text>
           <Text style={styles.pattern}>{pattern}</Text>
-          <Text style={styles.type}>Shallow</Text>
+          <Text style={styles.type}>
+            {depth === 0 ? "Surface" : depth === 1 ? "Shallow" : "Deep"}
+          </Text>
         </View>
         <View style={styles.note}>
           <Text>{note}</Text>
