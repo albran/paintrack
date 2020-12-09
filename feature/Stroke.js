@@ -24,13 +24,6 @@ const Stroke = ({ livePath, livePathWidth, stroke = {} }) => {
         strokeLinejoin="round"
         opacity={type === "Undefined" ? 0.5 : 1}
       />
-      {/* <Polyline
-        points={points}
-        stroke={color}
-        strokeWidth={width - 5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      /> */}
       {pattern === "Periodical" && (
         <Polyline
           points={points}
