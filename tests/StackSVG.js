@@ -4,16 +4,13 @@ import Svg, { Circle } from "react-native-svg";
 
 const StackSVG = () => (
   <View style={styles.container}>
-    <Pressable
-      style={{ position: "absolute" }}
-      onPress={() => console.log("Circle 1 pressed")}
-    >
-      <Svg height={300} width={300}>
+    <Pressable onPress={() => console.log("Circle 1 pressed")}>
+      <Svg style={{ position: "absolute" }} height={300} width={300}>
         <Circle cx="50" cy="50" r="50" fill="pink" />
       </Svg>
     </Pressable>
     <Pressable onPress={() => console.log("Circle 2 pressed")}>
-      <Svg height={300} width={300} style={{ position: "absolute" }}>
+      <Svg style={{ position: "absolute" }} height={300} width={300}>
         <Circle cx="150" cy="150" r="50" fill="pink" />
       </Svg>
     </Pressable>
