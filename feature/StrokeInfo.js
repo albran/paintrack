@@ -21,7 +21,6 @@ const StrokeInfo = ({
     updateLiveStroke({ do: "delete" });
   };
 
-  //todo: delete from memory
   const closeAndDelete = () => {
     setDrawState(DrawStates.Navigating);
     i > -1 && deleteStroke(i);
