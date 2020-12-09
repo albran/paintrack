@@ -41,7 +41,7 @@ const StrokeRenderer = ({
               <Stroke
                 key={i}
                 stroke={stroke}
-                opacity={(drawState = DrawStates.Factoring ? 1 : 0.2)}
+                opacity={drawState === DrawStates.Factoring ? 1 : 0.2}
               />
             )
         )}

@@ -202,8 +202,16 @@ const Canvas = ({
               alignItems: "center",
             }}
           >
-            <Text>{viewIsFront ? "Front" : "Back"}</Text>
-            <Text>{["Surface", "Shallow", "Deep"][depth]}</Text>
+            <Text
+              style={{ opacity: drawState === DrawStates.Factoring ? 0.1 : 1 }}
+            >
+              {viewIsFront ? "Front" : "Back"}
+            </Text>
+            <Text
+              style={{ opacity: drawState === DrawStates.Factoring ? 0.1 : 1 }}
+            >
+              {["Surface", "Shallow", "Deep"][depth]}
+            </Text>
           </View>
         </View>
       </View>
