@@ -3,7 +3,7 @@ import Stroke from "./Stroke";
 
 import { DrawStates } from "../library/globals";
 
-const StrokeRenderer = ({
+const StrokesRenderer = ({
   drawState,
   setDrawState,
   viewIsFront,
@@ -49,4 +49,4 @@ const StrokeRenderer = ({
     );
 };
 
-export default StrokeRenderer;
+export default StrokesRenderer;

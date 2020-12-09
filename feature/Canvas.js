@@ -8,7 +8,7 @@ import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Stroke from "./Stroke";
 import GesturesHandler from "./GesturesHandler";
 import Model from "./Model";
-import StrokeRenderer from "./StrokeRenderer";
+import StrokesRenderer from "./StrokesRenderer";
 import { DrawStates, Constants } from "../library/globals";
 
 const Canvas = ({
@@ -150,7 +150,7 @@ const Canvas = ({
               viewIsFront={viewIsFront}
             />
 
-            <StrokeRenderer
+            <StrokesRenderer
               drawState={drawState}
               setDrawState={setDrawState}
               viewIsFront={viewIsFront}
