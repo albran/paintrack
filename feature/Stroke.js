@@ -2,7 +2,7 @@ import { Polyline } from "react-native-svg";
 import React from "react";
 import colorFromStroke from "../library/colorFromStroke";
 
-const Stroke = ({ livePath, livePathWidth, stroke = {} }) => {
+const Stroke = ({ livePath, livePathWidth, stroke = {}, onPress }) => {
   const {
     path = livePath,
     width = livePathWidth,
@@ -17,6 +17,7 @@ const Stroke = ({ livePath, livePathWidth, stroke = {} }) => {
   return (
     <>
       <Polyline
+        onPress={onPress}
         points={points}
         stroke={color}
         strokeWidth={width}

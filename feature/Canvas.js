@@ -5,7 +5,6 @@ import Svg, { Circle, Rect } from "react-native-svg";
 import Animated from "react-native-reanimated";
 
 import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
-import TouchableOpacityG from "../components/TouchableOpacityG";
 import Stroke from "./Stroke";
 import GesturesHandler from "../components/GesturesHandler";
 import Model from "../components/assets/Model";
@@ -159,14 +158,10 @@ const Canvas = ({
               updateLiveStroke={updateLiveStroke}
             />
 
-            {(drawState === DrawStates.Viewing ||
+            {/* {(drawState === DrawStates.Viewing ||
               drawState === DrawStates.Reviewing) && (
-              <>
-                <TouchableOpacityG>
-                  <Rect x={0} y={0} width="100%" height="100%" />
-                </TouchableOpacityG>
-              </>
-            )}
+              <Rect x={0} y={0} width="100%" height="100%" />
+            )} */}
 
             {liveStroke && <Stroke stroke={liveStroke} />}
 

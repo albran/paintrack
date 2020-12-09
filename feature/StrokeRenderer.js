@@ -1,5 +1,4 @@
 import React from "react";
-import TouchableOpacityG from "../components/TouchableOpacityG";
 import Stroke from "./Stroke";
 
 import { DrawStates } from "../library/globals";
@@ -20,15 +19,14 @@ const StrokeRenderer = ({
           (stroke, i) =>
             depth === stroke.depth &&
             view === stroke.view && (
-              <TouchableOpacityG
+              <Stroke
                 key={i}
                 onPress={() => {
                   setDrawState(DrawStates.Viewing);
                   updateLiveStroke({ do: "set", props: { ...stroke, i: i } });
                 }}
-              >
-                <Stroke stroke={stroke} />
-              </TouchableOpacityG>
+                stroke={stroke}
+              />
             )
         )}
       </>
