@@ -158,11 +158,6 @@ const Canvas = ({
               updateLiveStroke={updateLiveStroke}
             />
 
-            {/* {(drawState === DrawStates.Viewing ||
-              drawState === DrawStates.Reviewing) && (
-              <Rect x={0} y={0} width="100%" height="100%" />
-            )} */}
-
             {liveStroke && <Stroke stroke={liveStroke} />}
 
             {livePath && (
