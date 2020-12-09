@@ -9,9 +9,9 @@ import FactorButton from "./FactorButton";
 const Factors = ({ setDrawState, factors, updateFactors, saveFactors }) => {
   const labels = ["sex", "one", "two"];
   const icons = [
-    <Ionicons name="ios-bed" size={24} color="white" />,
-    <FontAwesome5 name="water" size={24} color="white" />,
-    <FontAwesome5 name="poop" size={24} color="white" />,
+    <Ionicons name="ios-bed" size={24} color="whitesmoke" />,
+    <FontAwesome5 name="water" size={24} color="whitesmoke" />,
+    <FontAwesome5 name="poop" size={24} color="whitesmoke" />,
   ];
 
   const closeAndSave = () => {
@@ -35,7 +35,7 @@ const Factors = ({ setDrawState, factors, updateFactors, saveFactors }) => {
       </View>
       <BleedScale value={factors.bleeding} updateFactors={updateFactors} />
       <Pressable onPress={closeAndSave} style={styles.xButton}>
-        <Entypo name="cross" size={24} color="white" />
+        <Entypo name="cross" size={24} color="whitesmoke" />
       </Pressable>
     </View>
   );

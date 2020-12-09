@@ -143,6 +143,7 @@ const Canvas = ({
             viewBox={`0 0 ${winWidth} ${canvasHeight}`}
           >
             <Model
+              drawState={drawState}
               translateX={translateX}
               modelScale={modelScale}
               depth={depth}
@@ -172,6 +173,15 @@ const Canvas = ({
                 cx={circleXRef.current}
                 cy={circleYRef.current}
                 r={circleRref}
+              />
+            )}
+
+            {drawState === DrawStates.Factoring && (
+              <Rect
+                width={winWidth}
+                height={canvasHeight}
+                fill="whitesmoke"
+                opacity={0.9}
               />
             )}
           </Svg>

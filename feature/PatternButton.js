@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    color: "white",
+    color: "whitesmoke",
   },
   dotDashWrapper: {
     flexDirection: "row",
@@ -60,14 +60,14 @@ const styles = StyleSheet.create({
     borderRadius: 7 / 2,
     margin: 1,
     borderWidth: 1,
-    backgroundColor: "white",
+    backgroundColor: "whitesmoke",
   },
   dash: {
     width: 45,
     height: 7,
     borderRadius: 20,
     borderWidth: 1,
-    backgroundColor: "white",
+    backgroundColor: "whitesmoke",
   },
 });
 

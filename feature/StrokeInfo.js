@@ -49,10 +49,10 @@ const StrokeInfo = ({
         </View>
         <View>
           <Pressable onPress={closeAndSave} style={styles.x}>
-            <FontAwesome name="save" size={20} color="white" />
+            <FontAwesome name="save" size={20} color="whitesmoke" />
           </Pressable>
           <Pressable onPress={closeAndDelete} style={styles.x}>
-            <AntDesign name="delete" size={20} color="white" />
+            <AntDesign name="delete" size={20} color="whitesmoke" />
           </Pressable>
         </View>
       </View>
@@ -81,14 +81,14 @@ const styles = StyleSheet.create({
     borderRadius: 125 / 2,
   },
   type: {
-    color: "white",
+    color: "whitesmoke",
   },
   scale: {
-    color: "white",
+    color: "whitesmoke",
     fontSize: 40,
   },
   pattern: {
-    color: "white",
+    color: "whitesmoke",
   },
   note: {
     width: "45%",

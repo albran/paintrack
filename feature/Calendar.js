@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "whitesmoke",
   },
   contentWrapper: {
     justifyContent: "space-between",

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 21,
-    color: "white",
+    color: "whitesmoke",
     marginHorizontal: 15,
     marginVertical: 6,
   },

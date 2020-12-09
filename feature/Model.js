@@ -1,7 +1,8 @@
 import React from "react";
 import { G, Path } from "react-native-svg";
+import { DrawStates } from "../library/globals";
 
-const Model = ({ translateX, modelScale, depth, viewIsFront }) => {
+const Model = ({ translateX, modelScale, depth, viewIsFront, drawState }) => {
   const opacity = depth === 0 ? 1 : depth === 1 ? 0.5 : 0.25;
   return (
     <G

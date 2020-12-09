@@ -31,7 +31,7 @@ const TutorialFactors = ({ navigation }) => {
             }}
             style={styles.androidClose}
           >
-            <Entypo name="cross" size={10} color="white" />
+            <Entypo name="cross" size={10} color="whitesmoke" />
           </Pressable>
         )}
       </View>
@@ -47,7 +47,7 @@ const TutorialFactors = ({ navigation }) => {
           access the tooltip.
         </Text>
         <View style={styles.button}>
-          <AntDesign name="book" size={20} color="white" />
+          <AntDesign name="book" size={20} color="whitesmoke" />
         </View>
         <Text style={styles.text}>
           The top row of factor buttons are for indicating if any pain has been
@@ -58,21 +58,21 @@ const TutorialFactors = ({ navigation }) => {
         <View style={styles.buttonsWrapper}>
           <View style={styles.buttonContainer}>
             <View style={styles.factorsButton}>
-              <Ionicons name="ios-bed" size={24} color="white" />
+              <Ionicons name="ios-bed" size={24} color="whitesmoke" />
             </View>
             <Text style={styles.buttonText}>Painful sex</Text>
             <Text style={styles.buttonText}>(Dyspareunia)</Text>
           </View>
           <View style={styles.buttonContainer}>
             <View style={styles.factorsButton}>
-              <FontAwesome5 name="water" size={24} color="white" />
+              <FontAwesome5 name="water" size={24} color="whitesmoke" />
             </View>
             <Text style={styles.buttonText}>Painful urination</Text>
             <Text style={styles.buttonText}>(Dysuria)</Text>
           </View>
           <View style={styles.buttonContainer}>
             <View style={styles.factorsButton}>
-              <FontAwesome5 name="poop" size={24} color="white" />
+              <FontAwesome5 name="poop" size={24} color="whitesmoke" />
             </View>
             <Text style={styles.buttonText}>Painful defecation</Text>
             <Text style={styles.buttonText}>(Dyschezia)</Text>
@@ -87,22 +87,22 @@ const TutorialFactors = ({ navigation }) => {
         <View style={styles.buttonsWrapper}>
           <View style={styles.buttonContainer}>
             <View style={styles.bleedButton}>
-              <Fontisto name="blood-drop" size={15} color="white" />
+              <Fontisto name="blood-drop" size={15} color="whitesmoke" />
             </View>
             <Text style={styles.buttonText}>Spotting</Text>
           </View>
           <View style={styles.buttonContainer}>
             <View style={styles.bleedButton}>
-              <Fontisto name="blood-drop" size={15} color="white" />
-              <Fontisto name="blood-drop" size={15} color="white" />
+              <Fontisto name="blood-drop" size={15} color="whitesmoke" />
+              <Fontisto name="blood-drop" size={15} color="whitesmoke" />
             </View>
             <Text style={styles.buttonText}>Light</Text>
           </View>
           <View style={styles.buttonContainer}>
             <View style={styles.bleedButton}>
-              <Fontisto name="blood-drop" size={15} color="white" />
-              <Fontisto name="blood-drop" size={15} color="white" />
-              <Fontisto name="blood-drop" size={15} color="white" />
+              <Fontisto name="blood-drop" size={15} color="whitesmoke" />
+              <Fontisto name="blood-drop" size={15} color="whitesmoke" />
+              <Fontisto name="blood-drop" size={15} color="whitesmoke" />
             </View>
             <Text style={styles.buttonText}>Heavy</Text>
           </View>

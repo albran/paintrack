@@ -2,7 +2,13 @@ import { Polyline } from "react-native-svg";
 import React from "react";
 import colorFromStroke from "../library/colorFromStroke";
 
-const Stroke = ({ livePath, livePathWidth, stroke = {}, onPress }) => {
+const Stroke = ({
+  livePath,
+  livePathWidth,
+  stroke = {},
+  onPress,
+  opacity = 1,
+}) => {
   const {
     path = livePath,
     width = livePathWidth,
@@ -23,12 +29,12 @@ const Stroke = ({ livePath, livePathWidth, stroke = {}, onPress }) => {
         strokeWidth={width}
         strokeLinecap="round"
         strokeLinejoin="round"
-        opacity={type === "Undefined" ? 0.5 : 1}
+        opacity={type === "Undefined" ? 0.5 : opacity}
       />
       {pattern === "Periodical" && (
         <Polyline
           points={points}
-          stroke="white"
+          stroke="whitesmoke"
           strokeWidth={5}
           strokeLinejoin="round"
           strokeDasharray="2, 10"
@@ -37,7 +43,7 @@ const Stroke = ({ livePath, livePathWidth, stroke = {}, onPress }) => {
       {pattern === "Continuous" && (
         <Polyline
           points={points}
-          stroke="white"
+          stroke="whitesmoke"
           strokeWidth={2}
           strokeLinejoin="round"
           strokeLinecap="round"

@@ -27,7 +27,7 @@ const GesturePath = ({ path }) => {
       <Polyline
         points={points}
         fill="transparent"
-        stroke="white"
+        stroke="whitesmoke"
         strokeWidth={45}
         strokeLinecap="round"
         strokeLinejoin="round"

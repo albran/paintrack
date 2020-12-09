@@ -12,7 +12,7 @@ const StrokeRenderer = ({
   updateLiveStroke,
 }) => {
   const view = viewIsFront ? "front" : "back";
-  if (drawState === DrawStates.Navigating || drawState === DrawStates.Factoring)
+  if (drawState === DrawStates.Navigating)
     return (
       <>
         {strokes.map(
@@ -38,7 +38,11 @@ const StrokeRenderer = ({
           (stroke, i) =>
             depth === stroke.depth &&
             view === stroke.view && (
-              <Stroke key={i} stroke={stroke} opacity={0.3} />
+              <Stroke
+                key={i}
+                stroke={stroke}
+                opacity={(drawState = DrawStates.Factoring ? 1 : 0.2)}
+              />
             )
         )}
       </>

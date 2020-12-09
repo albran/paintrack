@@ -43,7 +43,7 @@ const TutorialDraw = ({ navigation }) => {
             }}
             style={styles.androidClose}
           >
-            <Entypo name="cross" size={10} color="white" />
+            <Entypo name="cross" size={10} color="whitesmoke" />
           </Pressable>
         )}
       </View>
@@ -65,7 +65,7 @@ const TutorialDraw = ({ navigation }) => {
           begin drawing a stroke.
         </Text>
         <View style={styles.factorsButton}>
-          <Octicons name="pencil" size={20} color="white" />
+          <Octicons name="pencil" size={20} color="whitesmoke" />
         </View>
         <Text style={styles.text}>To draw a stroke:</Text>
         <View style={styles.steps}>

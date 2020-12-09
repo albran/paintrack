@@ -25,7 +25,7 @@ const Tutorial = ({ navigation }) => {
             }}
             style={styles.androidClose}
           >
-            <Entypo name="cross" size={10} color="white" />
+            <Entypo name="cross" size={10} color="whitesmoke" />
           </Pressable>
         )}
       </View>
@@ -53,7 +53,7 @@ const Tutorial = ({ navigation }) => {
           button and select the relevant date.{" "}
         </Text>
         <View style={styles.factorsButton}>
-          <AntDesign name="calendar" size={20} color="white" />
+          <AntDesign name="calendar" size={20} color="whitesmoke" />
         </View>
         <Text style={styles.text}>
           Any tracking period can be edited retroactively, so if you forget to

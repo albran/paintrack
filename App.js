@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign, Octicons } from "@expo/vector-icons";
@@ -14,6 +14,14 @@ import TutorialFactors from "./feature/TutorialFactors";
 const MainStack = createStackNavigator();
 const RootStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: "whitesmoke",
+  },
+};
 
 export default function App() {
   const today = getYYYYMMDD(Date());
@@ -51,7 +59,7 @@ export default function App() {
   );
 
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       <RootStack.Navigator mode="modal" headerMode="none">
         <RootStack.Screen name="Main" component={MainStackNavigator} />
         <RootStack.Screen name="Tutorial" component={ModalTabNavigator} />

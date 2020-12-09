@@ -14,7 +14,7 @@ const CanvasKeyboardOverlay = ({ keyboard, winWidth, canvasHeight }) => {
           position: "absolute",
           width: winWidth,
           height: canvasHeight,
-          backgroundColor: "white",
+          backgroundColor: "whitesmoke",
           opacity: 0.9,
         }}
       />

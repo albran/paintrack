@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   number: {
     fontSize: 18,
     textAlign: "center",
-    color: "white",
+    color: "whitesmoke",
   },
 });
 

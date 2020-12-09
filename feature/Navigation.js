@@ -13,7 +13,7 @@ const Navigation = ({ setDrawState }) => {
         onPress={() => navigation.navigate("Tutorial")}
         style={styles.tutorial}
       >
-        <AntDesign name="question" size={24} color="white" />
+        <AntDesign name="question" size={24} color="whitesmoke" />
       </Pressable>
       <View style={styles.buttonPanel}>
         <Pressable
@@ -22,7 +22,7 @@ const Navigation = ({ setDrawState }) => {
           }}
           style={styles.factorsButton}
         >
-          <AntDesign name="book" size={30} color="white" />
+          <AntDesign name="book" size={30} color="whitesmoke" />
         </Pressable>
         <Pressable
           onPress={() => {
@@ -30,13 +30,13 @@ const Navigation = ({ setDrawState }) => {
           }}
           style={styles.drawButton}
         >
-          <Octicons name="pencil" size={60} color="white" />
+          <Octicons name="pencil" size={60} color="whitesmoke" />
         </Pressable>
         <Pressable
           onPress={() => navigation.navigate("Calendar")}
           style={styles.factorsButton}
         >
-          <AntDesign name="calendar" size={30} color="white" />
+          <AntDesign name="calendar" size={30} color="whitesmoke" />
         </Pressable>
       </View>
     </View>

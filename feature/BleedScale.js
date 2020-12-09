@@ -7,7 +7,7 @@ const BleedScale = ({ value, updateFactors }) => {
   const [selected, setSelected] = useState("none");
   const bleedValues = ["spotting", "light", "heavy"];
   const icon = (i) => (
-    <Fontisto key={i} name="blood-drop" size={15} color="white" />
+    <Fontisto key={i} name="blood-drop" size={15} color="whitesmoke" />
   );
 
   const generateIcons = (j) => {
