@@ -6,8 +6,8 @@ import Animated from "react-native-reanimated";
 
 import CanvasKeyboardOverlay from "./CanvasKeyboardOverlay";
 import Stroke from "./Stroke";
-import GesturesHandler from "../components/GesturesHandler";
-import Model from "../components/assets/Model";
+import GesturesHandler from "./GesturesHandler";
+import Model from "./Model";
 import StrokeRenderer from "./StrokeRenderer";
 import { DrawStates, Constants } from "../library/globals";
 
