@@ -42,7 +42,7 @@ export default function App() {
     <Tab.Navigator
       backBehavior="none"
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: () => {
           if (route.name === "Overview")
             return <AntDesign name="question" size={30} color="grey" />;
           if (route.name === "Tracking pain")
