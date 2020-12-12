@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { useWindowDimensions, View } from "react-native";
+import { SafeAreaView, useWindowDimensions, View } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
+import Constants from "expo-constants";
 
 import Canvas from "./Canvas";
 import Tooltip from "./Tooltip";
@@ -77,7 +78,7 @@ const Draw = ({ date }) => {
   }, [date]);
 
   return (
-    <View style={{ flex: 1, marginTop: winHeight * 0.04 }}>
+    <SafeAreaView style={{ flex: 1, marginTop: Constants.statusBarHeight }}>
       <KeyboardViewHandler setKeyboard={setKeyboard}>
         <Canvas
           winWidth={winWidth}
@@ -101,7 +102,7 @@ const Draw = ({ date }) => {
           saveFactors={saveFactors}
         />
       </KeyboardViewHandler>
-    </View>
+    </SafeAreaView>
   );
 };
 

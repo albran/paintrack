@@ -18,7 +18,6 @@ const Calendar = ({ navigation, setDate }) => {
           firstDay={1}
           maxDate={getYYYYMMDD(Date())}
           hideExtraDays={true}
-          hideArrows={true}
           enableSwipeMonths={true}
           onDayPress={(day) => {
             goToDay(day);
@@ -27,8 +26,9 @@ const Calendar = ({ navigation, setDate }) => {
             textMonthFontSize: 24,
             textDayHeaderFontSize: 14,
             textDayFontSize: 20,
+            calendarBackground: "whitesmoke",
           }}
-          style={{ width: 0.9 * winWidth }}
+          style={{ width: 0.9 * winWidth, backgroundColor: "whitesmoke" }}
         />
       </View>
     </View>
@@ -45,14 +45,6 @@ const styles = StyleSheet.create({
   contentWrapper: {
     justifyContent: "space-between",
     alignItems: "center",
-  },
-  button: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    height: 100,
-    borderRadius: 20,
-    backgroundColor: "pink",
   },
 });
 
