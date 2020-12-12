@@ -1,12 +1,16 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { SafeAreaView, useWindowDimensions, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  SafeAreaView,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import Constants from "expo-constants";
 
 import Canvas from "./Canvas";
 import Tooltip from "./Tooltip";
 import { DrawStates } from "../library/globals";
-import KeyboardViewHandler from "./KeyboardViewHandler";
 import {
   liveStrokeReducer,
   strokesReducer,
@@ -16,7 +20,7 @@ import {
 
 const Draw = ({ date }) => {
   const { width: winWidth, height: winHeight } = useWindowDimensions();
-  const [keyboard, setKeyboard] = useState(false);
+  const [keyboardIsOpen, setKeyboardIsOpen] = useState(false);
   const [drawState, setDrawState] = useState(DrawStates.Navigating);
   const [liveStroke, updateLiveStroke] = useReducer(liveStrokeReducer, null);
   const [strokes, updateStrokes] = useReducer(strokesReducer, []);
@@ -79,7 +83,14 @@ const Draw = ({ date }) => {
 
   return (
     <SafeAreaView style={{ flex: 1, marginTop: Constants.statusBarHeight }}>
-      <KeyboardViewHandler setKeyboard={setKeyboard}>
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={20}
+        contentContainerStyle={{
+          width: "100%",
+          height: "100%",
+        }}
+      >
         <Canvas
           winWidth={winWidth}
           liveStroke={liveStroke}
@@ -88,7 +99,8 @@ const Draw = ({ date }) => {
           setDrawState={setDrawState}
           strokes={strokes}
           updateStrokes={updateStrokes}
-          keyboard={keyboard}
+          keyboardIsOpen={keyboardIsOpen}
+          setKeyboardIsOpen={setKeyboardIsOpen}
         />
         <Tooltip
           liveStroke={liveStroke}
@@ -100,8 +112,9 @@ const Draw = ({ date }) => {
           saveStroke={saveStroke}
           deleteStroke={deleteStroke}
           saveFactors={saveFactors}
+          setKeyboardIsOpen={setKeyboardIsOpen}
         />
-      </KeyboardViewHandler>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

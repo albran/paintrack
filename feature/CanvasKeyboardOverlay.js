@@ -1,24 +1,25 @@
 import React from "react";
-import { Keyboard, TouchableWithoutFeedback, View } from "react-native";
+import { Pressable, Keyboard } from "react-native";
 
-const CanvasKeyboardOverlay = ({ keyboard, winWidth, canvasHeight }) => {
+const CanvasKeyboardOverlay = ({
+  winWidth,
+  canvasHeight,
+  setKeyboardIsOpen,
+}) => {
   return (
-    <TouchableWithoutFeedback
-      disabled={!keyboard}
+    <Pressable
       onPress={() => {
         Keyboard.dismiss();
+        setKeyboardIsOpen(false);
       }}
-    >
-      <View
-        style={{
-          position: "absolute",
-          width: winWidth,
-          height: canvasHeight,
-          backgroundColor: "whitesmoke",
-          opacity: 0.9,
-        }}
-      />
-    </TouchableWithoutFeedback>
+      style={{
+        position: "absolute",
+        width: winWidth,
+        height: canvasHeight,
+        backgroundColor: "whitesmoke",
+        opacity: 0.9,
+      }}
+    />
   );
 };
 

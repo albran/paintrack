@@ -18,7 +18,8 @@ const Canvas = ({
   drawState,
   setDrawState,
   strokes,
-  keyboard,
+  keyboardIsOpen,
+  setKeyboardIsOpen,
 }) => {
   const modelScale = winWidth / Constants.modelScaler;
   const translateX = Constants.xScaler * winWidth;
@@ -208,12 +209,12 @@ const Canvas = ({
           </View>
         </View>
       </View>
-      {keyboard && (
+      {keyboardIsOpen && (
         <CanvasKeyboardOverlay
-          keyboard={keyboard}
           winWidth={winWidth}
-          canvasHeight={canvasHeight}
+          canvasHeight={canvasHeight + legendHeight}
           setDrawState={setDrawState}
+          setKeyboardIsOpen={setKeyboardIsOpen}
         />
       )}
     </View>

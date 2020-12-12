@@ -22,6 +22,7 @@ const Tooltip = ({
   saveStroke,
   deleteStroke,
   saveFactors,
+  setKeyboardIsOpen,
 }) => {
   return (
     <View style={styles.container}>
@@ -60,7 +61,11 @@ const Tooltip = ({
         />
       )}
       {drawState === DrawStates.Noting && (
-        <Note updateLiveStroke={updateLiveStroke} setDrawState={setDrawState} />
+        <Note
+          updateLiveStroke={updateLiveStroke}
+          setDrawState={setDrawState}
+          setKeyboardIsOpen={setKeyboardIsOpen}
+        />
       )}
       {(drawState === DrawStates.Reviewing ||
         drawState === DrawStates.Viewing) && (
