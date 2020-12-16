@@ -14,7 +14,7 @@ import { Entypo, Octicons } from "@expo/vector-icons";
 const steps = [
   `Pinch with two fingers to adjust the size of the stroke as indicated by the displayed circle.`,
   `Select the adjective that best describes your pain. Select 'Other' if you feel none of the descriptors fit how you feel.`,
-  `Select the intensity of pain on the displayed scale, where 1 corresponds to the least noticible level of discomfort, and 10 corresponds to the worst pain imaginable. The stroke is updated to the corresponding descriptor color.`,
+  `Select the intensity of pain on the displayed scale, where 1 corresponds to the mildest pain you can experience, and 10 corresponds to the worst pain imaginable. The stroke is updated to the corresponding descriptor color.`,
   `Select the pattern of recurrence that best describes how often you feel exactly the type pain.`,
   `Add a note describing anything else about the pain.`,
 ];
